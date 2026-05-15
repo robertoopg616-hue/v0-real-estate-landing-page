@@ -1,8 +1,10 @@
 'use client'
 
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Check } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { ContactModal } from '@/components/modals/contact-modal'
 
 const plans = [
   {
@@ -69,6 +71,8 @@ const itemVariants = {
 }
 
 export function Pricing() {
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false)
+
   const scrollToContact = () => {
     const element = document.querySelector('#contact')
     if (element) {
@@ -156,14 +160,14 @@ export function Pricing() {
 
               {/* CTA Button */}
               <Button
-                onClick={scrollToContact}
+                onClick={() => setIsContactModalOpen(true)}
                 className={`w-full font-semibold ${
                   plan.highlighted
                     ? 'bg-primary hover:bg-primary/90 text-primary-foreground'
                     : 'bg-secondary hover:bg-secondary/80 text-secondary-foreground'
                 }`}
               >
-                Get Started
+                {plan.highlighted ? 'Join the Program' : 'Get Started'}
               </Button>
             </motion.div>
           ))}
@@ -180,6 +184,12 @@ export function Pricing() {
           * Buyer agent compensation separate. Contact us for detailed terms and conditions.
         </motion.p>
       </div>
+
+      {/* Contact Modal */}
+      <ContactModal
+        isOpen={isContactModalOpen}
+        onClose={() => setIsContactModalOpen(false)}
+      />
     </section>
   )
 }

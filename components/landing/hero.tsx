@@ -1,8 +1,10 @@
 'use client'
 
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { ArrowRight, TrendingUp, Clock, CheckCircle2, DollarSign } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { ContactModal } from '@/components/modals/contact-modal'
 
 const stats = [
   { icon: TrendingUp, value: '104%', label: 'Avg Sale Price' },
@@ -17,6 +19,8 @@ const fadeInUp = {
 }
 
 export function Hero() {
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false)
+
   const scrollToContact = () => {
     const element = document.querySelector('#contact')
     if (element) {
@@ -80,7 +84,7 @@ export function Hero() {
           >
             <Button
               size="lg"
-              onClick={scrollToContact}
+              onClick={() => setIsContactModalOpen(true)}
               className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold text-base px-8 py-6 rounded-lg shadow-lg shadow-primary/25 transition-all hover:shadow-xl hover:shadow-primary/30"
             >
               Get a Free Property Consultation
@@ -131,6 +135,12 @@ export function Hero() {
           </div>
         </motion.div>
       </div>
+
+      {/* Contact Modal */}
+      <ContactModal
+        isOpen={isContactModalOpen}
+        onClose={() => setIsContactModalOpen(false)}
+      />
     </section>
   )
 }

@@ -1,7 +1,11 @@
 'use client'
 
+import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Calculator, ShieldCheck, Sparkles } from 'lucide-react'
+import { Calculator, ShieldCheck, Sparkles, ArrowRight } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import { ContactModal } from '@/components/modals/contact-modal'
+import { LearnMoreModal } from '@/components/modals/learn-more-modal'
 
 const features = [
   {
@@ -47,6 +51,9 @@ const itemVariants = {
 }
 
 export function Features() {
+  const [isLearnMoreOpen, setIsLearnMoreOpen] = useState(false)
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false)
+
   return (
     <section id="features" className="py-24 md:py-32 relative">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -100,13 +107,34 @@ export function Features() {
               </h3>
 
               {/* Description */}
-              <p className="text-muted-foreground leading-relaxed">
+              <p className="text-muted-foreground leading-relaxed mb-4">
                 {feature.description}
               </p>
+
+              {/* Learn More Button */}
+              <Button
+                variant="ghost"
+                onClick={() => setIsLearnMoreOpen(true)}
+                className="text-primary hover:text-primary hover:bg-primary/10 p-0 h-auto font-semibold text-sm"
+              >
+                Learn More
+                <ArrowRight className="ml-1 size-4" />
+              </Button>
             </motion.div>
           ))}
         </motion.div>
       </div>
+
+      {/* Modals */}
+      <LearnMoreModal
+        isOpen={isLearnMoreOpen}
+        onClose={() => setIsLearnMoreOpen(false)}
+        onContactClick={() => setIsContactModalOpen(true)}
+      />
+      <ContactModal
+        isOpen={isContactModalOpen}
+        onClose={() => setIsContactModalOpen(false)}
+      />
     </section>
   )
 }

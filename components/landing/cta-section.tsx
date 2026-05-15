@@ -1,22 +1,23 @@
 'use client'
 
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { ArrowRight, Phone } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { ContactModal } from '@/components/modals/contact-modal'
 
 interface CTASectionProps {
   onContactClick?: () => void
 }
 
 export function CTASection({ onContactClick }: CTASectionProps) {
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false)
+
   const handleClick = () => {
     if (onContactClick) {
       onContactClick()
     } else {
-      const element = document.querySelector('#contact')
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' })
-      }
+      setIsContactModalOpen(true)
     }
   }
 
@@ -120,6 +121,12 @@ export function CTASection({ onContactClick }: CTASectionProps) {
           </motion.div>
         </motion.div>
       </div>
+
+      {/* Contact Modal */}
+      <ContactModal
+        isOpen={isContactModalOpen}
+        onClose={() => setIsContactModalOpen(false)}
+      />
     </section>
   )
 }
