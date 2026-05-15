@@ -1,8 +1,10 @@
 'use client'
 
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Home, ArrowUp, Mail, Phone, MapPin } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { ContactModal } from '@/components/modals/contact-modal'
 
 const footerLinks = {
   services: [
@@ -31,11 +33,17 @@ const realtorBoards = [
 ]
 
 export function Footer() {
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false)
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
-  const handleLinkClick = (href: string) => {
+  const handleLinkClick = (href: string, label: string) => {
+    if (label === 'Contact') {
+      setIsContactModalOpen(true)
+      return
+    }
     if (href.startsWith('#') && href !== '#') {
       const element = document.querySelector(href)
       if (element) {
@@ -92,7 +100,7 @@ export function Footer() {
                 {footerLinks.services.map((link) => (
                   <li key={link.label}>
                     <button
-                      onClick={() => handleLinkClick(link.href)}
+                      onClick={() => handleLinkClick(link.href, link.label)}
                       className="text-sm text-muted-foreground hover:text-foreground transition-colors"
                     >
                       {link.label}
@@ -111,7 +119,7 @@ export function Footer() {
                 {footerLinks.company.map((link) => (
                   <li key={link.label}>
                     <button
-                      onClick={() => handleLinkClick(link.href)}
+                      onClick={() => handleLinkClick(link.href, link.label)}
                       className="text-sm text-muted-foreground hover:text-foreground transition-colors"
                     >
                       {link.label}
@@ -130,7 +138,7 @@ export function Footer() {
                 {footerLinks.legal.map((link) => (
                   <li key={link.label}>
                     <button
-                      onClick={() => handleLinkClick(link.href)}
+                      onClick={() => handleLinkClick(link.href, link.label)}
                       className="text-sm text-muted-foreground hover:text-foreground transition-colors"
                     >
                       {link.label}
@@ -179,6 +187,12 @@ export function Footer() {
           </div>
         </div>
       </div>
+
+      {/* Contact Modal */}
+      <ContactModal
+        isOpen={isContactModalOpen}
+        onClose={() => setIsContactModalOpen(false)}
+      />
     </footer>
   )
 }
