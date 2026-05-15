@@ -7,6 +7,7 @@ import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { ContactForm } from '@/components/landing/contact-form'
 import { CTASection } from '@/components/landing/cta-section'
+import { CTABanner } from '@/components/landing/cta-banner'
 import { Footer } from '@/components/landing/footer'
 
 const contactInfo = [
@@ -150,6 +151,9 @@ export function ContactPageContent() {
           </motion.div>
         </div>
       </section>
+
+      {/* CTA Banner */}
+      <CTABanner onContactClick={scrollToForm} />
 
       {/* Contact Form Section */}
       <div ref={formRef}>
