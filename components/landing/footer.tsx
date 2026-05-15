@@ -44,6 +44,13 @@ export function Footer() {
       setIsContactModalOpen(true)
       return
     }
+    if (label === 'Success Stories') {
+      const element = document.querySelector('#testimonials')
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      }
+      return
+    }
     if (href.startsWith('#') && href !== '#') {
       const element = document.querySelector(href)
       if (element) {
