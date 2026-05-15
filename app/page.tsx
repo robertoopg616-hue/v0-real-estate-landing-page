@@ -6,6 +6,7 @@ import { Testimonials } from '@/components/landing/testimonials'
 import { CaseStudy } from '@/components/landing/case-study'
 import { FAQ } from '@/components/landing/faq'
 import { ContactForm } from '@/components/landing/contact-form'
+import { CTASection } from '@/components/landing/cta-section'
 import { Footer } from '@/components/landing/footer'
 
 export default function HomePage() {
@@ -19,6 +20,7 @@ export default function HomePage() {
       <CaseStudy />
       <FAQ />
       <ContactForm />
+      <CTASection />
       <Footer />
     </main>
   )
