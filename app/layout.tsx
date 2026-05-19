@@ -64,6 +64,7 @@ export default function RootLayout({
       <body className="font-sans antialiased min-h-screen">
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}
+import { SpeedInsights } from "@vercel/speed-insights/next"
         <SpeedInsights />
       </body>
     </html>
