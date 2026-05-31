@@ -89,7 +89,7 @@ export function Features() {
             <motion.div
               key={feature.title}
               variants={itemVariants}
-              className="group glass-card rounded-2xl p-8 hover:border-primary/30 transition-all duration-300"
+              className="group glow-card rounded-2xl p-8"
             >
               {/* Icon */}
               <div className="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-primary/10 group-hover:bg-primary/20 transition-colors mb-6">

@@ -66,28 +66,28 @@ To make interaction feel responsive and state-of-the-art:
 
 Use this checklist to track completed tasks as we proceed:
 
-- [ ] **Phase 1: Global styles and layout animations (`globals.css`)**
-  - [ ] Write keyframes and variables for the mesh gradient background aura.
-  - [ ] Implement utility classes for glowing border outlines.
-  - [ ] Set up layout scaffolding classes for the split-screen image slider.
-- [ ] **Phase 2: Hero section styling & Counter integration (`hero.tsx`)**
-  - [ ] Embed the moving gradient background layer.
-  - [ ] Integrate Framer Motion count-up numbers for the 4 key metrics.
-- [ ] **Phase 3: Drag-to-Reveal Staging Comparison (`case-study.tsx`)**
-  - [ ] Implement the side-by-side relative container structure.
-  - [ ] Implement mouse and mobile touch drag event listeners to update slider percentage state.
-  - [ ] Add the vertical line divider and floating grab-handle graphic.
-- [ ] **Phase 4: Interactive Proceeds Calculator (`pricing.tsx`)**
-  - [ ] Implement the range slider widget ($500k - $2.5M).
-  - [ ] Program calculation math for each tier (Essential 2%, Signature 3%, Elite 4%).
-  - [ ] Connect slider values to dynamically updated UI metrics showing Saved Equity.
-- [ ] **Phase 5: Hover effects & Reading indicator**
-  - [ ] Hook up 3D card tilt triggers to features & pricing card mouseovers.
-  - [ ] Add the top-anchored scroll progress indicator bar.
-- [ ] **Phase 6: QA, responsive testing & browser validation**
-  - [ ] Verify slider mouse click and touchscreen swiping behaviors.
-  - [ ] Verify mathematical accuracy of proceeds counts.
-  - [ ] Check console outputs for Next.js or React runtime notices.
+- [x] **Phase 1: Global styles and layout animations (`globals.css`)**
+  - [x] Write keyframes and variables for the mesh gradient background aura.
+  - [x] Implement utility classes for glowing border outlines.
+  - [x] Set up layout scaffolding classes for the split-screen image slider.
+- [x] **Phase 2: Hero section styling & Counter integration (`hero.tsx`)**
+  - [x] Embed the moving gradient background layer.
+  - [x] Integrate Framer Motion count-up numbers for the 4 key metrics.
+- [x] **Phase 3: Drag-to-Reveal Staging Comparison (`case-study.tsx`)**
+  - [x] Implement the side-by-side relative container structure.
+  - [x] Implement mouse and mobile touch drag event listeners to update slider percentage state.
+  - [x] Add the vertical line divider and floating grab-handle graphic.
+- [x] **Phase 4: Interactive Proceeds Calculator (`pricing.tsx`)**
+  - [x] Implement the range slider widget ($500k - $2.5M).
+  - [x] Program calculation math for each tier (Essential 2%, Signature 3%, Elite 4%).
+  - [x] Connect slider values to dynamically updated UI metrics showing Saved Equity.
+- [x] **Phase 5: Hover effects & Reading indicator**
+  - [x] Hook up 3D card tilt triggers to features & pricing card mouseovers.
+  - [x] Add the top-anchored scroll progress indicator bar.
+- [x] **Phase 6: QA, responsive testing & browser validation**
+  - [x] Verify slider mouse click and touchscreen swiping behaviors.
+  - [x] Verify mathematical accuracy of proceeds counts.
+  - [x] Check console outputs for Next.js or React runtime notices.
 
 ---
 
