@@ -1,7 +1,7 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
-import { motion, useInView, animate } from 'framer-motion'
+import { useState } from 'react'
+import { motion } from 'framer-motion'
 import { ArrowRight, TrendingUp, Clock, CheckCircle2, DollarSign } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { ContactModal } from '@/components/modals/contact-modal'
@@ -16,38 +16,6 @@ const stats = [
 const fadeInUp = {
   initial: { opacity: 0, y: 30 },
   animate: { opacity: 1, y: 0 },
-}
-
-function AnimatedCounter({ value }: { value: string }) {
-  const ref = useRef<HTMLSpanElement>(null)
-  const inView = useInView(ref, { once: true, margin: '-50px' })
-
-  useEffect(() => {
-    if (!inView || !ref.current) return
-
-    // Extract numbers from value (e.g. "104%" -> 104, "$42M+" -> 42, "12 Days" -> 12)
-    const numbers = value.match(/\d+/g)
-    if (!numbers) {
-      ref.current.textContent = value
-      return
-    }
-    
-    const target = parseInt(numbers[0], 10)
-    const node = ref.current
-    
-    const controls = animate(0, target, {
-      duration: 1.8,
-      ease: 'easeOut',
-      onUpdate(latest) {
-        const rounded = Math.round(latest)
-        node.textContent = value.replace(/\d+/, String(rounded))
-      }
-    })
-
-    return () => controls.stop()
-  }, [value, inView])
-
-  return <span ref={ref}>{value}</span>
 }
 
 export function Hero() {
@@ -72,13 +40,6 @@ export function Hero() {
           backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
         }}
       />
-
-      {/* Animated Ambient Glow Blobs */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0 opacity-40">
-        <div className="absolute top-[10%] left-[20%] w-[350px] h-[350px] rounded-full bg-primary/10 blur-[80px] animate-float-1" />
-        <div className="absolute top-[40%] right-[15%] w-[400px] h-[400px] rounded-full bg-orange-500/5 blur-[100px] animate-float-2" />
-        <div className="absolute bottom-[10%] left-[30%] w-[380px] h-[380px] rounded-full bg-blue-500/5 blur-[90px] animate-float-3" />
-      </div>
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 md:py-32">
         <div className="text-center max-w-4xl mx-auto">
@@ -147,7 +108,7 @@ export function Hero() {
         <motion.div
           {...fadeInUp}
           transition={{ duration: 0.6, delay: 0.5 }}
-          className="mt-20 md:mt-28 relative z-10"
+          className="mt-20 md:mt-28"
         >
           <div className="glass-card rounded-2xl p-6 md:p-8">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
@@ -163,7 +124,7 @@ export function Hero() {
                     <stat.icon className="size-6 text-primary" />
                   </div>
                   <span className="text-2xl md:text-3xl font-bold text-foreground">
-                    <AnimatedCounter value={stat.value} />
+                    {stat.value}
                   </span>
                   <span className="text-sm text-muted-foreground mt-1">
                     {stat.label}
@@ -183,4 +144,3 @@ export function Hero() {
     </section>
   )
 }
-

@@ -115,10 +115,10 @@ export function Pricing() {
             <motion.div
               key={plan.name}
               variants={itemVariants}
-              className={`relative rounded-2xl p-8 glow-card ${
+              className={`relative rounded-2xl p-8 ${
                 plan.highlighted
-                  ? 'border-primary/45 shadow-lg shadow-primary/10 bg-black/20'
-                  : 'bg-black/10'
+                  ? 'glass-card border-primary/40 shadow-lg shadow-primary/10'
+                  : 'glass-card'
               }`}
             >
               {/* Popular Badge */}
@@ -173,9 +173,6 @@ export function Pricing() {
           ))}
         </motion.div>
 
-        {/* Equity Calculator */}
-        <EquityCalculator />
-
         {/* Disclaimer */}
         <motion.p
           initial={{ opacity: 0 }}
@@ -194,146 +191,5 @@ export function Pricing() {
         onClose={() => setIsContactModalOpen(false)}
       />
     </section>
-  )
-}
-
-function EquityCalculator() {
-  const [homeValue, setHomeValue] = useState(1000000)
-
-  // Calculations
-  // Essential: 2% commission, 100% estimated sale price
-  const essentialPrice = homeValue
-  const essentialCommission = essentialPrice * 0.02
-  const essentialProceeds = essentialPrice - essentialCommission
-
-  // Signature: 3% commission, 103% estimated sale price (virtual staging and premium marketing)
-  const signaturePrice = homeValue * 1.03
-  const signatureCommission = signaturePrice * 0.03
-  const signatureProceeds = signaturePrice - signatureCommission
-
-  // Elite: 4% commission, 105% estimated sale price (full concierge white-glove staging)
-  const elitePrice = homeValue * 1.05
-  const eliteCommission = elitePrice * 0.04
-  const eliteProceeds = elitePrice - eliteCommission
-
-  const formatCurrency = (val: number) => {
-    return '$' + Math.round(val).toLocaleString('en-US')
-  }
-
-  return (
-    <div className="glass-card mt-20 p-6 sm:p-10 rounded-3xl border border-white/5 space-y-8 max-w-4xl mx-auto relative z-10">
-      <div className="text-center space-y-2">
-        <span className="text-primary font-bold text-xs uppercase tracking-wider">Interactive Tool</span>
-        <h3 className="text-2xl sm:text-3xl font-bold text-foreground">Home Equity & Proceeds Calculator</h3>
-        <p className="text-muted-foreground text-sm max-w-2xl mx-auto">
-          Drag the slider to select your estimated property value. See how professional styling and concierge-coordinated sales yield higher net proceeds—leaving more money in your pocket.
-        </p>
-      </div>
-
-      {/* Slider Controls */}
-      <div className="space-y-4 max-w-xl mx-auto">
-        <div className="flex justify-between items-center text-sm font-semibold">
-          <span className="text-muted-foreground">Estimated Property Value:</span>
-          <span className="text-primary text-xl sm:text-2xl font-bold">{formatCurrency(homeValue)}</span>
-        </div>
-        <input 
-          type="range"
-          min="500000"
-          max="2500000"
-          step="10000"
-          value={homeValue}
-          onChange={(e) => setHomeValue(parseInt(e.target.value, 10))}
-          className="w-full h-2 bg-secondary rounded-lg appearance-none cursor-pointer accent-primary"
-        />
-        <div className="flex justify-between text-xs text-muted-foreground">
-          <span>$500k</span>
-          <span>$1.5M</span>
-          <span>$2.5M</span>
-        </div>
-      </div>
-
-      {/* Comparison Grid */}
-      <div className="grid sm:grid-cols-3 gap-6 pt-4 border-t border-white/5">
-        {/* Essential Column */}
-        <div className="glass-card p-6 rounded-2xl border border-white/5 space-y-4 relative overflow-hidden flex flex-col justify-between bg-black/10">
-          <div className="space-y-1">
-            <h4 className="font-bold text-lg text-slate-300">Essential (2%)</h4>
-            <p className="text-xs text-muted-foreground">Standard listing without staging</p>
-          </div>
-          <div className="space-y-2 py-4">
-            <div className="flex justify-between text-xs">
-              <span className="text-muted-foreground">Est. Sale Price:</span>
-              <span className="text-slate-300 font-medium">{formatCurrency(essentialPrice)}</span>
-            </div>
-            <div className="flex justify-between text-xs">
-              <span className="text-muted-foreground">Commission Cost:</span>
-              <span className="text-red-400 font-medium">-{formatCurrency(essentialCommission)}</span>
-            </div>
-          </div>
-          <div className="pt-4 border-t border-white/5 space-y-1">
-            <span className="text-xs text-muted-foreground block">Net Cash Kept:</span>
-            <span className="text-xl sm:text-2xl font-bold text-foreground block">{formatCurrency(essentialProceeds)}</span>
-          </div>
-        </div>
-
-        {/* Signature Column */}
-        <div className="glass-card p-6 rounded-2xl border border-primary/20 shadow-lg shadow-primary/5 space-y-4 relative overflow-hidden flex flex-col justify-between bg-black/10">
-          <div className="absolute -right-12 -top-12 w-24 h-24 bg-primary/5 rounded-full blur-xl pointer-events-none" />
-          <div className="space-y-1">
-            <div className="flex items-center gap-1.5 justify-between">
-              <h4 className="font-bold text-lg text-foreground">Signature (3%)</h4>
-              <span className="text-[10px] bg-primary/20 border border-primary/40 px-2 py-0.5 rounded-full text-primary font-bold shrink-0">103% Sales Price</span>
-            </div>
-            <p className="text-xs text-muted-foreground">Virtual staging & premium marketing</p>
-          </div>
-          <div className="space-y-2 py-4">
-            <div className="flex justify-between text-xs">
-              <span className="text-muted-foreground">Est. Sale Price (+3%):</span>
-              <span className="text-primary font-medium">{formatCurrency(signaturePrice)}</span>
-            </div>
-            <div className="flex justify-between text-xs">
-              <span className="text-muted-foreground">Commission Cost:</span>
-              <span className="text-red-400 font-medium">-{formatCurrency(signatureCommission)}</span>
-            </div>
-          </div>
-          <div className="pt-4 border-t border-white/5 space-y-1">
-            <div className="flex justify-between items-baseline">
-              <span className="text-xs text-muted-foreground block">Net Cash Kept:</span>
-              <span className="text-xs text-emerald-400 font-bold">+{formatCurrency(signatureProceeds - essentialProceeds)} Net Gain</span>
-            </div>
-            <span className="text-xl sm:text-2xl font-bold text-foreground block">{formatCurrency(signatureProceeds)}</span>
-          </div>
-        </div>
-
-        {/* Elite Column */}
-        <div className="glass-card p-6 rounded-2xl border border-primary/40 shadow-xl shadow-primary/10 space-y-4 relative overflow-hidden flex flex-col justify-between bg-black/10">
-          <div className="absolute -right-8 -top-8 w-20 h-20 bg-primary/10 rounded-full blur-lg pointer-events-none" />
-          <div className="space-y-1">
-            <div className="flex items-center gap-1.5 justify-between">
-              <h4 className="font-bold text-lg text-primary">Elite Concierge (4%)</h4>
-              <span className="text-[10px] bg-primary text-primary-foreground px-2 py-0.5 rounded-full font-bold shrink-0">105% Sales Price</span>
-            </div>
-            <p className="text-xs text-muted-foreground">Full white-glove prep ($0 upfront)</p>
-          </div>
-          <div className="space-y-2 py-4">
-            <div className="flex justify-between text-xs">
-              <span className="text-muted-foreground">Est. Sale Price (+5%):</span>
-              <span className="text-primary font-bold">{formatCurrency(elitePrice)}</span>
-            </div>
-            <div className="flex justify-between text-xs">
-              <span className="text-muted-foreground">Commission Cost:</span>
-              <span className="text-red-400 font-medium">-{formatCurrency(eliteCommission)}</span>
-            </div>
-          </div>
-          <div className="pt-4 border-t border-white/5 space-y-1">
-            <div className="flex justify-between items-baseline">
-              <span className="text-xs text-muted-foreground block">Net Cash Kept:</span>
-              <span className="text-xs text-emerald-400 font-bold">+{formatCurrency(eliteProceeds - essentialProceeds)} Net Gain</span>
-            </div>
-            <span className="text-xl sm:text-2xl font-bold text-primary block">{formatCurrency(eliteProceeds)}</span>
-          </div>
-        </div>
-      </div>
-    </div>
   )
 }

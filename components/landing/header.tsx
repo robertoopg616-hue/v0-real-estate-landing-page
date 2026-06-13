@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { motion, useScroll } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { Menu, X, Home } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import {
@@ -21,7 +21,6 @@ const navLinks = [
 
 export function Header() {
   const [isOpen, setIsOpen] = useState(false)
-  const { scrollYProgress } = useScroll()
 
   const scrollToSection = (href: string) => {
     setIsOpen(false)
@@ -38,9 +37,6 @@ export function Header() {
       transition={{ duration: 0.6, ease: 'easeOut' }}
       className="fixed top-0 left-0 right-0 z-50 glass"
     >
-      {/* Scroll Progress Bar */}
-      <motion.div className="scroll-progress-bar" style={{ scaleX: scrollYProgress }} />
-
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
