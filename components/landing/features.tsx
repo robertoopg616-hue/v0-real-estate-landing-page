@@ -89,10 +89,10 @@ export function Features() {
             <motion.div
               key={feature.title}
               variants={itemVariants}
-              className="group glow-card rounded-2xl p-8"
+              className="group glow-card rounded-[10px] shadow-figma-card p-8 border border-white/5"
             >
               {/* Icon */}
-              <div className="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-primary/10 group-hover:bg-primary/20 transition-colors mb-6">
+              <div className="inline-flex items-center justify-center w-14 h-14 rounded-[10px] bg-primary/10 group-hover:bg-primary/20 transition-colors mb-6">
                 <feature.icon className="size-7 text-primary" />
               </div>
 

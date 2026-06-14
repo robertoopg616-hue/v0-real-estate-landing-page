@@ -115,10 +115,10 @@ export function Pricing() {
             <motion.div
               key={plan.name}
               variants={itemVariants}
-              className={`relative rounded-2xl p-8 glow-card ${
+              className={`relative rounded-[10px] p-8 glow-card shadow-figma-card ${
                 plan.highlighted
-                  ? 'border-primary/45 shadow-lg shadow-primary/10 bg-black/20'
-                  : 'bg-black/10'
+                  ? 'border-primary/45 bg-black/20'
+                  : 'bg-black/10 border border-white/5'
               }`}
             >
               {/* Popular Badge */}
@@ -161,7 +161,7 @@ export function Pricing() {
               {/* CTA Button */}
               <Button
                 onClick={() => setIsContactModalOpen(true)}
-                className={`w-full font-semibold ${
+                className={`w-full font-semibold rounded-[9.28px] border-figma-thin border-white/20 shadow-sm ${
                   plan.highlighted
                     ? 'bg-primary hover:bg-primary/90 text-primary-foreground'
                     : 'bg-secondary hover:bg-secondary/80 text-secondary-foreground'
@@ -221,7 +221,7 @@ function EquityCalculator() {
   }
 
   return (
-    <div className="glass-card mt-20 p-6 sm:p-10 rounded-3xl border border-white/5 space-y-8 max-w-4xl mx-auto relative z-10">
+    <div className="glass-card mt-20 p-6 sm:p-10 rounded-[10px] shadow-figma-card border border-white/5 space-y-8 max-w-4xl mx-auto relative z-10">
       <div className="text-center space-y-2">
         <span className="text-primary font-bold text-xs uppercase tracking-wider">Interactive Tool</span>
         <h3 className="text-2xl sm:text-3xl font-bold text-foreground">Home Equity & Proceeds Calculator</h3>
@@ -255,7 +255,7 @@ function EquityCalculator() {
       {/* Comparison Grid */}
       <div className="grid sm:grid-cols-3 gap-6 pt-4 border-t border-white/5">
         {/* Essential Column */}
-        <div className="glass-card p-6 rounded-2xl border border-white/5 space-y-4 relative overflow-hidden flex flex-col justify-between bg-black/10">
+        <div className="glass-card p-6 rounded-[10px] shadow-figma-card border border-white/5 space-y-4 relative overflow-hidden flex flex-col justify-between bg-black/10">
           <div className="space-y-1">
             <h4 className="font-bold text-lg text-slate-300">Essential (2%)</h4>
             <p className="text-xs text-muted-foreground">Standard listing without staging</p>
@@ -277,7 +277,7 @@ function EquityCalculator() {
         </div>
 
         {/* Signature Column */}
-        <div className="glass-card p-6 rounded-2xl border border-primary/20 shadow-lg shadow-primary/5 space-y-4 relative overflow-hidden flex flex-col justify-between bg-black/10">
+        <div className="glass-card p-6 rounded-[10px] shadow-figma-card border border-primary/20 space-y-4 relative overflow-hidden flex flex-col justify-between bg-black/10">
           <div className="absolute -right-12 -top-12 w-24 h-24 bg-primary/5 rounded-full blur-xl pointer-events-none" />
           <div className="space-y-1">
             <div className="flex items-center gap-1.5 justify-between">
@@ -306,7 +306,7 @@ function EquityCalculator() {
         </div>
 
         {/* Elite Column */}
-        <div className="glass-card p-6 rounded-2xl border border-primary/40 shadow-xl shadow-primary/10 space-y-4 relative overflow-hidden flex flex-col justify-between bg-black/10">
+        <div className="glass-card p-6 rounded-[10px] shadow-figma-card border border-primary/40 space-y-4 relative overflow-hidden flex flex-col justify-between bg-black/10">
           <div className="absolute -right-8 -top-8 w-20 h-20 bg-primary/10 rounded-full blur-lg pointer-events-none" />
           <div className="space-y-1">
             <div className="flex items-center gap-1.5 justify-between">

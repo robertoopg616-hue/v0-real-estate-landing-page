@@ -201,7 +201,7 @@ export function CaseStudy() {
             className="lg:col-span-5 space-y-6"
           >
             {/* Challenge Card */}
-            <div className="glass-card p-6 rounded-2xl border border-white/5 space-y-3">
+            <div className="glass-card p-6 rounded-[10px] shadow-figma-card border border-white/5 space-y-3">
               <div className="flex items-center gap-2 text-red-400 font-bold text-sm">
                 <HelpCircle className="size-5 shrink-0" />
                 The Challenge
@@ -213,7 +213,7 @@ export function CaseStudy() {
             </div>
 
             {/* Results Card */}
-            <div className="glass-card p-6 rounded-2xl border border-primary/20 shadow-lg shadow-primary/5 space-y-3">
+            <div className="glass-card p-6 rounded-[10px] border border-primary/20 shadow-figma-card space-y-3">
               <div className="flex items-center gap-2 text-primary font-bold text-sm">
                 <CheckCircle className="size-5 shrink-0" />
                 The Solution & Result
@@ -229,7 +229,7 @@ export function CaseStudy() {
               <Button
                 size="lg"
                 onClick={scrollToContact}
-                className="w-full sm:w-auto bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-8 py-6 rounded-lg shadow-lg shadow-primary/20 transition-all hover:shadow-xl hover:shadow-primary/30"
+                className="w-full sm:w-auto bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-8 py-6 rounded-[9.28px] border-figma-thin border-white/20 shadow-lg shadow-primary/20 transition-all hover:shadow-xl hover:shadow-primary/30"
               >
                 Plan Your Synchronized Move
                 <ArrowRight className="ml-2 size-5" />

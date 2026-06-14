@@ -99,7 +99,7 @@ export function Hero() {
           <motion.h1
             {...fadeInUp}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-foreground text-balance leading-[1.1]"
+            className="text-4xl sm:text-5xl md:text-5xl lg:text-5xl font-semibold tracking-tight text-foreground text-balance leading-[1.2] lg:leading-[56px]"
           >
             Outgrow your home,{' '}
             <span className="text-primary">not your peace of mind.</span>
@@ -109,7 +109,7 @@ export function Hero() {
           <motion.p
             {...fadeInUp}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="mt-6 text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto text-pretty leading-relaxed"
+            className="mt-6 text-lg font-semibold text-muted-foreground max-w-2xl mx-auto text-pretty leading-[27px]"
           >
             Expert guidance to sell your property for top dollar and transition into
             your dream home seamlessly. We handle the timing so you never move twice.
@@ -124,7 +124,7 @@ export function Hero() {
             <Button
               size="lg"
               onClick={() => setIsContactModalOpen(true)}
-              className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold text-base px-8 py-6 rounded-lg shadow-lg shadow-primary/25 transition-all hover:shadow-xl hover:shadow-primary/30"
+              className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold text-base px-8 py-6 rounded-[9.28px] border-figma-thin border-white/20 shadow-lg shadow-primary/25 transition-all hover:shadow-xl hover:shadow-primary/30"
             >
               Get a Free Property Consultation
               <ArrowRight className="ml-2 size-5" />
@@ -136,7 +136,7 @@ export function Hero() {
                 const el = document.querySelector('#features')
                 el?.scrollIntoView({ behavior: 'smooth' })
               }}
-              className="text-foreground border-border hover:bg-secondary hover:text-foreground font-medium text-base px-8 py-6 rounded-lg"
+              className="text-foreground border-border hover:bg-secondary hover:text-foreground font-medium text-base px-8 py-6 rounded-[9.28px] border-figma-thin border-white/10"
             >
               See How It Works
             </Button>
@@ -149,7 +149,7 @@ export function Hero() {
           transition={{ duration: 0.6, delay: 0.5 }}
           className="mt-20 md:mt-28 relative z-10"
         >
-          <div className="glass-card rounded-2xl p-6 md:p-8">
+          <div className="glass-card rounded-[10px] p-6 md:p-8 shadow-figma-card">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
               {stats.map((stat, index) => (
                 <motion.div

@@ -77,7 +77,7 @@ export function FAQ() {
               <AccordionItem
                 key={index}
                 value={`item-${index}`}
-                className="glass-card rounded-xl mb-4 px-6 border-border data-[state=open]:border-primary/30"
+                className="glass-card rounded-[10px] shadow-figma-card mb-4 px-6 border border-white/5 data-[state=open]:border-primary/30"
               >
                 <AccordionTrigger className="text-left text-foreground hover:text-primary hover:no-underline py-6 text-base font-semibold">
                   {faq.question}

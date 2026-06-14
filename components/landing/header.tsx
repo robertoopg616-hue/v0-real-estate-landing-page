@@ -48,8 +48,8 @@ export function Header() {
             href="#"
             className="flex items-center gap-2 text-foreground hover:text-primary transition-colors"
           >
-            <Home className="size-6" />
-            <span className="text-lg font-semibold tracking-tight">
+            <Home className="size-6 text-primary" />
+            <span className="text-xl font-bold tracking-tight font-sans">
               Premium Realty
             </span>
           </a>
@@ -60,7 +60,7 @@ export function Header() {
               <button
                 key={link.href}
                 onClick={() => scrollToSection(link.href)}
-                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+                className="text-base font-medium text-muted-foreground hover:text-foreground transition-colors"
               >
                 {link.label}
               </button>
@@ -71,7 +71,7 @@ export function Header() {
           <div className="hidden md:block">
             <Button
               onClick={() => scrollToSection('#contact')}
-              className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold"
+              className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold text-base rounded-[9.28px] border-figma-thin border-white/20 shadow-sm"
             >
               Free Consultation
             </Button>
@@ -104,7 +104,7 @@ export function Header() {
                 ))}
                 <Button
                   onClick={() => scrollToSection('#contact')}
-                  className="mt-4 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold w-full"
+                  className="mt-4 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold text-base w-full rounded-[9.28px] border-figma-thin border-white/20 shadow-sm"
                 >
                   Free Consultation
                 </Button>

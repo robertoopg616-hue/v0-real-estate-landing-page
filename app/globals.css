@@ -132,6 +132,21 @@ html {
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
+/* Figma Custom Drop Shadows */
+.shadow-figma-card {
+  box-shadow: -21px -15px 66px rgba(27, 35, 55, 0.25);
+}
+
+.shadow-figma-search {
+  box-shadow: 32px -16px 73px rgba(10, 13, 17, 0.08);
+}
+
+/* Figma custom thin border */
+.border-figma-thin {
+  border-width: 0.8px;
+}
+
+
 /* Text balance for headings */
 .text-balance {
   text-wrap: balance;

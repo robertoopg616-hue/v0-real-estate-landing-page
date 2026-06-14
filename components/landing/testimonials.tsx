@@ -92,7 +92,7 @@ export function Testimonials() {
                   key={index}
                   className="pl-4 md:basis-1/2 lg:basis-1/3"
                 >
-                  <div className="glass-card rounded-2xl p-8 h-full flex flex-col">
+                  <div className="glass-card rounded-[10px] shadow-figma-card p-8 h-full flex flex-col border border-white/5">
                     {/* Quote Icon */}
                     <Quote className="size-8 text-primary/40 mb-4" />
 
