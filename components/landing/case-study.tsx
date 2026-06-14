@@ -80,7 +80,10 @@ function BeforeAfterComparison() {
       }}
     >
       {/* Before Layer (Underneath) */}
-      <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-zinc-950 flex flex-col justify-between p-6 sm:p-10 select-none">
+      <div 
+        className="absolute inset-0 bg-gradient-to-br from-slate-900 to-zinc-950 flex flex-col justify-between p-6 sm:p-10 select-none"
+        style={{ backgroundColor: '#090f1e' }}
+      >
         <div className="flex justify-between items-start">
           <span className="inline-flex items-center rounded-full bg-red-500/10 border border-red-500/20 px-3 py-1 text-xs font-semibold text-red-400">
             Before: Outdated condo
@@ -101,8 +104,11 @@ function BeforeAfterComparison() {
 
       {/* After Layer (Overlay with Clip-Path) */}
       <div 
-        className="absolute inset-0 bg-gradient-to-br from-slate-950 via-primary/5 to-slate-900 flex flex-col justify-between p-6 sm:p-10 select-none border-r border-primary/20"
-        style={{ clipPath: `inset(0 ${100 - sliderPos}% 0 0)` }}
+        className="absolute inset-0 bg-gradient-to-br from-slate-950 to-slate-900 flex flex-col justify-between p-6 sm:p-10 select-none border-r border-primary/20"
+        style={{ 
+          backgroundColor: '#0f172a',
+          clipPath: `inset(0 ${100 - sliderPos}% 0 0)` 
+        }}
       >
         <div className="flex justify-between items-start w-full">
           <span className="inline-flex items-center rounded-full bg-primary/20 border border-primary/40 px-3 py-1 text-xs font-semibold text-primary">

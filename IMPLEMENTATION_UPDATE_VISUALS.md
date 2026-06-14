@@ -88,6 +88,10 @@ Use this checklist to track completed tasks as we proceed:
   - [x] Verify slider mouse click and touchscreen swiping behaviors.
   - [x] Verify mathematical accuracy of proceeds counts.
   - [x] Check console outputs for Next.js or React runtime notices.
+- [x] **Phase 7: Rollback Typography & Fix Slider Overlap**
+  - [x] Roll back Playfair Display serif Google Font changes to restore working page state
+  - [x] Ensure solid, non-transparent background layers for Before/After panels
+  - [x] Fix text overlap bug in case study comparison slider
 
 ---
 
