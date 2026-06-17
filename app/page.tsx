@@ -1,5 +1,6 @@
 import { Header } from '@/components/landing/header'
 import { Hero } from '@/components/landing/hero'
+import { StatsSection } from '@/components/landing/stats-section'
 import { Features } from '@/components/landing/features'
 import { Pricing } from '@/components/landing/pricing'
 import { Testimonials } from '@/components/landing/testimonials'
@@ -14,6 +15,7 @@ export default function HomePage() {
     <main className="relative">
       <Header />
       <Hero />
+      <StatsSection />
       <Features />
       <Pricing />
       <Testimonials />

@@ -50,9 +50,15 @@ const testimonials = [
 ]
 
 export function Testimonials() {
+  const featured = testimonials[0]
+  const listItems = testimonials.slice(1)
+
   return (
-    <section id="testimonials" className="py-24 md:py-32">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <section id="testimonials" className="py-24 md:py-32 relative overflow-hidden bg-secondary/10">
+      {/* Background gradients */}
+      <div className="absolute bottom-0 right-0 w-[300px] h-[300px] rounded-full bg-primary/5 blur-[100px] pointer-events-none" />
+
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -72,76 +78,92 @@ export function Testimonials() {
           </p>
         </motion.div>
 
-        {/* Testimonials Carousel */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-100px' }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-        >
-          <Carousel
-            opts={{
-              align: 'start',
-              loop: true,
-            }}
-            className="w-full"
+        {/* Asymmetrical Testimonials Grid */}
+        <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+          {/* Left Column: Large Featured Testimonial with Image */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ duration: 0.8 }}
+            className="lg:col-span-6 space-y-8"
           >
-            <CarouselContent className="-ml-4">
-              {testimonials.map((testimonial, index) => (
-                <CarouselItem
-                  key={index}
-                  className="pl-4 md:basis-1/2 lg:basis-1/3"
-                >
-                  <div className="glass-card rounded-[10px] shadow-figma-card p-8 h-full flex flex-col border border-white/5">
-                    {/* Quote Icon */}
-                    <Quote className="size-8 text-primary/40 mb-4" />
+            <div className="space-y-6">
+              <Quote className="size-12 text-primary/30" />
+              
+              <div className="flex gap-1">
+                {Array.from({ length: featured.rating }).map((_, i) => (
+                  <Star key={i} className="size-5 fill-primary text-primary" />
+                ))}
+              </div>
 
-                    {/* Rating */}
-                    <div className="flex gap-1 mb-4">
-                      {Array.from({ length: testimonial.rating }).map((_, i) => (
-                        <Star
-                          key={i}
-                          className="size-4 fill-primary text-primary"
-                        />
-                      ))}
-                    </div>
+              <blockquote className="text-xl sm:text-2xl font-bold text-foreground leading-relaxed text-pretty">
+                &ldquo;{featured.quote}&rdquo;
+              </blockquote>
 
-                    {/* Quote */}
-                    <blockquote className="text-foreground leading-relaxed flex-grow mb-6">
-                      &ldquo;{testimonial.quote}&rdquo;
-                    </blockquote>
-
-                    {/* Highlight Badge */}
-                    <div className="mb-4">
-                      <span className="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
-                        {testimonial.highlight}
-                      </span>
-                    </div>
-
-                    {/* Author */}
-                    <div className="flex items-center gap-3 pt-4 border-t border-border">
-                      <div className="flex items-center justify-center w-10 h-10 rounded-full bg-primary/20 text-primary font-semibold text-sm">
-                        {testimonial.initials}
-                      </div>
-                      <div>
-                        <p className="font-semibold text-foreground text-sm">
-                          {testimonial.name}
-                        </p>
-                        <p className="text-xs text-muted-foreground">
-                          {testimonial.location}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-            <div className="flex justify-center gap-2 mt-8">
-              <CarouselPrevious className="static translate-y-0 bg-secondary hover:bg-secondary/80 border-border" />
-              <CarouselNext className="static translate-y-0 bg-secondary hover:bg-secondary/80 border-border" />
+              <div className="flex items-center gap-3 pt-4 border-t border-white/10">
+                <div className="flex items-center justify-center w-12 h-12 rounded-full bg-primary/20 text-primary font-semibold text-base">
+                  {featured.initials}
+                </div>
+                <div>
+                  <p className="font-bold text-foreground text-base">{featured.name}</p>
+                  <p className="text-xs text-muted-foreground">{featured.location}</p>
+                </div>
+              </div>
             </div>
-          </Carousel>
-        </motion.div>
+
+            {/* Premium Staged Interior Image */}
+            <div className="relative rounded-[20px] overflow-hidden border border-white/10 shadow-figma-card aspect-video max-w-lg">
+              <img 
+                src="/staged-interior.png" 
+                alt="Beautiful staged home interior" 
+                className="w-full h-full object-cover object-center transform hover:scale-105 transition-transform duration-700 select-none"
+                loading="lazy"
+              />
+            </div>
+          </motion.div>
+
+          {/* Right Column: Other Testimonials List */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="lg:col-span-6 space-y-10 divide-y divide-white/10 lg:pt-6"
+          >
+            {listItems.map((item, index) => (
+              <div 
+                key={index} 
+                className={`space-y-4 ${index > 0 ? 'pt-8' : ''}`}
+              >
+                <div className="flex justify-between items-center">
+                  <div className="flex gap-1">
+                    {Array.from({ length: item.rating }).map((_, i) => (
+                      <Star key={i} className="size-4 fill-primary text-primary" />
+                    ))}
+                  </div>
+                  <span className="inline-flex items-center rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-semibold text-primary border border-primary/20">
+                    {item.highlight}
+                  </span>
+                </div>
+
+                <blockquote className="text-base text-muted-foreground leading-relaxed text-pretty">
+                  &ldquo;{item.quote}&rdquo;
+                </blockquote>
+
+                <div className="flex items-center gap-3">
+                  <div className="flex items-center justify-center w-10 h-10 rounded-full bg-primary/10 text-primary font-semibold text-sm">
+                    {item.initials}
+                  </div>
+                  <div>
+                    <p className="font-semibold text-foreground text-sm">{item.name}</p>
+                    <p className="text-xs text-muted-foreground">{item.location}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </motion.div>
+        </div>
       </div>
     </section>
   )

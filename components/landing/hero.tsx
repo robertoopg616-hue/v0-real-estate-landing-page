@@ -81,98 +81,77 @@ export function Hero() {
       </div>
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 md:py-32">
-        <div className="text-center max-w-4xl mx-auto">
-          {/* Badge */}
-          <motion.div
-            {...fadeInUp}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-sm text-primary mb-6"
-          >
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75" />
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-primary" />
-            </span>
-            Trusted by 500+ Growing Families
-          </motion.div>
-
-          {/* Headline */}
-          <motion.h1
-            {...fadeInUp}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-4xl sm:text-5xl md:text-5xl lg:text-5xl font-semibold tracking-tight text-foreground text-balance leading-[1.2] lg:leading-[56px]"
-          >
-            Outgrow your home,{' '}
-            <span className="text-primary">not your peace of mind.</span>
-          </motion.h1>
-
-          {/* Subheadline */}
-          <motion.p
-            {...fadeInUp}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="mt-6 text-lg font-semibold text-muted-foreground max-w-2xl mx-auto text-pretty leading-[27px]"
-          >
-            Expert guidance to sell your property for top dollar and transition into
-            your dream home seamlessly. We handle the timing so you never move twice.
-          </motion.p>
-
-          {/* CTA Buttons */}
-          <motion.div
-            {...fadeInUp}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4"
-          >
-            <Button
-              size="lg"
-              onClick={() => setIsContactModalOpen(true)}
-              className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold text-base px-8 py-6 rounded-[9.28px] border-figma-thin border-white/20 shadow-lg shadow-primary/25 transition-all hover:shadow-xl hover:shadow-primary/30"
+        <div className="grid lg:grid-cols-12 gap-12 lg:gap-8 items-center relative z-10">
+          {/* Left Column: Content */}
+          <div className="lg:col-span-6 text-left space-y-6">
+            {/* Headline */}
+            <motion.h1
+              {...fadeInUp}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-foreground leading-[1.15] text-balance"
             >
-              Get a Free Property Consultation
-              <ArrowRight className="ml-2 size-5" />
-            </Button>
-            <Button
-              variant="outline"
-              size="lg"
-              onClick={() => {
-                const el = document.querySelector('#features')
-                el?.scrollIntoView({ behavior: 'smooth' })
-              }}
-              className="text-foreground border-border hover:bg-secondary hover:text-foreground font-medium text-base px-8 py-6 rounded-[9.28px] border-figma-thin border-white/10"
+              Outgrow your home,{' '}
+              <span className="text-primary block sm:inline">not your peace of mind.</span>
+            </motion.h1>
+
+            {/* Subheadline */}
+            <motion.p
+              {...fadeInUp}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="text-lg text-muted-foreground leading-relaxed max-w-xl text-pretty font-medium"
             >
-              See How It Works
-            </Button>
+              Expert guidance to sell your property for top dollar and transition into
+              your dream home seamlessly. We handle the timing so you never move twice.
+            </motion.p>
+
+            {/* CTA Buttons */}
+            <motion.div
+              {...fadeInUp}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-4"
+            >
+              <Button
+                size="lg"
+                onClick={() => setIsContactModalOpen(true)}
+                className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold text-base px-8 py-6 rounded-[9.28px] border-figma-thin border-white/20 shadow-lg shadow-primary/25 transition-all hover:shadow-xl hover:shadow-primary/30"
+              >
+                Get a Free Consultation
+                <ArrowRight className="ml-2 size-5" />
+              </Button>
+              <Button
+                variant="outline"
+                size="lg"
+                onClick={() => {
+                  const el = document.querySelector('#features')
+                  el?.scrollIntoView({ behavior: 'smooth' })
+                }}
+                className="text-foreground border-border hover:bg-secondary hover:text-foreground font-medium text-base px-8 py-6 rounded-[9.28px] border-figma-thin border-white/10"
+              >
+                See How It Works
+              </Button>
+            </motion.div>
+          </div>
+
+          {/* Right Column: Visual Hook Image */}
+          <motion.div
+            initial={{ opacity: 0, x: 40 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, ease: 'easeOut', delay: 0.2 }}
+            className="lg:col-span-6 relative w-full"
+          >
+            {/* Ambient glow behind image */}
+            <div className="absolute -inset-4 rounded-[30px] bg-gradient-to-tr from-primary/10 to-orange-500/5 blur-2xl opacity-75 z-0" />
+            
+            <div className="relative rounded-[24px] overflow-hidden border border-white/10 shadow-figma-card z-10 aspect-square sm:aspect-[4/3] lg:aspect-[4/3]">
+              <img 
+                src="/hero-house.png" 
+                alt="Modern luxury real estate villa" 
+                className="w-full h-full object-cover object-center transform hover:scale-105 transition-transform duration-700 select-none"
+                loading="eager"
+              />
+            </div>
           </motion.div>
         </div>
-
-        {/* Trust Ribbon - Stats */}
-        <motion.div
-          {...fadeInUp}
-          transition={{ duration: 0.6, delay: 0.5 }}
-          className="mt-20 md:mt-28 relative z-10"
-        >
-          <div className="glass-card rounded-[10px] p-6 md:p-8 shadow-figma-card">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
-              {stats.map((stat, index) => (
-                <motion.div
-                  key={stat.label}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.6 + index * 0.1 }}
-                  className="flex flex-col items-center text-center"
-                >
-                  <div className="flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 mb-3">
-                    <stat.icon className="size-6 text-primary" />
-                  </div>
-                  <span className="text-2xl md:text-3xl font-bold text-foreground">
-                    <AnimatedCounter value={stat.value} />
-                  </span>
-                  <span className="text-sm text-muted-foreground mt-1">
-                    {stat.label}
-                  </span>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </motion.div>
       </div>
 
       {/* Contact Modal */}
@@ -183,4 +162,5 @@ export function Hero() {
     </section>
   )
 }
+
 

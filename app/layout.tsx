@@ -21,6 +21,9 @@ export const metadata: Metadata = {
   title: 'Premium Real Estate | Expert Guidance for Upsizing Families',
   description:
     'Outgrow your home, not your peace of mind. Expert guidance to sell your property for top dollar and transition into your dream home seamlessly. We handle the timing so you never move twice.',
+  icons: {
+    icon: '/favicon.png',
+  },
   keywords: [
     'real estate',
     'upsizing',

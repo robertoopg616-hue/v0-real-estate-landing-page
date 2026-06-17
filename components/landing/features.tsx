@@ -77,52 +77,58 @@ export function Features() {
           </p>
         </motion.div>
 
-        {/* Features Grid */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-100px' }}
-          className="grid md:grid-cols-3 gap-6 lg:gap-8"
-        >
-          {features.map((feature) => (
+        {/* Features Timeline Stepper */}
+        <div className="max-w-3xl mx-auto relative pl-6 sm:pl-12 ml-4 sm:ml-8 border-l border-white/10 space-y-16 py-4">
+          {features.map((feature, index) => (
             <motion.div
               key={feature.title}
-              variants={itemVariants}
-              className="group glow-card rounded-[10px] shadow-figma-card p-8 border border-white/5"
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: '-100px' }}
+              transition={{ duration: 0.6, delay: index * 0.15 }}
+              className="relative group pl-6 sm:pl-8"
             >
-              {/* Icon */}
-              <div className="inline-flex items-center justify-center w-14 h-14 rounded-[10px] bg-primary/10 group-hover:bg-primary/20 transition-colors mb-6">
-                <feature.icon className="size-7 text-primary" />
+              {/* Floating Step Icon Bubble */}
+              <div className="absolute -left-[51px] sm:-left-[77px] top-0 w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-background border border-white/10 group-hover:border-primary/40 flex items-center justify-center shadow-lg transition-colors z-10">
+                <feature.icon className="size-6 text-primary group-hover:scale-110 transition-transform" />
               </div>
 
-              {/* Highlight Badge */}
-              <span className="inline-block text-xs font-semibold text-primary uppercase tracking-wider mb-3">
-                {feature.highlight}
-              </span>
+              <div className="space-y-3">
+                {/* Step number and highlight */}
+                <div className="flex items-center gap-3">
+                  <span className="text-xs font-bold text-primary uppercase tracking-widest bg-primary/10 border border-primary/20 px-2.5 py-0.5 rounded-full">
+                    Step 0{index + 1}
+                  </span>
+                  <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                    {feature.highlight}
+                  </span>
+                </div>
 
-              {/* Title */}
-              <h3 className="text-xl font-bold text-foreground mb-3">
-                {feature.title}
-              </h3>
+                {/* Title */}
+                <h3 className="text-xl sm:text-2xl font-bold text-foreground group-hover:text-primary transition-colors">
+                  {feature.title}
+                </h3>
 
-              {/* Description */}
-              <p className="text-muted-foreground leading-relaxed mb-4">
-                {feature.description}
-              </p>
+                {/* Description */}
+                <p className="text-muted-foreground text-sm sm:text-base leading-relaxed max-w-2xl">
+                  {feature.description}
+                </p>
 
-              {/* Learn More Button */}
-              <Button
-                variant="ghost"
-                onClick={() => setIsLearnMoreOpen(true)}
-                className="text-primary hover:text-primary hover:bg-primary/10 p-0 h-auto font-semibold text-sm"
-              >
-                Learn More
-                <ArrowRight className="ml-1 size-4" />
-              </Button>
+                {/* Learn More Button */}
+                <div className="pt-2">
+                  <Button
+                    variant="ghost"
+                    onClick={() => setIsLearnMoreOpen(true)}
+                    className="text-primary hover:text-primary hover:bg-primary/10 p-0 h-auto font-semibold text-sm"
+                  >
+                    Learn More
+                    <ArrowRight className="ml-1 size-4" />
+                  </Button>
+                </div>
+              </div>
             </motion.div>
           ))}
-        </motion.div>
+        </div>
       </div>
 
       {/* Modals */}
