@@ -1,163 +1,99 @@
-# Implementation Kickstart Guide
+# Implementation Kickstart Guide - Premium Light Edition
 
 ## Project Overview
 
-A high-converting, frontend-only landing page for a modern real estate agency targeting "Sarah, The Hesitant Upsizer" - a 38-year-old professional who needs more space but fears market timing.
+An elite, high-converting, frontend-only landing page prototype for a modern real estate agency targeting "Sarah, The Hesitant Upsizer" - a 38-year-old professional who needs more family space but is paralyzed by transaction timing and double moving.
+
+---
 
 ## Tech Stack
 
 - **Framework**: Next.js 16 (App Router)
-- **Styling**: Tailwind CSS 4 with custom design tokens
+- **Styling**: Tailwind CSS 4 with custom design variables
 - **UI Components**: shadcn/ui (Accordion, Button, Card, Carousel, Input, Sheet)
-- **Animations**: Framer Motion (fade-ins, smooth transitions)
-- **Typography**: Geist Sans (primary), Geist Mono (code)
+- **Animations**: Framer Motion (floating blobs, fade-ins, modal scale effects)
+- **Typography**: Geist Sans (mandatory font style)
 
-## Design System
+---
+
+## Design System & Theme
 
 ### Color Palette
 
-| Token | Value | Usage |
-|-------|-------|-------|
-| `--background` | Deep Navy (#0f172a) | Page background |
-| `--foreground` | Off-white | Primary text |
-| `--primary` | Burnt Orange (#f97316) | CTAs, accents, highlights |
-| `--secondary` | Slate Gray | Secondary backgrounds |
-| `--muted` | Dark Slate | Subtle backgrounds |
-| `--muted-foreground` | Light Gray | Secondary text |
+| Token | Hex Value | Usage |
+|-------|-----------|-------|
+| `Alabaster / Off-White` | `#f8f9fa` | Page body background |
+| `Deep Emerald Green` | `#0f2e1e` | Typography hierarchy headings, contrast sections |
+| `Metallic Gold` | `#d4af37` | Core CTA buttons, highlights, brand accents |
+| `Deep Charcoal` | `#1a1a1a` | Primary readability paragraph text |
 
-### Glassmorphism
+### Custom CSS Visual Styles
 
-Two utility classes are available:
-- `.glass` - Lighter glass effect for headers/overlays
-- `.glass-card` - Heavier glass effect for cards with gradient
+1. **Watermark Grid (`.grid-watermark`)**: A repeating 48px grid pattern with gold opacity (`rgba(212, 175, 55, 0.04)`) to break flat empty spaces.
+2. **CSS Marble Texture (`.marble-texture`)**: Custom background texture rendering gold and gray veins to give lead modals a premium, off-white marble backdrop.
+3. **Glassmorphism (`.glass`, `.glass-card`)**: Light background blurs (`backdrop-blur-md`) with gold borders at low opacity (`rgba(212, 175, 55, 0.2)`).
+
+---
 
 ## Component Architecture
 
 ```
 components/
-└── landing/
-    ├── header.tsx        # Fixed navigation with mobile hamburger menu
-    ├── hero.tsx          # Hero section with trust ribbon stats
-    ├── features.tsx      # 3-column feature cards
-    ├── pricing.tsx       # 3-tier pricing comparison
-    ├── testimonials.tsx  # Carousel with client testimonials
-    ├── case-study.tsx    # Before/after comparison
-    ├── faq.tsx           # Accordion FAQ section
-    ├── contact-form.tsx  # Lead capture with success state
-    └── footer.tsx        # Full-width footer with links
+├── landing/
+│   ├── header.tsx        # Fixed navigation with brand favicon and gold CTA button
+│   ├── hero.tsx          # Split Hero with horizontal metrics row & luxury villa image
+│   ├── stats-section.tsx # Scroll-triggered animated counters (green numbers, gold details)
+│   ├── features.tsx      # 3-column light glassmorphism card grid
+│   ├── pricing.tsx       # 3-tier pricing table + interactive proceeds bar visualizer
+│   ├── testimonials.tsx  # Testimonials carousel + Before vs After conversion highlight
+│   ├── case-study.tsx    # Drag-to-reveal Before/After text slider with watermarks
+│   ├── faq.tsx           # Accordions addressing timing and staging objections
+│   ├── contact-form.tsx  # In-page lead capture with success roadmap
+│   └── footer.tsx        # Deep emerald footer with realtor board compliance text
+└── modals/
+    ├── contact-modal.tsx # Primary modal (capture form -> 3-step roadmap success view)
+    └── learn-more-modal.tsx # Secondary modal (learn more features with gold bullet points)
 ```
 
-## Page Sections
+---
 
-1. **Header** - Fixed glassmorphism navbar with smooth-scroll navigation
-2. **Hero** - Main headline, subheadline, dual CTAs, trust ribbon with 4 metrics
-3. **Features** - 3 glass-effect cards (Equity Unlock, Stay-Put Guarantee, Concierge Prep)
-4. **Pricing** - 3-column comparison (Essential 2%, Signature 3%, Elite 4%)
-5. **Testimonials** - Carousel featuring client success stories
-6. **Case Study** - Before/after visual comparison
-7. **FAQ** - 6 accordion items addressing common objections
-8. **Contact Form** - Lead capture with success state roadmap
-9. **Footer** - Links, contact info, realtor board placeholders
+## Interaction Flows & State Management
 
-## State Management
+### 1. Primary Modal Flow
+Clicking "Join Program" or "Get a Free Property Consultation" triggers the `ContactModal`:
+- Shows a form with Name, Email, and Property Address fields (required native validation).
+- On submit, switches instantly to the **3-Step Roadmap success roadmap**:
+  1. **10-Min Discovery Call**
+  2. **Custom Equity Report**
+  3. **Coffee Consultation**
 
-This is a **frontend-only prototype**:
-- Form state managed with React `useState`
-- No backend integration
-- Data does not persist on refresh
-- Form submission toggles to success state UI
+### 2. Secondary Modal Flow
+Clicking "Learn More" in feature cards triggers the `LearnMoreModal`:
+- Displays styled bullet points in Metallic Gold explaining timing security and staging equity.
 
-## Key Features
+### 3. Contact Scroll & Focus
+Clicking the "Contact" link in the footer smoothly scrolls the viewport to the top and opens the `ContactModal` so that users don't get stuck at the bottom of the page.
 
-### Smooth Scrolling
-All navigation links and CTAs use `scrollIntoView({ behavior: 'smooth' })` for seamless page navigation.
+---
 
-### Mobile Responsive
-- Hamburger menu for mobile navigation (using shadcn Sheet)
-- Responsive grid layouts (1 → 2 → 3 columns)
-- Touch-friendly carousel controls
+## SEO & Accessibility
 
-### Animations
-- Fade-in-up animations on section headers
-- Staggered animations on card grids
-- Smooth transitions on hover states
+- Semantic HTML tags (`<header>`, `<main>`, `<section>`, `<footer>`).
+- Linked favicon configurations in the `layout.tsx` metadata.
+- Contrast ratios optimized (Deep Charcoal on Alabaster background).
+- Clear heading structure from h1 to h3.
 
-### CTA Placement
-Primary CTA ("Get a Free Property Consultation") appears in:
-1. Header navigation
-2. Hero section
-3. Pricing section buttons
-4. Case study section
-5. Contact form submit
+---
 
-## Form Success State
-
-When the form is submitted:
-1. Form UI fades out
-2. Success message with personalized greeting appears
-3. 3-step "What Happens Next" roadmap displays:
-   - Step 1: 10-Min Discovery Call
-   - Step 2: Custom Equity Report
-   - Step 3: Coffee Consultation
-
-## SEO Structure
-
-- Semantic HTML (`<main>`, `<section>`, `<header>`, `<footer>`)
-- Meta tags configured in `layout.tsx`
-- Open Graph and Twitter Card metadata
-- Proper heading hierarchy (h1 → h2 → h3)
-- Alt text placeholders ready for images
-
-## Future Enhancements
-
-To convert to a production application:
-
-1. **Backend Integration**
-   - Add API route for form submissions
-   - Connect to CRM (HubSpot, Salesforce, etc.)
-   - Email notification service
-
-2. **Images**
-   - Add real property photos
-   - Testimonial client photos
-   - Case study before/after images
-   - Realtor board logos
-
-3. **Analytics**
-   - Add event tracking for CTAs
-   - Form submission tracking
-   - Scroll depth tracking
-
-4. **A/B Testing**
-   - Test headline variations
-   - CTA button colors/text
-   - Pricing tier emphasis
-
-## Running the Project
+## Development & Build Commands
 
 ```bash
 # Install dependencies
 pnpm install
 
-# Start development server
+# Start local server
 pnpm dev
 
-# Build for production
+# Perform production build check
 pnpm build
-
-# Start production server
-pnpm start
-```
-
-## File Structure
-
-```
-app/
-├── globals.css      # Design tokens & glassmorphism utilities
-├── layout.tsx       # Root layout with fonts & metadata
-└── page.tsx         # Main landing page
-
-components/
-├── landing/         # All landing page components
-└── ui/              # shadcn/ui components
 ```

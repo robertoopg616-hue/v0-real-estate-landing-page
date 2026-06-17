@@ -1,21 +1,19 @@
 import { SpeedInsights } from "@vercel/speed-insights/next"
 
 import type { Metadata, Viewport } from 'next'
-import { Plus_Jakarta_Sans, Montserrat } from 'next/font/google'
+import { Geist, Geist_Mono } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
-const plusJakarta = Plus_Jakarta_Sans({
+const geistSans = Geist({
   subsets: ['latin'],
-  variable: '--font-plus-jakarta',
+  variable: '--font-geist-sans',
 })
 
-const montserrat = Montserrat({
+const geistMono = Geist_Mono({
   subsets: ['latin'],
-  variable: '--font-montserrat',
-  weight: ['400', '500', '600', '700'],
+  variable: '--font-geist-mono',
 })
-
 
 export const metadata: Metadata = {
   title: 'Premium Real Estate | Expert Guidance for Upsizing Families',
@@ -56,7 +54,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  themeColor: '#0f172a',
+  themeColor: '#f8f9fa',
 }
 
 export default function RootLayout({
@@ -65,7 +63,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${plusJakarta.variable} ${montserrat.variable} bg-background`}>
+    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} bg-background`}>
       <body className="font-sans antialiased min-h-screen">
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}

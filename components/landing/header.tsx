@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { motion, useScroll } from 'framer-motion'
-import { Menu, X, Home } from 'lucide-react'
+import { Menu, Home } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import {
   Sheet,
@@ -19,7 +19,11 @@ const navLinks = [
   { href: '#faq', label: 'FAQ' },
 ]
 
-export function Header() {
+interface HeaderProps {
+  onContactClick: () => void
+}
+
+export function Header({ onContactClick }: HeaderProps) {
   const [isOpen, setIsOpen] = useState(false)
   const { scrollYProgress } = useScroll()
 
@@ -43,13 +47,17 @@ export function Header() {
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
-          {/* Logo */}
+          {/* Logo with gold icon placeholder */}
           <a
             href="#"
-            className="flex items-center gap-2 text-foreground hover:text-primary transition-colors"
+            className="flex items-center gap-2 text-secondary hover:text-primary transition-colors"
           >
-            <Home className="size-6 text-primary" />
-            <span className="text-xl font-bold tracking-tight font-sans">
+            <img 
+              src="/logo.png" 
+              alt="Premium Realty Logo" 
+              className="w-8 h-8 object-contain"
+            />
+            <span className="text-lg font-extrabold tracking-tight font-sans text-secondary">
               Premium Realty
             </span>
           </a>
@@ -60,7 +68,7 @@ export function Header() {
               <button
                 key={link.href}
                 onClick={() => scrollToSection(link.href)}
-                className="text-base font-medium text-muted-foreground hover:text-foreground transition-colors"
+                className="text-sm font-bold text-muted-foreground hover:text-secondary transition-colors"
               >
                 {link.label}
               </button>
@@ -70,25 +78,25 @@ export function Header() {
           {/* Desktop CTA */}
           <div className="hidden md:block">
             <Button
-              onClick={() => scrollToSection('#contact')}
-              className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold text-base rounded-[9.28px] border-figma-thin border-white/20 shadow-sm"
+              onClick={onContactClick}
+              className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold text-sm rounded-lg px-5 py-2 border border-primary/30 shadow-md transition-all"
             >
-              Free Consultation
+              Join Program
             </Button>
           </div>
 
           {/* Mobile Menu */}
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild className="md:hidden">
-              <Button variant="ghost" size="icon">
+              <Button variant="ghost" size="icon" className="text-secondary">
                 <Menu className="size-5" />
                 <span className="sr-only">Toggle menu</span>
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="w-[300px] glass-card border-border">
+            <SheetContent side="right" className="w-[300px] bg-background border-l border-primary/20">
               <SheetHeader>
-                <SheetTitle className="flex items-center gap-2 text-foreground">
-                  <Home className="size-5" />
+                <SheetTitle className="flex items-center gap-2 text-secondary font-bold">
+                  <img src="/logo.png" alt="Premium Logo" className="w-6 h-6 object-contain" />
                   Premium Realty
                 </SheetTitle>
               </SheetHeader>
@@ -97,16 +105,19 @@ export function Header() {
                   <button
                     key={link.href}
                     onClick={() => scrollToSection(link.href)}
-                    className="text-left text-base font-medium text-muted-foreground hover:text-foreground transition-colors py-2"
+                    className="text-left text-sm font-bold text-muted-foreground hover:text-secondary transition-colors py-2 border-b border-border/10"
                   >
                     {link.label}
                   </button>
                 ))}
                 <Button
-                  onClick={() => scrollToSection('#contact')}
-                  className="mt-4 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold text-base w-full rounded-[9.28px] border-figma-thin border-white/20 shadow-sm"
+                  onClick={() => {
+                    setIsOpen(false)
+                    onContactClick()
+                  }}
+                  className="mt-4 bg-primary hover:bg-primary/90 text-primary-foreground font-bold text-sm w-full rounded-lg py-3 shadow-md"
                 >
-                  Free Consultation
+                  Join Program
                 </Button>
               </nav>
             </SheetContent>

@@ -38,23 +38,15 @@ const testimonials = [
     highlight: '40% more buying power',
     initials: 'RF',
   },
-  {
-    name: 'Amanda & Michael Torres',
-    location: 'Sold in Eastside, Bought in Westwood',
-    quote:
-      "The whole process was seamless. From listing to closing on both homes, everything was coordinated perfectly. We never felt stressed or rushed.",
-    rating: 5,
-    highlight: 'Seamless transition',
-    initials: 'AT',
-  },
 ]
 
-export function Testimonials() {
-  const featured = testimonials[0]
-  const listItems = testimonials.slice(1)
+interface TestimonialsProps {
+  onContactClick: () => void
+}
 
+export function Testimonials({ onContactClick }: TestimonialsProps) {
   return (
-    <section id="testimonials" className="py-24 md:py-32 relative overflow-hidden bg-secondary/10">
+    <section id="testimonials" className="py-24 md:py-32 relative overflow-hidden bg-background">
       {/* Background gradients */}
       <div className="absolute bottom-0 right-0 w-[300px] h-[300px] rounded-full bg-primary/5 blur-[100px] pointer-events-none" />
 
@@ -67,102 +59,114 @@ export function Testimonials() {
           transition={{ duration: 0.6 }}
           className="text-center max-w-3xl mx-auto mb-16"
         >
-          <span className="text-primary font-semibold text-sm uppercase tracking-wider">
+          <span className="text-primary font-bold text-sm uppercase tracking-wider">
             Success Stories
           </span>
-          <h2 className="mt-3 text-3xl md:text-4xl lg:text-5xl font-bold text-foreground text-balance">
+          <h2 className="mt-3 text-3xl md:text-4xl lg:text-5xl font-extrabold text-secondary text-balance font-sans">
             Families who found their perfect home
           </h2>
           <p className="mt-4 text-lg text-muted-foreground text-pretty">
-            Real stories from real families who made the leap to their dream homes.
+            Real stories from real families who made the leap to their dream homes without the stress.
           </p>
         </motion.div>
 
         {/* Asymmetrical Testimonials Grid */}
-        <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-          {/* Left Column: Large Featured Testimonial with Image */}
+        <div className="grid lg:grid-cols-12 gap-12 lg:gap-8 items-start">
+          
+          {/* Left Column: 5-Star Testimonial Carousel */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-100px' }}
             transition={{ duration: 0.8 }}
-            className="lg:col-span-6 space-y-8"
+            className="lg:col-span-7 space-y-6 bg-white p-6 sm:p-10 rounded-2xl border border-primary/20 shadow-figma-card"
           >
-            <div className="space-y-6">
-              <Quote className="size-12 text-primary/30" />
-              
-              <div className="flex gap-1">
-                {Array.from({ length: featured.rating }).map((_, i) => (
-                  <Star key={i} className="size-5 fill-primary text-primary" />
+            <Quote className="size-12 text-primary/20" />
+            
+            <Carousel className="w-full">
+              <CarouselContent>
+                {testimonials.map((item, index) => (
+                  <CarouselItem key={index} className="space-y-6">
+                    <div className="flex gap-1">
+                      {Array.from({ length: item.rating }).map((_, i) => (
+                        <Star key={i} className="size-5 fill-primary text-primary" />
+                      ))}
+                    </div>
+
+                    <blockquote className="text-lg sm:text-xl font-bold text-secondary leading-relaxed text-pretty font-sans">
+                      &ldquo;{item.quote}&rdquo;
+                    </blockquote>
+
+                    <div className="flex items-center gap-3 pt-6 border-t border-border">
+                      <div className="flex items-center justify-center w-12 h-12 rounded-full bg-primary/15 text-secondary font-bold text-base border border-primary/30">
+                        {item.initials}
+                      </div>
+                      <div>
+                        <p className="font-extrabold text-secondary text-sm">{item.name}</p>
+                        <p className="text-xs text-muted-foreground font-semibold">{item.location}</p>
+                      </div>
+                    </div>
+                  </CarouselItem>
                 ))}
+              </CarouselContent>
+              <div className="flex justify-end gap-2 mt-4 pt-4 border-t border-border/10">
+                <CarouselPrevious className="static translate-y-0 text-secondary border-primary/20 hover:bg-primary/10" />
+                <CarouselNext className="static translate-y-0 text-secondary border-primary/20 hover:bg-primary/10" />
               </div>
-
-              <blockquote className="text-xl sm:text-2xl font-bold text-foreground leading-relaxed text-pretty">
-                &ldquo;{featured.quote}&rdquo;
-              </blockquote>
-
-              <div className="flex items-center gap-3 pt-4 border-t border-white/10">
-                <div className="flex items-center justify-center w-12 h-12 rounded-full bg-primary/20 text-primary font-semibold text-base">
-                  {featured.initials}
-                </div>
-                <div>
-                  <p className="font-bold text-foreground text-base">{featured.name}</p>
-                  <p className="text-xs text-muted-foreground">{featured.location}</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Premium Staged Interior Image */}
-            <div className="relative rounded-[20px] overflow-hidden border border-white/10 shadow-figma-card aspect-video max-w-lg">
-              <img 
-                src="/staged-interior.png" 
-                alt="Beautiful staged home interior" 
-                className="w-full h-full object-cover object-center transform hover:scale-105 transition-transform duration-700 select-none"
-                loading="lazy"
-              />
-            </div>
+            </Carousel>
           </motion.div>
 
-          {/* Right Column: Other Testimonials List */}
+          {/* Right Column: Staging Before vs After Conversion Highlight */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-100px' }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="lg:col-span-6 space-y-10 divide-y divide-white/10 lg:pt-6"
+            className="lg:col-span-5 space-y-6"
           >
-            {listItems.map((item, index) => (
-              <div 
-                key={index} 
-                className={`space-y-4 ${index > 0 ? 'pt-8' : ''}`}
-              >
-                <div className="flex justify-between items-center">
-                  <div className="flex gap-1">
-                    {Array.from({ length: item.rating }).map((_, i) => (
-                      <Star key={i} className="size-4 fill-primary text-primary" />
-                    ))}
-                  </div>
-                  <span className="inline-flex items-center rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-semibold text-primary border border-primary/20">
-                    {item.highlight}
+            <div className="glass-card p-6 sm:p-8 rounded-2xl border border-primary/20 shadow-figma-card space-y-6 bg-white">
+              <h3 className="text-lg font-bold text-secondary border-b border-border pb-3 uppercase tracking-wider">
+                Visual Transition Metric
+              </h3>
+              
+              <div className="space-y-4">
+                {/* Before Row */}
+                <div className="space-y-1.5">
+                  <span className="inline-flex items-center rounded-full bg-red-500/10 border border-red-500/20 px-2.5 py-0.5 text-[10px] font-bold text-red-500">
+                    Before: Starter Condo
                   </span>
+                  <div className="flex justify-between items-center text-xs font-semibold text-muted-foreground pt-1">
+                    <span>Valued at: $380,000</span>
+                    <span>Days on Market: 45+</span>
+                  </div>
+                  <div className="w-full bg-red-100 rounded-full h-2 overflow-hidden border border-red-200">
+                    <div className="bg-red-500 h-full w-[40%]" />
+                  </div>
                 </div>
 
-                <blockquote className="text-base text-muted-foreground leading-relaxed text-pretty">
-                  &ldquo;{item.quote}&rdquo;
-                </blockquote>
-
-                <div className="flex items-center gap-3">
-                  <div className="flex items-center justify-center w-10 h-10 rounded-full bg-primary/10 text-primary font-semibold text-sm">
-                    {item.initials}
+                {/* After Row */}
+                <div className="space-y-1.5 pt-2">
+                  <span className="inline-flex items-center rounded-full bg-emerald-500/10 border border-emerald-500/20 px-2.5 py-0.5 text-[10px] font-bold text-emerald-600">
+                    After: 4BR Family Home
+                  </span>
+                  <div className="flex justify-between items-center text-xs font-bold text-secondary pt-1">
+                    <span>Sold: $425,000 (+12% Staged)</span>
+                    <span className="text-emerald-600">Days on Market: 12</span>
                   </div>
-                  <div>
-                    <p className="font-semibold text-foreground text-sm">{item.name}</p>
-                    <p className="text-xs text-muted-foreground">{item.location}</p>
+                  <div className="w-full bg-emerald-100 rounded-full h-2 overflow-hidden border border-emerald-200">
+                    <div className="bg-emerald-500 h-full w-[100%]" />
                   </div>
                 </div>
               </div>
-            ))}
+
+              <div className="pt-4 border-t border-border/10 text-center">
+                <p className="text-xs text-muted-foreground leading-relaxed font-semibold">
+                  Sarah unlocked $45,000 extra equity to afford her dream home upgrade.
+                </p>
+              </div>
+            </div>
           </motion.div>
+
         </div>
       </div>
     </section>

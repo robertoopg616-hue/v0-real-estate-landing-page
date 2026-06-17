@@ -4,63 +4,47 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* Deep Navy base for dark theme */
-  --background: oklch(0.145 0.02 260);
-  --foreground: oklch(0.97 0 0);
+  /* Alabaster / Off-White background */
+  --background: oklch(0.985 0.003 85);
+  --foreground: oklch(0.18 0.005 85);
   
-  /* Card with glassmorphism support */
-  --card: oklch(0.18 0.015 260);
-  --card-foreground: oklch(0.97 0 0);
+  /* White Card with soft gold border */
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.18 0.005 85);
   
-  --popover: oklch(0.18 0.015 260);
-  --popover-foreground: oklch(0.97 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.18 0.005 85);
   
-  /* Primary is the Burnt Orange accent */
-  --primary: oklch(0.7 0.18 45);
-  --primary-foreground: oklch(0.98 0 0);
+  /* Metallic Gold primary CTA/accent (#d4af37) */
+  --primary: oklch(0.76 0.14 85);
+  --primary-foreground: oklch(0.12 0.03 140); /* Deep Emerald contrast text on gold */
   
-  /* Secondary - subtle slate */
-  --secondary: oklch(0.25 0.01 260);
-  --secondary-foreground: oklch(0.97 0 0);
+  /* Deep Emerald Green secondary (#0f2e1e) */
+  --secondary: oklch(0.18 0.03 140);
+  --secondary-foreground: oklch(0.985 0.003 85);
   
-  /* Muted for subtle backgrounds */
-  --muted: oklch(0.22 0.01 260);
-  --muted-foreground: oklch(0.65 0 0);
+  /* Muted off-white/gray */
+  --muted: oklch(0.95 0.005 85);
+  --muted-foreground: oklch(0.45 0.01 85);
   
-  /* Accent matches primary burnt orange */
-  --accent: oklch(0.7 0.18 45);
-  --accent-foreground: oklch(0.98 0 0);
+  /* Accent matches primary Gold */
+  --accent: oklch(0.76 0.14 85);
+  --accent-foreground: oklch(1 0 0);
   
-  --destructive: oklch(0.577 0.245 27.325);
+  --destructive: oklch(0.6 0.18 29);
   --destructive-foreground: oklch(0.98 0 0);
   
-  /* Borders - subtle slate */
-  --border: oklch(0.3 0.01 260);
-  --input: oklch(0.25 0.01 260);
-  --ring: oklch(0.7 0.18 45);
-  
-  /* Chart colors */
-  --chart-1: oklch(0.7 0.18 45);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
+  /* Faint gold border strokes */
+  --border: oklch(0.76 0.14 85 / 0.2);
+  --input: oklch(0.96 0.005 85);
+  --ring: oklch(0.76 0.14 85);
   
   --radius: 0.75rem;
-  
-  --sidebar: oklch(0.16 0.015 260);
-  --sidebar-foreground: oklch(0.97 0 0);
-  --sidebar-primary: oklch(0.7 0.18 45);
-  --sidebar-primary-foreground: oklch(0.98 0 0);
-  --sidebar-accent: oklch(0.22 0.01 260);
-  --sidebar-accent-foreground: oklch(0.97 0 0);
-  --sidebar-border: oklch(0.3 0.01 260);
-  --sidebar-ring: oklch(0.7 0.18 45);
 }
 
 @theme inline {
-  --font-sans: var(--font-plus-jakarta), system-ui, sans-serif;
-  --font-mono: 'Geist Mono', 'Geist Mono Fallback', monospace;
+  --font-sans: var(--font-geist-sans), system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), monospace;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -80,23 +64,11 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  --color-chart-1: var(--chart-1);
-  --color-chart-2: var(--chart-2);
-  --color-chart-3: var(--chart-3);
-  --color-chart-4: var(--chart-4);
-  --color-chart-5: var(--chart-5);
+  
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
-  --color-sidebar: var(--sidebar);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-ring: var(--sidebar-ring);
 }
 
 @layer base {
@@ -104,10 +76,11 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans;
   }
   h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-montserrat), sans-serif;
+    font-family: var(--font-sans), sans-serif;
+    @apply text-secondary font-bold tracking-tight;
   }
 }
 
@@ -116,32 +89,61 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Glassmorphism utility */
+/* Light glassmorphism utility with faint gold border */
 .glass {
-  background: rgba(30, 41, 59, 0.6);
+  background: rgba(255, 255, 255, 0.75);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(212, 175, 55, 0.15);
 }
 
 .glass-card {
   background: linear-gradient(
     135deg,
-    rgba(30, 41, 59, 0.8) 0%,
-    rgba(15, 23, 42, 0.9) 100%
+    rgba(255, 255, 255, 0.9) 0%,
+    rgba(248, 249, 250, 0.96) 100%
   );
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(212, 175, 55, 0.22);
+}
+
+/* Off-white marble backdrop texture rendered purely in CSS */
+.marble-texture {
+  background-color: #f8f9fa;
+  background-image: 
+    radial-gradient(circle at 20% 20%, rgba(212, 175, 55, 0.05) 0%, transparent 60%),
+    linear-gradient(215deg, transparent 45%, rgba(0, 0, 0, 0.015) 46%, rgba(0, 0, 0, 0.015) 48%, transparent 49%),
+    linear-gradient(125deg, transparent 55%, rgba(212, 175, 55, 0.02) 56%, rgba(212, 175, 55, 0.02) 58%, transparent 59%),
+    linear-gradient(35deg, transparent 35%, rgba(0, 0, 0, 0.01) 36%, rgba(0, 0, 0, 0.01) 38%, transparent 39%);
+  background-size: 100% 100%, 200px 300px, 300px 400px, 250px 350px;
+}
+
+/* Geometric Grid Watermark background overlay */
+.grid-watermark {
+  position: relative;
+}
+
+.grid-watermark::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.04;
+  background-image: 
+    linear-gradient(rgba(212, 175, 55, 0.6) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(212, 175, 55, 0.6) 1px, transparent 1px);
+  background-size: 48px 48px;
 }
 
 /* Figma Custom Drop Shadows */
 .shadow-figma-card {
-  box-shadow: -21px -15px 66px rgba(27, 35, 55, 0.25);
+  box-shadow: 0 10px 30px rgba(15, 46, 30, 0.06), 0 1px 3px rgba(212, 175, 55, 0.05);
 }
 
 .shadow-figma-search {
-  box-shadow: 32px -16px 73px rgba(10, 13, 17, 0.08);
+  box-shadow: 0 4px 20px rgba(15, 46, 30, 0.04);
 }
 
 /* Figma custom thin border */
@@ -149,28 +151,26 @@ html {
   border-width: 0.8px;
 }
 
-
-/* Text balance for headings */
 .text-balance {
   text-wrap: balance;
 }
 
-/* Animated Mesh Gradient blobs */
+/* Animated Ambient Glow Blobs (Fitted for Light Theme) */
 @keyframes float-blob-1 {
   0% { transform: translate(0px, 0px) scale(1); }
-  33% { transform: translate(40px, -60px) scale(1.15); }
-  66% { transform: translate(-30px, 30px) scale(0.9); }
+  33% { transform: translate(30px, -40px) scale(1.1); }
+  66% { transform: translate(-20px, 20px) scale(0.95); }
   100% { transform: translate(0px, 0px) scale(1); }
 }
 @keyframes float-blob-2 {
   0% { transform: translate(0px, 0px) scale(1); }
-  50% { transform: translate(-60px, 50px) scale(1.25); }
+  50% { transform: translate(-40px, 30px) scale(1.15); }
   100% { transform: translate(0px, 0px) scale(1); }
 }
 @keyframes float-blob-3 {
   0% { transform: translate(0px, 0px) scale(1); }
-  33% { transform: translate(-20px, -50px) scale(0.85); }
-  66% { transform: translate(50px, 40px) scale(1.15); }
+  33% { transform: translate(-15px, -30px) scale(0.9); }
+  66% { transform: translate(30px, 20px) scale(1.1); }
   100% { transform: translate(0px, 0px) scale(1); }
 }
 
@@ -184,7 +184,7 @@ html {
   animation: float-blob-3 22s infinite ease-in-out;
 }
 
-/* Premium glow cards with animated borders */
+/* Premium glow cards with animated borders (Light theme) */
 .glow-card {
   position: relative;
   transition: border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease-out;
@@ -195,24 +195,24 @@ html {
   position: absolute;
   inset: -1px;
   border-radius: inherit;
-  padding: 1px;
+  padding: 1.2px;
   background: linear-gradient(135deg, var(--primary) 0%, transparent 100%);
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
   pointer-events: none;
   transition: opacity 0.4s ease;
-  opacity: 0;
+  opacity: 0.1;
   z-index: 1;
 }
 
 .glow-card:hover::before {
-  opacity: 1;
+  opacity: 0.8;
 }
 
 .glow-card:hover {
-  box-shadow: 0 0 30px -5px rgba(249, 115, 22, 0.18);
-  border-color: rgba(249, 115, 22, 0.25) !important;
+  box-shadow: 0 15px 35px -5px rgba(15, 46, 30, 0.08), 0 0 15px rgba(212, 175, 55, 0.15);
+  border-color: rgba(212, 175, 55, 0.4) !important;
   transform: translateY(-4px);
 }
 
@@ -245,7 +245,7 @@ html {
   border-radius: 50%;
   background-color: var(--primary);
   border: 4px solid var(--background);
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5), 0 0 10px rgba(249, 115, 22, 0.5);
+  box-shadow: 0 10px 25px -5px rgba(15, 46, 30, 0.15), 0 0 10px rgba(212, 175, 55, 0.3);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -256,7 +256,7 @@ html {
 }
 
 .before-after-slider-handle:hover {
-  background-color: oklch(0.65 0.18 45);
+  background-color: oklch(0.7 0.13 85);
   transform: translate(-50%, -50%) scale(1.1);
 }
 
@@ -267,8 +267,7 @@ html {
   left: 0;
   right: 0;
   height: 3px;
-  background: linear-gradient(to right, var(--primary), #fb923c);
+  background: linear-gradient(to right, var(--primary), var(--secondary));
   transform-origin: 0%;
   z-index: 100;
 }
-

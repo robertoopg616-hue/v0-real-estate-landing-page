@@ -11,11 +11,6 @@ const stats = [
   { icon: DollarSign, value: '$42M+', label: 'Equity Unlocked' },
 ]
 
-const fadeInUp = {
-  initial: { opacity: 0, y: 30 },
-  animate: { opacity: 1, y: 0 },
-}
-
 function AnimatedCounter({ value }: { value: string }) {
   const ref = useRef<HTMLSpanElement>(null)
   const inView = useInView(ref, { once: true, margin: '-50px' })
@@ -34,7 +29,6 @@ function AnimatedCounter({ value }: { value: string }) {
     
     const controls = animate(0, target, {
       duration: 2,
-      ease: 'easeOut',
       onUpdate(latest) {
         const rounded = Math.round(latest)
         node.textContent = value.replace(/\d+/, String(rounded))
@@ -49,13 +43,13 @@ function AnimatedCounter({ value }: { value: string }) {
 
 export function StatsSection() {
   return (
-    <section className="py-16 md:py-20 border-y border-white/5 bg-secondary/10 relative overflow-hidden">
+    <section className="py-16 md:py-20 border-y border-primary/20 bg-muted/30 relative overflow-hidden">
       {/* Background gradients */}
       <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[250px] h-[250px] rounded-full bg-primary/5 blur-[80px] pointer-events-none" />
-      <div className="absolute top-1/2 right-1/4 -translate-y-1/2 w-[250px] h-[250px] rounded-full bg-orange-500/3 blur-[80px] pointer-events-none" />
+      <div className="absolute top-1/2 right-1/4 -translate-y-1/2 w-[250px] h-[250px] rounded-full bg-secondary/5 blur-[80px] pointer-events-none" />
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 divide-y md:divide-y-0 md:divide-x divide-white/5">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 divide-y md:divide-y-0 md:divide-x divide-primary/20">
           {stats.map((stat, index) => (
             <motion.div
               key={stat.label}
@@ -68,10 +62,10 @@ export function StatsSection() {
               <div className="flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 mb-4 border border-primary/20">
                 <stat.icon className="size-5 text-primary" />
               </div>
-              <span className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground font-serif tracking-tight">
+              <span className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-secondary font-sans tracking-tight">
                 <AnimatedCounter value={stat.value} />
               </span>
-              <span className="text-sm font-semibold text-muted-foreground uppercase tracking-widest mt-2">
+              <span className="text-xs font-bold text-muted-foreground uppercase tracking-widest mt-2">
                 {stat.label}
               </span>
             </motion.div>

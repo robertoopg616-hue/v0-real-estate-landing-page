@@ -1,11 +1,8 @@
 'use client'
 
-import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Calculator, ShieldCheck, Sparkles, ArrowRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { ContactModal } from '@/components/modals/contact-modal'
-import { LearnMoreModal } from '@/components/modals/learn-more-modal'
 
 const features = [
   {
@@ -50,12 +47,13 @@ const itemVariants = {
   },
 }
 
-export function Features() {
-  const [isLearnMoreOpen, setIsLearnMoreOpen] = useState(false)
-  const [isContactModalOpen, setIsContactModalOpen] = useState(false)
+interface FeaturesProps {
+  onLearnMoreClick: () => void
+}
 
+export function Features({ onLearnMoreClick }: FeaturesProps) {
   return (
-    <section id="features" className="py-24 md:py-32 relative">
+    <section id="features" className="py-24 md:py-32 relative bg-background">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div
@@ -65,10 +63,10 @@ export function Features() {
           transition={{ duration: 0.6 }}
           className="text-center max-w-3xl mx-auto mb-16"
         >
-          <span className="text-primary font-semibold text-sm uppercase tracking-wider">
+          <span className="text-primary font-bold text-sm uppercase tracking-wider">
             Our Program
           </span>
-          <h2 className="mt-3 text-3xl md:text-4xl lg:text-5xl font-bold text-foreground text-balance">
+          <h2 className="mt-3 text-3xl md:text-4xl lg:text-5xl font-extrabold text-secondary text-balance">
             Everything you need to upsize with confidence
           </h2>
           <p className="mt-4 text-lg text-muted-foreground text-pretty">
@@ -77,70 +75,64 @@ export function Features() {
           </p>
         </motion.div>
 
-        {/* Features Timeline Stepper */}
-        <div className="max-w-3xl mx-auto relative pl-6 sm:pl-12 ml-4 sm:ml-8 border-l border-white/10 space-y-16 py-4">
+        {/* 3-column light glass-effect card grid */}
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-100px' }}
+          className="grid md:grid-cols-3 gap-8"
+        >
           {features.map((feature, index) => (
             <motion.div
               key={feature.title}
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: '-100px' }}
-              transition={{ duration: 0.6, delay: index * 0.15 }}
-              className="relative group pl-6 sm:pl-8"
+              variants={itemVariants}
+              className="glass-card rounded-2xl p-8 border border-primary/20 shadow-figma-card glow-card flex flex-col justify-between"
             >
-              {/* Floating Step Icon Bubble */}
-              <div className="absolute -left-[51px] sm:-left-[77px] top-0 w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-background border border-white/10 group-hover:border-primary/40 flex items-center justify-center shadow-lg transition-colors z-10">
-                <feature.icon className="size-6 text-primary group-hover:scale-110 transition-transform" />
+              <div className="space-y-4">
+                {/* Floating Step Icon Bubble */}
+                <div className="w-12 h-12 rounded-full bg-primary/10 border border-primary/25 flex items-center justify-center">
+                  <feature.icon className="size-6 text-primary" />
+                </div>
+
+                <div className="space-y-2">
+                  {/* Step tag */}
+                  <div className="flex items-center gap-3">
+                    <span className="text-[10px] font-bold text-secondary uppercase tracking-widest bg-primary/10 px-2 py-0.5 rounded-full border border-primary/20">
+                      Step 0{index + 1}
+                    </span>
+                    <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider">
+                      {feature.highlight}
+                    </span>
+                  </div>
+
+                  {/* Title */}
+                  <h3 className="text-xl font-extrabold text-secondary font-sans leading-snug">
+                    {feature.title}
+                  </h3>
+
+                  {/* Description */}
+                  <p className="text-muted-foreground text-sm leading-relaxed">
+                    {feature.description}
+                  </p>
+                </div>
               </div>
 
-              <div className="space-y-3">
-                {/* Step number and highlight */}
-                <div className="flex items-center gap-3">
-                  <span className="text-xs font-bold text-primary uppercase tracking-widest bg-primary/10 border border-primary/20 px-2.5 py-0.5 rounded-full">
-                    Step 0{index + 1}
-                  </span>
-                  <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-                    {feature.highlight}
-                  </span>
-                </div>
-
-                {/* Title */}
-                <h3 className="text-xl sm:text-2xl font-bold text-foreground group-hover:text-primary transition-colors">
-                  {feature.title}
-                </h3>
-
-                {/* Description */}
-                <p className="text-muted-foreground text-sm sm:text-base leading-relaxed max-w-2xl">
-                  {feature.description}
-                </p>
-
-                {/* Learn More Button */}
-                <div className="pt-2">
-                  <Button
-                    variant="ghost"
-                    onClick={() => setIsLearnMoreOpen(true)}
-                    className="text-primary hover:text-primary hover:bg-primary/10 p-0 h-auto font-semibold text-sm"
-                  >
-                    Learn More
-                    <ArrowRight className="ml-1 size-4" />
-                  </Button>
-                </div>
+              {/* Learn More Button */}
+              <div className="pt-6 border-t border-border/10 mt-6">
+                <Button
+                  variant="ghost"
+                  onClick={onLearnMoreClick}
+                  className="text-primary hover:text-primary hover:bg-primary/10 p-0 h-auto font-bold text-sm"
+                >
+                  Learn More
+                  <ArrowRight className="ml-1.5 size-4" />
+                </Button>
               </div>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
-
-      {/* Modals */}
-      <LearnMoreModal
-        isOpen={isLearnMoreOpen}
-        onClose={() => setIsLearnMoreOpen(false)}
-        onContactClick={() => setIsContactModalOpen(true)}
-      />
-      <ContactModal
-        isOpen={isContactModalOpen}
-        onClose={() => setIsContactModalOpen(false)}
-      />
     </section>
   )
 }
