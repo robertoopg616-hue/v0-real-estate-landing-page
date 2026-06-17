@@ -41,8 +41,8 @@ An elite, high-converting, frontend-only landing page prototype for a modern rea
 components/
 ├── landing/
 │   ├── header.tsx        # Fixed navigation with brand favicon and gold CTA button
-│   ├── hero.tsx          # Split Hero with horizontal metrics row & luxury villa image
-│   ├── stats-section.tsx # Scroll-triggered animated counters (green numbers, gold details)
+│   ├── hero.tsx          # Split Hero with clean layout (no metrics) & luxury villa image
+│   ├── stats-section.tsx # Scroll-triggered animated counters wrapped in a single floating glassmorphic card
 │   ├── features.tsx      # 3-column light glassmorphism card grid
 │   ├── pricing.tsx       # 3-tier pricing table + interactive proceeds bar visualizer
 │   ├── testimonials.tsx  # Testimonials carousel + Before vs After conversion highlight

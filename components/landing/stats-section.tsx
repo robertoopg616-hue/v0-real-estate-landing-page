@@ -43,34 +43,37 @@ function AnimatedCounter({ value }: { value: string }) {
 
 export function StatsSection() {
   return (
-    <section className="py-16 md:py-20 border-y border-primary/20 bg-muted/30 relative overflow-hidden">
-      {/* Background gradients */}
-      <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[250px] h-[250px] rounded-full bg-primary/5 blur-[80px] pointer-events-none" />
-      <div className="absolute top-1/2 right-1/4 -translate-y-1/2 w-[250px] h-[250px] rounded-full bg-secondary/5 blur-[80px] pointer-events-none" />
+    <section className="py-12 md:py-16 relative overflow-hidden bg-background">
+      {/* Soft ambient background glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[250px] rounded-full bg-primary/5 blur-[100px] pointer-events-none" />
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 divide-y md:divide-y-0 md:divide-x divide-primary/20">
-          {stats.map((stat, index) => (
-            <motion.div
-              key={stat.label}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-50px' }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="flex flex-col items-center text-center pt-6 md:pt-0 first:pt-0"
-            >
-              <div className="flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 mb-4 border border-primary/20">
-                <stat.icon className="size-5 text-primary" />
+        <motion.div
+          initial={{ opacity: 0, y: 35 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-100px' }}
+          transition={{ duration: 0.7, ease: 'easeOut' }}
+          className="glass-card rounded-2xl md:rounded-[24px] p-8 md:p-12 border border-primary/25 shadow-figma-card bg-white"
+        >
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-0 lg:divide-x lg:divide-primary/20">
+            {stats.map((stat) => (
+              <div
+                key={stat.label}
+                className="flex flex-col items-center text-center px-4 lg:first:pl-0 lg:last:pr-0"
+              >
+                <div className="flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 mb-4 border border-primary/20 shadow-sm">
+                  <stat.icon className="size-5 text-primary" />
+                </div>
+                <span className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-secondary font-sans tracking-tight">
+                  <AnimatedCounter value={stat.value} />
+                </span>
+                <span className="text-xs font-bold text-muted-foreground uppercase tracking-widest mt-2">
+                  {stat.label}
+                </span>
               </div>
-              <span className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-secondary font-sans tracking-tight">
-                <AnimatedCounter value={stat.value} />
-              </span>
-              <span className="text-xs font-bold text-muted-foreground uppercase tracking-widest mt-2">
-                {stat.label}
-              </span>
-            </motion.div>
-          ))}
-        </div>
+            ))}
+          </div>
+        </motion.div>
       </div>
     </section>
   )

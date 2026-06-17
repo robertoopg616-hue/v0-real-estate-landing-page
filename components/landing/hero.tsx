@@ -47,24 +47,7 @@ export function Hero({ onContactClick }: HeroProps) {
             </motion.p>
 
             {/* Low-Contrast Horizontal Metric Summary Row */}
-            <motion.div
-              {...fadeInUp}
-              transition={{ duration: 0.6, delay: 0.25 }}
-              className="grid grid-cols-3 gap-4 border-y border-primary/20 py-4 max-w-xl text-left font-sans"
-            >
-              <div>
-                <span className="block text-xl font-extrabold text-secondary leading-none">104%</span>
-                <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest mt-1 block">Avg Price</span>
-              </div>
-              <div className="border-l border-primary/20 pl-4">
-                <span className="block text-xl font-extrabold text-secondary leading-none">12 Days</span>
-                <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest mt-1 block">On Market</span>
-              </div>
-              <div className="border-l border-primary/20 pl-4">
-                <span className="block text-xl font-extrabold text-secondary leading-none">100%</span>
-                <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest mt-1 block">Success</span>
-              </div>
-            </motion.div>
+
 
             {/* CTA Buttons */}
             <motion.div
