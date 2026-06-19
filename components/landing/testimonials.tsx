@@ -62,7 +62,7 @@ export function Testimonials({ onContactClick }: TestimonialsProps) {
           <span className="text-primary font-bold text-sm uppercase tracking-wider">
             Success Stories
           </span>
-          <h2 className="mt-3 text-3xl md:text-4xl lg:text-5xl font-extrabold text-secondary text-balance font-sans">
+          <h2 className="mt-3 text-3xl md:text-4xl lg:text-5xl font-bold text-secondary text-balance font-serif">
             Families who found their perfect home
           </h2>
           <p className="mt-4 text-lg text-muted-foreground text-pretty">
@@ -71,7 +71,7 @@ export function Testimonials({ onContactClick }: TestimonialsProps) {
         </motion.div>
 
         {/* Asymmetrical Testimonials Grid */}
-        <div className="grid lg:grid-cols-12 gap-12 lg:gap-8 items-start">
+        <div className="grid lg:grid-cols-12 gap-12 lg:gap-8 items-center">
           
           {/* Left Column: 5-Star Testimonial Carousel */}
           <motion.div
@@ -79,9 +79,9 @@ export function Testimonials({ onContactClick }: TestimonialsProps) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-100px' }}
             transition={{ duration: 0.8 }}
-            className="lg:col-span-7 space-y-6 bg-white p-6 sm:p-10 rounded-2xl border border-primary/20 shadow-figma-card"
+            className="lg:col-span-7 space-y-6 p-4 sm:p-6 lg:p-0"
           >
-            <Quote className="size-12 text-primary/20" />
+            <Quote className="size-16 text-primary/30" />
             
             <Carousel className="w-full">
               <CarouselContent>
@@ -93,7 +93,7 @@ export function Testimonials({ onContactClick }: TestimonialsProps) {
                       ))}
                     </div>
 
-                    <blockquote className="text-lg sm:text-xl font-bold text-secondary leading-relaxed text-pretty font-sans">
+                    <blockquote className="text-lg sm:text-2xl font-semibold text-secondary leading-relaxed text-pretty font-serif italic">
                       &ldquo;{item.quote}&rdquo;
                     </blockquote>
 

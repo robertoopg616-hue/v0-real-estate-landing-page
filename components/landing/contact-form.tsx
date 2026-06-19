@@ -38,7 +38,7 @@ export function ContactForm() {
           <span className="text-primary font-bold text-sm uppercase tracking-wider">
             Get Started
           </span>
-          <h2 className="mt-3 text-3xl md:text-4xl lg:text-5xl font-extrabold text-secondary text-balance font-sans">
+          <h2 className="mt-3 text-3xl md:text-4xl lg:text-5xl font-bold text-secondary text-balance font-serif">
             Ready to find your dream home?
           </h2>
           <p className="mt-4 text-lg text-muted-foreground text-pretty">
@@ -149,7 +149,7 @@ export function ContactForm() {
                   </div>
                   
                   <div>
-                    <h3 className="text-2xl font-extrabold text-secondary font-sans mb-2">
+                    <h3 className="text-2xl font-bold text-secondary font-serif mb-2">
                       Request Confirmed!
                     </h3>
                     <p className="text-sm text-muted-foreground max-w-sm mx-auto">

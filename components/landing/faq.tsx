@@ -56,7 +56,7 @@ export function FAQ() {
           <span className="text-primary font-bold text-sm uppercase tracking-wider">
             Common Questions
           </span>
-          <h2 className="mt-3 text-3xl md:text-4xl lg:text-5xl font-extrabold text-secondary text-balance font-sans">
+          <h2 className="mt-3 text-3xl md:text-4xl lg:text-5xl font-bold text-secondary text-balance font-serif">
             Everything you need to know
           </h2>
           <p className="mt-4 text-lg text-muted-foreground text-pretty">
@@ -64,7 +64,7 @@ export function FAQ() {
             looking for, reach out directly.
           </p>
         </motion.div>
-
+ 
         {/* FAQ Accordion */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -72,14 +72,14 @@ export function FAQ() {
           viewport={{ once: true, margin: '-100px' }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          <Accordion type="single" collapsible className="w-full">
+          <Accordion type="single" collapsible className="w-full max-w-4xl mx-auto">
             {faqs.map((faq, index) => (
               <AccordionItem
                 key={index}
                 value={`item-${index}`}
-                className="glass-card rounded-[10px] shadow-figma-card mb-4 px-6 border border-primary/20 bg-white data-[state=open]:border-primary"
+                className="border-b border-primary/20 px-2 data-[state=open]:border-primary transition-all duration-300"
               >
-                <AccordionTrigger className="text-left text-secondary hover:text-primary hover:no-underline py-6 text-base font-bold font-sans">
+                <AccordionTrigger className="text-left text-secondary hover:text-primary hover:no-underline py-6 text-base sm:text-lg font-bold font-serif">
                   {faq.question}
                 </AccordionTrigger>
                 <AccordionContent className="text-muted-foreground leading-relaxed pb-6 text-sm">

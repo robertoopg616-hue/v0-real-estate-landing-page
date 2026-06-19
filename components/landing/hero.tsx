@@ -30,11 +30,26 @@ export function Hero({ onContactClick }: HeroProps) {
             <motion.h1
               {...fadeInUp}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-4xl sm:text-5xl lg:text-[3.5rem] font-extrabold tracking-tight text-secondary leading-[1.15] text-balance font-sans"
+              className="text-4xl sm:text-5xl lg:text-[3.5rem] font-bold tracking-tight text-secondary leading-[1.15] text-balance font-serif"
             >
               Outgrow your home,{' '}
               <span className="text-primary block sm:inline">not your peace of mind.</span>
             </motion.h1>
+
+            {/* Mobile/Tablet Image - Inlined between Headline and Subheadline */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.15 }}
+              className="block lg:hidden relative w-full rounded-2xl overflow-hidden border border-primary/25 shadow-lg my-4 aspect-[4/3] bg-muted"
+            >
+              <img 
+                src="/hero-house.jpg" 
+                alt="Modern luxury real estate villa" 
+                className="w-full h-full object-cover object-center select-none"
+                loading="eager"
+              />
+            </motion.div>
 
             {/* Subheadline */}
             <motion.p
@@ -82,7 +97,7 @@ export function Hero({ onContactClick }: HeroProps) {
             initial={{ opacity: 0, x: 40 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: 'easeOut', delay: 0.2 }}
-            className="lg:col-span-6 relative w-full"
+            className="hidden lg:block lg:col-span-6 relative w-full"
           >
             {/* Ambient glow behind image */}
             <div className="absolute -inset-4 rounded-[30px] bg-gradient-to-tr from-primary/10 to-secondary/5 blur-2xl opacity-75 z-0" />

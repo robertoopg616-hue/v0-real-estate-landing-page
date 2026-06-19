@@ -42,7 +42,7 @@ export function CTASection({ onContactClick }: CTASectionProps) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-secondary mb-6 text-balance font-sans"
+            className="text-3xl md:text-4xl lg:text-5xl font-bold text-secondary mb-6 text-balance font-serif"
           >
             Ready to make your move?
           </motion.h2>

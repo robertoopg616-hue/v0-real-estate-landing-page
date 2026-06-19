@@ -69,7 +69,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
                     <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-secondary text-xs font-bold mb-3 border border-primary/20">
                       Join the Program
                     </span>
-                    <h2 className="text-2xl md:text-3xl font-bold text-secondary mb-2 font-sans tracking-tight">
+                    <h2 className="text-2xl md:text-3xl font-bold text-secondary mb-2 font-serif tracking-tight">
                       Free Property Consultation
                     </h2>
                     <p className="text-muted-foreground text-sm">

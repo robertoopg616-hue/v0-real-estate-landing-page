@@ -1,18 +1,20 @@
 import { SpeedInsights } from "@vercel/speed-insights/next"
 
 import type { Metadata, Viewport } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
+import { Playfair_Display, Plus_Jakarta_Sans } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
-const geistSans = Geist({
+const playfair = Playfair_Display({
   subsets: ['latin'],
-  variable: '--font-geist-sans',
+  variable: '--font-playfair',
+  display: 'swap',
 })
 
-const geistMono = Geist_Mono({
+const jakarta = Plus_Jakarta_Sans({
   subsets: ['latin'],
-  variable: '--font-geist-mono',
+  variable: '--font-jakarta',
+  display: 'swap',
 })
 
 export const metadata: Metadata = {
@@ -63,7 +65,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} bg-background`}>
+    <html lang="en" className={`${playfair.variable} ${jakarta.variable} bg-background`}>
       <body className="font-sans antialiased min-h-screen">
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}

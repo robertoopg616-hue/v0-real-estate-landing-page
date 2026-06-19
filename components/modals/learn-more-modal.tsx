@@ -52,7 +52,7 @@ export function LearnMoreModal({ isOpen, onClose, onContactClick }: LearnMoreMod
                 <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-secondary text-xs font-bold mb-3 border border-primary/20">
                   Program Details
                 </span>
-                <h2 className="text-2xl md:text-3xl font-bold text-secondary mb-2 font-sans tracking-tight">
+                <h2 className="text-2xl md:text-3xl font-bold text-secondary mb-2 font-serif tracking-tight">
                   Maximize Equity & Time Your Move
                 </h2>
                 <p className="text-muted-foreground text-sm">
