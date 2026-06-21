@@ -21,6 +21,7 @@ const testimonials = [
     rating: 5,
     highlight: 'Sold $82K over asking',
     initials: 'MF',
+    image: '/hero-house.jpg',
   },
   {
     name: 'Sarah & James Chen',
@@ -30,6 +31,7 @@ const testimonials = [
     rating: 5,
     highlight: 'Sold in 8 days',
     initials: 'SC',
+    image: '/staged-interior.png',
   },
   {
     name: 'The Rodriguez Family',
@@ -39,6 +41,7 @@ const testimonials = [
     rating: 5,
     highlight: '40% more buying power',
     initials: 'RF',
+    image: '/condo-after.png',
   },
 ]
 
@@ -61,17 +64,17 @@ const metrics = [
   {
     before: {
       label: 'Before: Dated Condo (Vacant)',
-      val: '$380,000',
+      val: '$410,000',
       days: '45+ Days on Market',
-      width: '40%',
+      width: '60%',
     },
     after: {
       label: 'After: Concierge Staged',
-      val: '$425,000 (+11.8% Staged)',
-      days: '8 Days on Market',
+      val: '$550,000 (+34.1% Staged)',
+      days: '9 Days on Market',
       width: '100%',
     },
-    gains: '$45,000 extra equity unlocked in just 8 days on market.',
+    gains: 'Gained +$140,000 extra net cash proceeds delivered via proactive staging concierge.',
   },
   {
     before: {
@@ -92,23 +95,33 @@ const metrics = [
 
 interface TestimonialsProps {
   onContactClick: () => void
+  activeStoryIndex: number
+  setActiveStoryIndex: (index: number) => void
 }
 
-export function Testimonials({ onContactClick }: TestimonialsProps) {
+export function Testimonials({ 
+  onContactClick, 
+  activeStoryIndex, 
+  setActiveStoryIndex 
+}: TestimonialsProps) {
   const [api, setApi] = React.useState<CarouselApi>()
-  const [current, setCurrent] = React.useState(0)
 
   React.useEffect(() => {
     if (!api) return
 
-    setCurrent(api.selectedScrollSnap())
-
     api.on('select', () => {
-      setCurrent(api.selectedScrollSnap())
+      setActiveStoryIndex(api.selectedScrollSnap())
     })
-  }, [api])
+  }, [api, setActiveStoryIndex])
 
-  const currentMetric = metrics[current] || metrics[0]
+  React.useEffect(() => {
+    if (!api) return
+    if (api.selectedScrollSnap() !== activeStoryIndex) {
+      api.scrollTo(activeStoryIndex)
+    }
+  }, [api, activeStoryIndex])
+
+  const currentMetric = metrics[activeStoryIndex] || metrics[0]
 
   return (
     <section id="testimonials" className="py-24 md:py-32 relative overflow-hidden bg-background">
@@ -162,13 +175,28 @@ export function Testimonials({ onContactClick }: TestimonialsProps) {
                       &ldquo;{item.quote}&rdquo;
                     </blockquote>
 
-                    <div className="flex items-center gap-3 pt-6 border-t border-border">
-                      <div className="flex items-center justify-center w-12 h-12 rounded-full bg-primary/15 text-secondary font-bold text-base border border-primary/30">
-                        {item.initials}
+                    <div className="flex items-center justify-between pt-6 border-t border-border">
+                      <div className="flex items-center gap-3">
+                        <div className="flex items-center justify-center w-12 h-12 rounded-full bg-primary/15 text-secondary font-bold text-base border border-primary/30 shrink-0">
+                          {item.initials}
+                        </div>
+                        <div>
+                          <p className="font-extrabold text-secondary text-sm">{item.name}</p>
+                          <p className="text-xs text-muted-foreground font-semibold">{item.location}</p>
+                        </div>
                       </div>
-                      <div>
-                        <p className="font-extrabold text-secondary text-sm">{item.name}</p>
-                        <p className="text-xs text-muted-foreground font-semibold">{item.location}</p>
+
+                      {/* Property Thumbnail */}
+                      <div className="flex items-center gap-2.5 bg-muted/40 rounded-lg p-1.5 border border-border/60 max-w-[160px] sm:max-w-[220px]">
+                        <img 
+                          src={item.image} 
+                          alt={`Staged property for ${item.name}`} 
+                          className="w-10 h-10 rounded object-cover shadow-xs border border-border shrink-0" 
+                        />
+                        <div className="hidden sm:block text-[10px] leading-tight text-muted-foreground">
+                          <span className="font-bold text-secondary block">Verified Sale</span>
+                          Staged Home
+                        </div>
                       </div>
                     </div>
                   </CarouselItem>
@@ -197,7 +225,7 @@ export function Testimonials({ onContactClick }: TestimonialsProps) {
                 
                 <AnimatePresence mode="wait">
                   <motion.div
-                    key={current}
+                    key={activeStoryIndex}
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}
@@ -248,7 +276,7 @@ export function Testimonials({ onContactClick }: TestimonialsProps) {
               <div className="pt-4 border-t border-border/10 text-center">
                 <AnimatePresence mode="wait">
                   <motion.p
-                    key={current}
+                    key={activeStoryIndex}
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}

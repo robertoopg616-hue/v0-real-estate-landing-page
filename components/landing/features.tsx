@@ -9,37 +9,22 @@ const features = [
     icon: Calculator,
     title: 'Equity Unlock Assessment',
     description:
-      'Get a comprehensive analysis of your current equity position and discover how much buying power you actually have. No guesswork, just data-driven clarity.',
+      "Determine your home's exact equity position and map out your maximum buying power.",
     highlight: 'Know Your Numbers',
-    deliverables: [
-      'Current value valuation report',
-      'Debt and equity layout overview',
-      'Target home buying power math',
-    ],
   },
   {
     icon: ShieldCheck,
     title: 'Stay-Put Guarantee',
     description:
-      "Never feel rushed. Our exclusive guarantee means you won't move until your new home is ready. Sell with confidence knowing you're protected.",
+      'Maintain full occupancy of your current home with zero timing gaps until your new property is ready.',
     highlight: 'Zero Stress Transition',
-    deliverables: [
-      'Timeline coordination schedule',
-      'Double move risk evaluation',
-      'Direct moving day setup',
-    ],
   },
   {
     icon: Sparkles,
     title: 'Concierge Prep ($0 Upfront)',
     description:
-      'Professional staging, minor repairs, and premium photography—all handled by us with zero out-of-pocket costs. Pay only when your home sells.',
+      'Transform your property value with high-end staging and repairs at zero out-of-pocket upfront cost.',
     highlight: 'White-Glove Service',
-    deliverables: [
-      'High-end furniture staging',
-      'Minor repair project coverage',
-      'Premium listing photography',
-    ],
   },
 ]
 
@@ -125,24 +110,9 @@ export function Features({ onLearnMoreClick }: FeaturesProps) {
                     </h3>
                   </div>
 
-                  <p className="text-muted-foreground text-xs leading-relaxed">
+                  <p className="text-muted-foreground text-xs leading-relaxed font-semibold">
                     {feature.description}
                   </p>
-                </div>
-
-                {/* Deliverables Checklist */}
-                <div className="space-y-2 pt-2">
-                  <span className="text-[10px] font-bold text-secondary uppercase tracking-wider block">
-                    What&apos;s Included:
-                  </span>
-                  <ul className="space-y-2">
-                    {feature.deliverables.map((item, idx) => (
-                      <li key={idx} className="flex items-center gap-2 text-xs text-muted-foreground">
-                        <span className="w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
-                        <span className="font-medium text-secondary/80">{item}</span>
-                      </li>
-                    ))}
-                  </ul>
                 </div>
               </div>
 

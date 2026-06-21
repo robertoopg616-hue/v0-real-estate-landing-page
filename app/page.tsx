@@ -18,6 +18,7 @@ import { LearnMoreModal } from '@/components/modals/learn-more-modal'
 export default function HomePage() {
   const [isContactOpen, setIsContactOpen] = useState(false)
   const [isLearnMoreOpen, setIsLearnMoreOpen] = useState(false)
+  const [activeStoryIndex, setActiveStoryIndex] = useState(0)
 
   const handleContactClick = () => {
     setIsContactOpen(true)
@@ -38,11 +39,18 @@ export default function HomePage() {
         <StatsSection />
         <Features onLearnMoreClick={handleLearnMoreClick} />
         <Pricing onContactClick={handleContactClick} />
-        <Testimonials onContactClick={handleContactClick} />
-        <CaseStudy onContactClick={handleContactClick} />
-        <FAQ />
+        <Testimonials 
+          onContactClick={handleContactClick} 
+          activeStoryIndex={activeStoryIndex}
+          setActiveStoryIndex={setActiveStoryIndex}
+        />
+        <CaseStudy 
+          onContactClick={handleContactClick} 
+          activeStoryIndex={activeStoryIndex}
+        />
         <ContactForm />
         <CTASection onContactClick={handleContactClick} />
+        <FAQ />
         <Footer onContactClick={handleContactClick} />
       </div>
 

@@ -65,17 +65,12 @@ export function Header({ onContactClick }: HeaderProps) {
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
-          {/* Logo with gold icon placeholder */}
+          {/* Logo brand typographic signature */}
           <a
             href="#"
             className="flex items-center gap-2 hover:text-primary transition-colors text-current"
           >
-            <img 
-              src="/logo.png" 
-              alt="Premium Realty Logo" 
-              className="w-8 h-8 object-contain shrink-0"
-            />
-            <span className="text-lg font-extrabold tracking-tight font-sans text-current">
+            <span className="text-lg font-serif font-semibold tracking-[0.2em] uppercase text-current">
               Premium Realty
             </span>
           </a>
@@ -117,8 +112,7 @@ export function Header({ onContactClick }: HeaderProps) {
             </SheetTrigger>
             <SheetContent side="right" className="w-[300px] bg-background border-l border-primary/20">
               <SheetHeader>
-                <SheetTitle className="flex items-center gap-2 text-secondary font-bold">
-                  <img src="/logo.png" alt="Premium Logo" className="w-6 h-6 object-contain" />
+                <SheetTitle className="text-secondary font-serif font-semibold tracking-[0.2em] uppercase text-sm">
                   Premium Realty
                 </SheetTitle>
               </SheetHeader>
