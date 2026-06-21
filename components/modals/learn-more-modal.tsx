@@ -35,13 +35,13 @@ export function LearnMoreModal({ isOpen, onClose, onContactClick }: LearnMoreMod
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             transition={{ duration: 0.3, ease: 'easeOut' }}
-            className="fixed left-1/2 top-1/2 z-50 w-full max-w-lg -translate-x-1/2 -translate-y-1/2 px-4 max-h-[90vh] overflow-y-auto"
+            className="fixed inset-0 md:left-1/2 md:top-1/2 z-50 w-full md:max-w-lg md:-translate-x-1/2 md:-translate-y-1/2 p-0 md:px-4 h-full md:h-auto max-h-screen md:max-h-[90vh] overflow-y-auto"
           >
-            <div className="glass-card rounded-2xl p-6 md:p-8 border border-primary/25 shadow-2xl relative">
+            <div className="glass-card min-h-full md:min-h-0 md:rounded-2xl p-6 md:p-8 border-0 md:border md:border-primary/25 shadow-2xl relative flex flex-col justify-center bg-white">
               {/* Close Button */}
               <button
                 onClick={onClose}
-                className="absolute right-4 top-4 p-2 rounded-full bg-background/80 hover:bg-muted text-muted-foreground hover:text-foreground transition-colors border border-border"
+                className="absolute right-4 top-4 md:right-4 md:top-4 p-3 md:p-2 rounded-full bg-background/90 hover:bg-muted text-muted-foreground hover:text-foreground transition-colors border border-border z-10"
               >
                 <X className="size-5" />
                 <span className="sr-only">Close</span>

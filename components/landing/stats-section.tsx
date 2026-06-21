@@ -53,29 +53,24 @@ export function StatsSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-100px' }}
           transition={{ duration: 0.7, ease: 'easeOut' }}
-          className="glass-card rounded-2xl md:rounded-[24px] p-6 sm:p-8 md:p-12 border border-primary/25 shadow-figma-card bg-white"
+          className="grid grid-cols-2 lg:grid-cols-4 gap-y-8 gap-x-4 lg:gap-0 lg:divide-x lg:divide-primary/20"
         >
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-0 lg:divide-x lg:divide-primary/20">
-            {stats.map((stat, index) => (
-              <div
-                key={stat.label}
-                className={`flex flex-col items-center text-center p-4 lg:p-0 lg:first:pl-0 lg:last:pr-0 lg:border-0
-                  ${index % 2 === 0 ? 'border-r border-primary/10' : ''}
-                  ${index < 2 ? 'border-b border-primary/10 pb-6 mb-6 lg:pb-0 lg:mb-0' : 'pt-2 lg:pt-0'}
-                `}
-              >
-                <div className="flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 mb-4 border border-primary/20 shadow-sm">
-                  <stat.icon className="size-5 text-primary" />
-                </div>
-                <span className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-secondary font-serif tracking-tight">
-                  <AnimatedCounter value={stat.value} />
-                </span>
-                <span className="text-[10px] md:text-xs font-bold text-muted-foreground uppercase tracking-widest mt-2">
-                  {stat.label}
-                </span>
+          {stats.map((stat, index) => (
+            <div
+              key={stat.label}
+              className="flex flex-col items-center text-center p-4 lg:p-0 lg:first:pl-0 lg:last:pr-0"
+            >
+              <div className="flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 mb-4 border border-primary/20 shadow-sm">
+                <stat.icon className="size-5 text-primary" />
               </div>
-            ))}
-          </div>
+              <span className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-secondary font-serif tracking-tight">
+                <AnimatedCounter value={stat.value} />
+              </span>
+              <span className="text-[10px] md:text-xs font-bold text-muted-foreground uppercase tracking-widest mt-2">
+                {stat.label}
+              </span>
+            </div>
+          ))}
         </motion.div>
       </div>
     </section>

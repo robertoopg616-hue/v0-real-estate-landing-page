@@ -215,7 +215,6 @@ function EquityCalculator() {
   return (
     <div className="mt-24 py-12 border-y border-primary/20 space-y-8 max-w-4xl mx-auto relative z-10">
       <div className="text-center space-y-2">
-        <span className="text-primary font-bold text-xs uppercase tracking-wider">Interactive Tool</span>
         <h3 className="text-2xl sm:text-3xl font-bold text-secondary font-serif">Home Equity & Net Proceeds Visualizer</h3>
         <p className="text-muted-foreground text-sm max-w-2xl mx-auto">
           Drag the slider to select your estimated property value. See how professional styling and concierge-coordinated sales yield higher net proceeds—leaving more money in your pocket.
@@ -223,10 +222,10 @@ function EquityCalculator() {
       </div>
 
       {/* Slider Controls */}
-      <div className="space-y-4 max-w-xl mx-auto">
-        <div className="flex justify-between items-center text-sm font-semibold">
-          <span className="text-muted-foreground">Estimated Property Value:</span>
-          <span className="text-primary text-xl sm:text-2xl font-bold">{formatCurrency(homeValue)}</span>
+      <div className="space-y-4 max-w-xl mx-auto px-2">
+        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-1 sm:gap-4 text-center sm:text-left text-sm font-semibold">
+          <span className="text-muted-foreground text-xs sm:text-sm">Estimated Property Value:</span>
+          <span className="text-primary text-2xl sm:text-2xl font-extrabold">{formatCurrency(homeValue)}</span>
         </div>
         <input 
           type="range"
@@ -264,13 +263,13 @@ function EquityCalculator() {
       <div className="space-y-8 pt-4">
         
         {/* Tier 1: Essential */}
-        <div className="space-y-3">
+        <div className="space-y-3 p-5 sm:p-0 rounded-xl sm:rounded-none border border-primary/10 sm:border-0 bg-white/70 sm:bg-transparent shadow-sm sm:shadow-none">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div className="space-y-1">
               <span className="font-bold text-base text-secondary">Essential (2% Fee)</span>
               <span className="text-xs text-muted-foreground block">Standard listing, no staging</span>
             </div>
-            <div className="grid grid-cols-3 gap-4 text-left sm:text-right text-xs font-semibold sm:flex sm:items-center sm:gap-6">
+            <div className="grid grid-cols-3 gap-2 sm:gap-6 text-left sm:text-right text-[10px] sm:text-xs font-semibold sm:flex sm:items-center">
               <div className="text-left sm:text-right">
                 <span className="text-[10px] text-muted-foreground block uppercase tracking-wider">Sale Price</span>
                 <span className="text-secondary font-medium">{formatCurrency(essentialPrice)}</span>
@@ -291,7 +290,7 @@ function EquityCalculator() {
               className="h-full bg-gradient-to-r from-emerald-600/70 to-emerald-500/80 flex items-center px-3 text-[10px] font-bold text-emerald-100 whitespace-nowrap overflow-hidden"
               layout
             >
-              Net Proceeds: {formatCurrency(essentialProceeds)}
+              <span className="hidden sm:inline">Net Proceeds: </span>{formatCurrency(essentialProceeds)}
             </motion.div>
             <motion.div 
               style={{ width: `${(essentialCommission / maxTotal) * 100}%` }}
@@ -304,7 +303,7 @@ function EquityCalculator() {
         </div>
 
         {/* Tier 2: Signature */}
-        <div className="space-y-3">
+        <div className="space-y-3 p-5 sm:p-0 rounded-xl sm:rounded-none border border-primary/10 sm:border-0 bg-white/70 sm:bg-transparent shadow-sm sm:shadow-none">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div className="space-y-1">
               <span className="font-bold text-base text-secondary flex items-center gap-2">
@@ -315,7 +314,7 @@ function EquityCalculator() {
               </span>
               <span className="text-xs text-muted-foreground block">Virtual staging & marketing</span>
             </div>
-            <div className="grid grid-cols-3 gap-4 text-left sm:text-right text-xs font-semibold sm:flex sm:items-center sm:gap-6">
+            <div className="grid grid-cols-3 gap-2 sm:gap-6 text-left sm:text-right text-[10px] sm:text-xs font-semibold sm:flex sm:items-center">
               <div className="text-left sm:text-right">
                 <span className="text-[10px] text-muted-foreground block uppercase tracking-wider">Sale Price (+3%)</span>
                 <span className="text-secondary font-medium">{formatCurrency(signaturePrice)}</span>
@@ -341,14 +340,14 @@ function EquityCalculator() {
               className="h-full bg-gradient-to-r from-emerald-600/70 to-emerald-500/80 flex items-center px-3 text-[10px] font-bold text-emerald-100 whitespace-nowrap overflow-hidden"
               layout
             >
-              Base Net: {formatCurrency(essentialProceeds)}
+              <span className="hidden sm:inline">Base Net: </span>{formatCurrency(essentialProceeds)}
             </motion.div>
             <motion.div 
               style={{ width: `${(signatureNetGain / maxTotal) * 100}%` }}
               className="h-full bg-gradient-to-r from-primary to-orange-500 flex items-center px-3 text-[10px] font-bold text-secondary whitespace-nowrap overflow-hidden border-l border-white/20 shadow-[inset_0_1px_0_rgba(255,255,255,0.2)]"
               layout
             >
-              +{formatCurrency(signatureNetGain)} Gain
+              +{formatCurrency(signatureNetGain)}<span className="hidden sm:inline"> Gain</span>
             </motion.div>
             <motion.div 
               style={{ width: `${(signatureCommission / maxTotal) * 100}%` }}
@@ -361,7 +360,7 @@ function EquityCalculator() {
         </div>
 
         {/* Tier 3: Elite */}
-        <div className="space-y-3">
+        <div className="space-y-3 p-5 sm:p-0 rounded-xl sm:rounded-none border border-primary/10 sm:border-0 bg-white/70 sm:bg-transparent shadow-sm sm:shadow-none">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div className="space-y-1">
               <span className="font-bold text-base text-primary flex items-center gap-2">
@@ -372,7 +371,7 @@ function EquityCalculator() {
               </span>
               <span className="text-xs text-muted-foreground block">Full prep, white-glove staging</span>
             </div>
-            <div className="grid grid-cols-3 gap-4 text-left sm:text-right text-xs font-semibold sm:flex sm:items-center sm:gap-6">
+            <div className="grid grid-cols-3 gap-2 sm:gap-6 text-left sm:text-right text-[10px] sm:text-xs font-semibold sm:flex sm:items-center">
               <div className="text-left sm:text-right">
                 <span className="text-[10px] text-muted-foreground block uppercase tracking-wider">Sale Price (+5%)</span>
                 <span className="text-secondary font-medium">{formatCurrency(elitePrice)}</span>
@@ -398,14 +397,14 @@ function EquityCalculator() {
               className="h-full bg-gradient-to-r from-emerald-600/70 to-emerald-500/80 flex items-center px-3 text-[10px] font-bold text-emerald-100 whitespace-nowrap overflow-hidden"
               layout
             >
-              Base Net: {formatCurrency(essentialProceeds)}
+              <span className="hidden sm:inline">Base Net: </span>{formatCurrency(essentialProceeds)}
             </motion.div>
             <motion.div 
               style={{ width: `${(eliteNetGain / maxTotal) * 100}%` }}
               className="h-full bg-gradient-to-r from-primary to-orange-500 flex items-center px-3 text-[10px] font-bold text-secondary whitespace-nowrap overflow-hidden border-l border-white/20 shadow-[inset_0_1px_0_rgba(255,255,255,0.2)]"
               layout
             >
-              +{formatCurrency(eliteNetGain)} Gain
+              +{formatCurrency(eliteNetGain)}<span className="hidden sm:inline"> Gain</span>
             </motion.div>
             <motion.div 
               style={{ width: `${(eliteCommission / maxTotal) * 100}%` }}

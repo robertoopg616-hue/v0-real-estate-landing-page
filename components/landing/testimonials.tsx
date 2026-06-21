@@ -1,6 +1,7 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import * as React from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { Quote, Star } from 'lucide-react'
 import {
   Carousel,
@@ -8,6 +9,7 @@ import {
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
+  type CarouselApi,
 } from '@/components/ui/carousel'
 
 const testimonials = [
@@ -40,11 +42,74 @@ const testimonials = [
   },
 ]
 
+const metrics = [
+  {
+    before: {
+      label: 'Before: Starter Home (Un-Staged)',
+      val: '$520,000',
+      days: '38 Days on Market',
+      width: '60%',
+    },
+    after: {
+      label: 'After: Modernized & Staged',
+      val: '$602,000 (+15.8% Staged)',
+      days: '9 Days on Market',
+      width: '100%',
+    },
+    gains: '$82,000 extra equity unlocked to fund their Oak Hills transition.',
+  },
+  {
+    before: {
+      label: 'Before: Dated Condo (Vacant)',
+      val: '$380,000',
+      days: '45+ Days on Market',
+      width: '40%',
+    },
+    after: {
+      label: 'After: Concierge Staged',
+      val: '$425,000 (+11.8% Staged)',
+      days: '8 Days on Market',
+      width: '100%',
+    },
+    gains: '$45,000 extra equity unlocked in just 8 days on market.',
+  },
+  {
+    before: {
+      label: 'Before: Traditional Suburban (Occupied)',
+      val: '$450,000',
+      days: '52 Days on Market',
+      width: '50%',
+    },
+    after: {
+      label: 'After: Designer Staging',
+      val: '$530,000 (+17.8% Staged)',
+      days: '14 Days on Market',
+      width: '100%',
+    },
+    gains: 'Gained 40% more buying power, unlocking $80,000 in equity.',
+  },
+]
+
 interface TestimonialsProps {
   onContactClick: () => void
 }
 
 export function Testimonials({ onContactClick }: TestimonialsProps) {
+  const [api, setApi] = React.useState<CarouselApi>()
+  const [current, setCurrent] = React.useState(0)
+
+  React.useEffect(() => {
+    if (!api) return
+
+    setCurrent(api.selectedScrollSnap())
+
+    api.on('select', () => {
+      setCurrent(api.selectedScrollSnap())
+    })
+  }, [api])
+
+  const currentMetric = metrics[current] || metrics[0]
+
   return (
     <section id="testimonials" className="py-24 md:py-32 relative overflow-hidden bg-background">
       {/* Background gradients */}
@@ -83,7 +148,7 @@ export function Testimonials({ onContactClick }: TestimonialsProps) {
           >
             <Quote className="size-16 text-primary/30" />
             
-            <Carousel className="w-full">
+            <Carousel setApi={setApi} className="w-full">
               <CarouselContent>
                 {testimonials.map((item, index) => (
                   <CarouselItem key={index} className="space-y-6">
@@ -124,45 +189,75 @@ export function Testimonials({ onContactClick }: TestimonialsProps) {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="lg:col-span-5 space-y-6"
           >
-            <div className="glass-card p-6 sm:p-8 rounded-2xl border border-primary/20 shadow-figma-card space-y-6 bg-white">
-              <h3 className="text-lg font-bold text-secondary border-b border-border pb-3 uppercase tracking-wider">
-                Visual Transition Metric
-              </h3>
-              
-              <div className="space-y-4">
-                {/* Before Row */}
-                <div className="space-y-1.5">
-                  <span className="inline-flex items-center rounded-full bg-red-500/10 border border-red-500/20 px-2.5 py-0.5 text-[10px] font-bold text-red-500">
-                    Before: Starter Condo
-                  </span>
-                  <div className="flex justify-between items-center text-xs font-semibold text-muted-foreground pt-1">
-                    <span>Valued at: $380,000</span>
-                    <span>Days on Market: 45+</span>
-                  </div>
-                  <div className="w-full bg-red-100 rounded-full h-2 overflow-hidden border border-red-200">
-                    <div className="bg-red-500 h-full w-[40%]" />
-                  </div>
-                </div>
+            <div className="glass-card p-6 sm:p-8 rounded-2xl border border-primary/20 shadow-figma-card space-y-6 bg-white min-h-[350px] flex flex-col justify-between">
+              <div>
+                <h3 className="text-lg font-bold text-secondary border-b border-border pb-3 uppercase tracking-wider">
+                  Visual Transition Metric
+                </h3>
+                
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={current}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.3 }}
+                    className="space-y-4 pt-4"
+                  >
+                    {/* Before Row */}
+                    <div className="space-y-1.5">
+                      <span className="inline-flex items-center rounded-full bg-red-500/10 border border-red-500/20 px-2.5 py-0.5 text-[10px] font-bold text-red-500">
+                        {currentMetric.before.label}
+                      </span>
+                      <div className="flex justify-between items-center text-xs font-semibold text-muted-foreground pt-1">
+                        <span>Valued at: {currentMetric.before.val}</span>
+                        <span>{currentMetric.before.days}</span>
+                      </div>
+                      <div className="w-full bg-red-100 rounded-full h-2 overflow-hidden border border-red-200">
+                        <motion.div
+                          className="bg-red-500 h-full"
+                          initial={{ width: 0 }}
+                          animate={{ width: currentMetric.before.width }}
+                          transition={{ duration: 0.5, ease: 'easeOut' }}
+                        />
+                      </div>
+                    </div>
 
-                {/* After Row */}
-                <div className="space-y-1.5 pt-2">
-                  <span className="inline-flex items-center rounded-full bg-emerald-500/10 border border-emerald-500/20 px-2.5 py-0.5 text-[10px] font-bold text-emerald-600">
-                    After: 4BR Family Home
-                  </span>
-                  <div className="flex justify-between items-center text-xs font-bold text-secondary pt-1">
-                    <span>Sold: $425,000 (+12% Staged)</span>
-                    <span className="text-emerald-600">Days on Market: 12</span>
-                  </div>
-                  <div className="w-full bg-emerald-100 rounded-full h-2 overflow-hidden border border-emerald-200">
-                    <div className="bg-emerald-500 h-full w-[100%]" />
-                  </div>
-                </div>
+                    {/* After Row */}
+                    <div className="space-y-1.5 pt-2">
+                      <span className="inline-flex items-center rounded-full bg-emerald-500/10 border border-emerald-500/20 px-2.5 py-0.5 text-[10px] font-bold text-emerald-600">
+                        {currentMetric.after.label}
+                      </span>
+                      <div className="flex justify-between items-center text-xs font-bold text-secondary pt-1">
+                        <span>Sold: {currentMetric.after.val}</span>
+                        <span className="text-emerald-600">{currentMetric.after.days}</span>
+                      </div>
+                      <div className="w-full bg-emerald-100 rounded-full h-2 overflow-hidden border border-emerald-200">
+                        <motion.div
+                          className="bg-emerald-500 h-full"
+                          initial={{ width: 0 }}
+                          animate={{ width: currentMetric.after.width }}
+                          transition={{ duration: 0.5, ease: 'easeOut' }}
+                        />
+                      </div>
+                    </div>
+                  </motion.div>
+                </AnimatePresence>
               </div>
 
               <div className="pt-4 border-t border-border/10 text-center">
-                <p className="text-xs text-muted-foreground leading-relaxed font-semibold">
-                  Sarah unlocked $45,000 extra equity to afford her dream home upgrade.
-                </p>
+                <AnimatePresence mode="wait">
+                  <motion.p
+                    key={current}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                    className="text-xs text-muted-foreground leading-relaxed font-semibold"
+                  >
+                    {currentMetric.gains}
+                  </motion.p>
+                </AnimatePresence>
               </div>
             </div>
           </motion.div>

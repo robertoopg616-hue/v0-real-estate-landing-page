@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion, useScroll } from 'framer-motion'
 import { Menu, Home } from 'lucide-react'
 import { Button } from '@/components/ui/button'
@@ -25,7 +25,21 @@ interface HeaderProps {
 
 export function Header({ onContactClick }: HeaderProps) {
   const [isOpen, setIsOpen] = useState(false)
+  const [isScrolled, setIsScrolled] = useState(false)
   const { scrollYProgress } = useScroll()
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setIsScrolled(true)
+      } else {
+        setIsScrolled(false)
+      }
+    }
+    window.addEventListener('scroll', handleScroll)
+    handleScroll() // run on mount
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   const scrollToSection = (href: string) => {
     setIsOpen(false)
@@ -40,7 +54,11 @@ export function Header({ onContactClick }: HeaderProps) {
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: 'easeOut' }}
-      className="fixed top-0 left-0 right-0 z-50 glass"
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        isScrolled
+          ? 'bg-white/70 backdrop-blur-lg border-b border-primary/20 shadow-sm text-secondary'
+          : 'bg-transparent text-white border-transparent'
+      } max-md:bg-white/90 max-md:backdrop-blur-xl max-md:border-b max-md:border-primary/20 max-md:shadow-sm max-md:text-secondary`}
     >
       {/* Scroll Progress Bar */}
       <motion.div className="scroll-progress-bar" style={{ scaleX: scrollYProgress }} />
@@ -50,14 +68,14 @@ export function Header({ onContactClick }: HeaderProps) {
           {/* Logo with gold icon placeholder */}
           <a
             href="#"
-            className="flex items-center gap-2 text-secondary hover:text-primary transition-colors"
+            className="flex items-center gap-2 hover:text-primary transition-colors text-current"
           >
             <img 
               src="/logo.png" 
               alt="Premium Realty Logo" 
-              className="w-8 h-8 object-contain"
+              className="w-8 h-8 object-contain shrink-0"
             />
-            <span className="text-lg font-extrabold tracking-tight font-sans text-secondary">
+            <span className="text-lg font-extrabold tracking-tight font-sans text-current">
               Premium Realty
             </span>
           </a>
@@ -68,7 +86,11 @@ export function Header({ onContactClick }: HeaderProps) {
               <button
                 key={link.href}
                 onClick={() => scrollToSection(link.href)}
-                className="text-sm font-bold text-muted-foreground hover:text-secondary transition-colors"
+                className={`text-sm font-bold transition-colors ${
+                  isScrolled 
+                    ? 'text-muted-foreground hover:text-secondary' 
+                    : 'text-slate-200 hover:text-white'
+                }`}
               >
                 {link.label}
               </button>
@@ -88,7 +110,7 @@ export function Header({ onContactClick }: HeaderProps) {
           {/* Mobile Menu */}
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild className="md:hidden">
-              <Button variant="ghost" size="icon" className="text-secondary">
+              <Button variant="ghost" size="icon" className="text-current">
                 <Menu className="size-5" />
                 <span className="sr-only">Toggle menu</span>
               </Button>
