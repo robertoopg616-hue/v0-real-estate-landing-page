@@ -13,55 +13,55 @@ const caseStudies = [
   {
     client: 'The Miller Family',
     challenge: {
-      profile: 'The Miller Family (Growing from 2 to 4 family members)',
-      bottleneck: '3BR Starter Home valued at $520,000 with zero room to grow.',
-      blocker: 'Paralyzed by the fear of selling first and being temporarily displaced.'
+      profile: 'Miller Family (Growing 2 to 4 members)',
+      bottleneck: '$520k starter home (no room to grow)',
+      blocker: 'Fear of selling first and temporary displacement'
     },
     transition: {
-      prep: '5 Days of cosmetic staging concierge ($0 upfront cost).',
-      speed: 'Placed under contract in exactly 9 days at 102% of asking price.',
-      security: 'Stay-Put Leaseback agreement, securing 30 days post-closing occupancy.'
+      prep: '5 Days staging ($0 upfront)',
+      speed: 'Under contract in 9 days (102% ask)',
+      security: '30-Day Stay-Put Leaseback'
     },
     outcome: {
-      premium: '+$82,000 secured over typical neighborhood listing values.',
-      capital: '$82,000 in net cash equity instantly unlocked and deployed into new purchase.',
-      asset: 'Seamlessly transitioned into a 4BR Family Estate with 0 days of double moves.'
+      premium: '+$82k above neighborhood average',
+      capital: '$82k net cash equity unlocked',
+      asset: 'Seamless transition, 0 double moves'
     }
   },
   {
     client: 'Sarah & James Chen',
     challenge: {
-      profile: 'Sarah & James Chen (Growing family needing suburban schools)',
-      bottleneck: '2BR Urban Condo valued at $410,000 with zero room to grow.',
-      blocker: 'Paralyzed by the fear of selling first and being temporarily displaced.'
+      profile: 'Chen Family (Suburban school upgrade)',
+      bottleneck: '$410k urban condo (cramped footprint)',
+      blocker: 'Fear of selling first and displacement'
     },
     transition: {
-      prep: '72 Hours of cosmetic staging concierge ($0 upfront cost).',
-      speed: 'Placed under contract in exactly 9 days at 104% of asking price.',
-      security: 'Stay-Put Leaseback agreement, securing 45 days post-closing occupancy.'
+      prep: '72-Hour staging ($0 upfront)',
+      speed: 'Under contract in 9 days (104% ask)',
+      security: '45-Day Stay-Put Leaseback'
     },
     outcome: {
-      premium: '+$16,400 secured over typical neighborhood listing values.',
-      capital: '$140,000 in net cash equity instantly unlocked and deployed into new purchase.',
-      asset: 'Seamlessly transitioned into a 4BR Suburban Smart Home with 0 days of double moves.'
+      premium: '+$16.4k above neighborhood average',
+      capital: '$140k net cash equity unlocked',
+      asset: 'Suburban smart home, 0 double moves'
     }
   },
   {
     client: 'The Rodriguez Family',
     challenge: {
-      profile: 'The Rodriguez Family (First-time upsizers with 3 kids)',
-      bottleneck: '3BR Midtown Bungalow valued at $450,000 with zero room to grow.',
-      blocker: 'Paralyzed by the fear of double moves and high renting costs.'
+      profile: 'Rodriguez Family (Upsizers with 3 kids)',
+      bottleneck: '$450k midtown bungalow',
+      blocker: 'Fear of double moves and renting costs'
     },
     transition: {
-      prep: '4 Days of cosmetic staging concierge ($0 upfront cost).',
-      speed: 'Placed under contract in exactly 14 days at 103% of asking price.',
-      security: 'Dual-Closing Equity Advance securing single-day closing transition.'
+      prep: '4 Days staging ($0 upfront)',
+      speed: 'Under contract in 14 days (103% ask)',
+      security: 'Dual-Closing Equity Advance'
     },
     outcome: {
-      premium: '+$80,000 secured over typical neighborhood listing values.',
-      capital: '$80,000 in net cash equity instantly unlocked and deployed into new purchase.',
-      asset: 'Seamlessly transitioned into a 5BR Lakeside Manor with 0 days of double moves.'
+      premium: '+$80k above neighborhood average',
+      capital: '$80k net cash equity unlocked',
+      asset: 'Lakeside manor, 0 double moves'
     }
   }
 ]
@@ -70,7 +70,7 @@ export function CaseStudy({ onContactClick, activeStoryIndex }: CaseStudyProps) 
   const activeData = caseStudies[activeStoryIndex] || caseStudies[0]
 
   return (
-    <section className="py-24 md:py-32 bg-muted/40 relative overflow-hidden">
+    <section className="py-16 bg-muted/40 relative overflow-hidden">
       {/* Background gradients */}
       <div className="absolute top-1/2 left-0 -translate-y-1/2 w-[350px] h-[350px] rounded-full bg-primary/5 blur-[100px] pointer-events-none" />
 
@@ -97,14 +97,14 @@ export function CaseStudy({ onContactClick, activeStoryIndex }: CaseStudyProps) 
         {/* 3-Card Grid System */}
         <div className="grid lg:grid-cols-3 gap-8 items-stretch">
           
-          {/* CARD 1: THE INITIAL SITUATION (Left) */}
+          {/* CARD 1: THE Challenge (Left) */}
           <div className="bg-white border border-primary/20 rounded-2xl p-6 sm:p-8 flex flex-col justify-between shadow-xs transition-all duration-300">
             <div>
               <span className="text-xs font-bold text-primary tracking-widest uppercase block mb-3">
                 01 / The Challenge
               </span>
               <h3 className="text-xl font-bold text-secondary font-serif mb-6 border-b border-border pb-4">
-                The Initial Situation
+                The Challenge
               </h3>
               
               <AnimatePresence mode="wait">
@@ -138,7 +138,7 @@ export function CaseStudy({ onContactClick, activeStoryIndex }: CaseStudyProps) 
             </div>
             
             <div className="mt-8 pt-4 border-t border-border/40 text-xs text-muted-foreground font-semibold flex justify-between">
-              <span>Status: Solved</span>
+              <span>Status: Active Challenge</span>
               <span>Timeline Start</span>
             </div>
           </div>
@@ -154,10 +154,10 @@ export function CaseStudy({ onContactClick, activeStoryIndex }: CaseStudyProps) 
 
             <div>
               <span className="text-xs font-bold text-[#d4af37] tracking-widest uppercase block mb-3 mt-1">
-                02 / The Transition Execution
+                02 / The Transition
               </span>
               <h3 className="text-xl font-bold text-secondary font-serif mb-6 border-b border-border pb-4">
-                Concierge Strategy Bridge
+                Status: Active Control
               </h3>
               
               <AnimatePresence mode="wait">
@@ -197,7 +197,7 @@ export function CaseStudy({ onContactClick, activeStoryIndex }: CaseStudyProps) 
             </div>
             
             <div className="mt-8 pt-4 border-t border-border/40 text-xs text-[#d4af37] font-extrabold flex justify-between">
-              <span>Status: Active Control</span>
+              <span>Status: Staging & Leaseback</span>
               <span>Concierge Phase</span>
             </div>
           </div>
@@ -206,10 +206,10 @@ export function CaseStudy({ onContactClick, activeStoryIndex }: CaseStudyProps) 
           <div className="bg-[#0f2e1e] border border-[#0f2e1e] text-white rounded-2xl p-6 sm:p-8 flex flex-col justify-between shadow-lg transition-all duration-300">
             <div>
               <span className="text-xs font-bold text-primary tracking-widest uppercase block mb-3">
-                03 / Final Financial Outcome
+                03 / The Outcome
               </span>
               <h3 className="text-xl font-bold text-white font-serif mb-6 border-b border-white/10 pb-4">
-                The Unlocked Results
+                Final Outcome
               </h3>
               
               <AnimatePresence mode="wait">
@@ -249,7 +249,7 @@ export function CaseStudy({ onContactClick, activeStoryIndex }: CaseStudyProps) 
             </div>
             
             <div className="mt-8 pt-4 border-t border-white/10 text-xs text-primary font-bold flex justify-between">
-              <span>Status: Goal Achieved</span>
+              <span>Status: Outcome Achieved</span>
               <span>100% Client Success</span>
             </div>
           </div>

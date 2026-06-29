@@ -10,7 +10,7 @@ interface CTASectionProps {
 
 export function CTASection({ onContactClick }: CTASectionProps) {
   return (
-    <section className="py-20 md:py-28 relative overflow-hidden bg-background">
+    <section className="py-16 relative overflow-hidden bg-background">
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-secondary/5" />
       

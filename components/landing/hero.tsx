@@ -31,7 +31,7 @@ export function Hero({ onContactClick }: HeroProps) {
         <div className="hidden md:block absolute inset-0 bg-black/40 lg:bg-transparent" />
       </div>
 
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-32 z-10 w-full">
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 md:py-24 z-10 w-full">
         <div className="max-w-2xl text-left space-y-6">
           {/* Headline */}
           <motion.h1
@@ -39,8 +39,7 @@ export function Hero({ onContactClick }: HeroProps) {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="text-4xl sm:text-5xl lg:text-[3.75rem] font-bold tracking-tight text-white max-md:text-[#1a1a1a] leading-[1.12] text-balance font-serif"
           >
-            Outgrow your home,{' '}
-            <span className="text-primary max-md:text-[#d4af37] block sm:inline">not your peace of mind.</span>
+            Sell your current home for top dollar and move into your next one seamlessly.
           </motion.h1>
 
           {/* Subheadline */}
@@ -49,8 +48,7 @@ export function Hero({ onContactClick }: HeroProps) {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-base sm:text-lg lg:text-xl text-slate-200/90 max-md:text-[#1a1a1a]/90 leading-relaxed max-w-xl text-pretty font-medium"
           >
-            Expert guidance to sell your property for top dollar and transition into
-            your dream home seamlessly. We handle the timing so you never move twice.
+            We handle the logistics, fund your property's cosmetic staging upfront, and coordinate timelines so you never have to move twice.
           </motion.p>
 
           {/* CTA Buttons */}

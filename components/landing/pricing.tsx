@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Check } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
 
 const plans = [
   {
@@ -75,7 +76,7 @@ interface PricingProps {
 
 export function Pricing({ onContactClick }: PricingProps) {
   return (
-    <section id="pricing" className="py-24 md:py-32 bg-muted/40 relative">
+    <section id="pricing" className="py-16 bg-muted/40 relative">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div
@@ -190,6 +191,9 @@ export function Pricing({ onContactClick }: PricingProps) {
 
 function EquityCalculator() {
   const [homeValue, setHomeValue] = useState(1000000)
+  const [hasInteracted, setHasInteracted] = useState(false)
+  const [isGateUnlocked, setIsGateUnlocked] = useState(false)
+  const [email, setEmail] = useState('')
 
   // Calculations
   const essentialPrice = homeValue
@@ -213,7 +217,7 @@ function EquityCalculator() {
   }
 
   return (
-    <div className="mt-24 py-12 border-y border-primary/20 space-y-8 max-w-4xl mx-auto relative z-10">
+    <div className="mt-16 py-12 border-y border-primary/20 space-y-8 max-w-4xl mx-auto relative z-10">
       <div className="text-center space-y-2">
         <h3 className="text-2xl sm:text-3xl font-bold text-secondary font-serif">Home Equity & Net Proceeds Visualizer</h3>
         <p className="text-muted-foreground text-sm max-w-2xl mx-auto">
@@ -233,7 +237,12 @@ function EquityCalculator() {
           max="2500000"
           step="10000"
           value={homeValue}
-          onChange={(e) => setHomeValue(parseInt(e.target.value, 10))}
+          onChange={(e) => {
+            setHomeValue(parseInt(e.target.value, 10))
+            if (!isGateUnlocked) {
+              setHasInteracted(true)
+            }
+          }}
           className="w-full h-2 bg-secondary/10 rounded-lg appearance-none cursor-pointer accent-primary border border-border"
         />
         <div className="flex justify-between text-xs text-muted-foreground">
@@ -244,19 +253,24 @@ function EquityCalculator() {
       </div>
 
       {/* Visual Chart Legend */}
-      <div className="flex flex-wrap items-center justify-center gap-6 text-xs font-semibold pt-4 border-t border-border">
-        <div className="flex items-center gap-2">
-          <span className="w-3.5 h-3.5 rounded bg-emerald-600/80 border border-emerald-500/20" />
-          <span className="text-muted-foreground">Base Net Proceeds (Essential Level)</span>
+      <div className="flex flex-col items-center justify-center gap-2 pt-4 border-t border-border">
+        <div className="flex flex-wrap items-center justify-center gap-6 text-xs font-semibold">
+          <div className="flex items-center gap-2">
+            <span className="w-3.5 h-3.5 rounded bg-emerald-600/80 border border-emerald-500/20" />
+            <span className="text-muted-foreground">Base Net Proceeds (Essential Level)</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="w-3.5 h-3.5 rounded bg-gradient-to-r from-primary to-orange-500 border border-white/10" />
+            <span className="text-muted-foreground">Staging Premium Earned (Extra Cash Kept)</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="w-3.5 h-3.5 rounded bg-[#5c2424] border border-[#7a2e2e]/30" />
+            <span className="text-muted-foreground">Commission Fees</span>
+          </div>
         </div>
-        <div className="flex items-center gap-2">
-          <span className="w-3.5 h-3.5 rounded bg-gradient-to-r from-primary to-orange-500 border border-white/10" />
-          <span className="text-muted-foreground">Staging Premium Earned (Extra Cash Kept)</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <span className="w-3.5 h-3.5 rounded bg-[#5c2424] border border-[#7a2e2e]/30" />
-          <span className="text-muted-foreground">Commission Fees</span>
-        </div>
+        <p className="text-[10px] text-center text-muted-foreground mt-2 font-medium max-w-lg">
+          *Staging Premium Earned: Average 3-7% home value increase generated via our $0 upfront cosmetic staging concierge.
+        </p>
       </div>
 
       {/* Visual Rows replaced with Dynamic Column Chart */}
@@ -268,7 +282,9 @@ function EquityCalculator() {
           <div className="flex flex-col items-center gap-2 w-full max-w-[150px] h-full justify-end">
             <div className="text-center space-y-0.5">
               <span className="text-[9px] font-bold text-muted-foreground uppercase tracking-wider block">Essential</span>
-              <span className="text-xs sm:text-sm font-black text-secondary">{formatCurrency(essentialProceeds)}</span>
+              <span className="text-xs sm:text-sm font-black text-secondary">
+                {hasInteracted && !isGateUnlocked ? '$•,•••,•••' : formatCurrency(essentialProceeds)}
+              </span>
             </div>
             <div className="w-full h-full flex flex-col justify-end">
               <motion.div 
@@ -282,7 +298,7 @@ function EquityCalculator() {
                   className="w-full bg-[#5c2424] flex items-center justify-center p-1 text-[9px] font-bold text-red-200 border-b border-black/10 shrink-0"
                   layout
                 >
-                  -{formatCurrency(essentialCommission)}
+                  {hasInteracted && !isGateUnlocked ? '-$••,•••' : `-${formatCurrency(essentialCommission)}`}
                 </motion.div>
                 {/* Bottom: Base Net Proceeds block (Green) */}
                 <div className="w-full flex-1 bg-emerald-600/80 flex items-center justify-center">
@@ -296,7 +312,9 @@ function EquityCalculator() {
           <div className="flex flex-col items-center gap-2 w-full max-w-[150px] h-full justify-end">
             <div className="text-center space-y-0.5">
               <span className="text-[9px] font-bold text-secondary uppercase tracking-wider block">Signature</span>
-              <span className="text-xs sm:text-sm font-black text-primary">{formatCurrency(signatureProceeds)}</span>
+              <span className="text-xs sm:text-sm font-black text-primary">
+                {hasInteracted && !isGateUnlocked ? '$•,•••,•••' : formatCurrency(signatureProceeds)}
+              </span>
             </div>
             <div className="w-full h-full flex flex-col justify-end">
               <motion.div 
@@ -310,7 +328,7 @@ function EquityCalculator() {
                   className="w-full bg-[#5c2424] flex items-center justify-center p-1 text-[9px] font-bold text-red-200 border-b border-black/10 shrink-0"
                   layout
                 >
-                  -{formatCurrency(signatureCommission)}
+                  {hasInteracted && !isGateUnlocked ? '-$••,•••' : `-${formatCurrency(signatureCommission)}`}
                 </motion.div>
                 {/* Middle: Staging Gain block (Orange/Gold) */}
                 <motion.div 
@@ -318,7 +336,7 @@ function EquityCalculator() {
                   className="w-full bg-gradient-to-b from-primary to-orange-500 flex items-center justify-center p-1 text-[9px] font-bold text-secondary shrink-0"
                   layout
                 >
-                  +{formatCurrency(signatureNetGain)}
+                  {hasInteracted && !isGateUnlocked ? '+$••,•••' : `+${formatCurrency(signatureNetGain)}`}
                 </motion.div>
                 {/* Bottom: Base Net Proceeds block (Green) */}
                 <div className="w-full flex-1 bg-emerald-600/80 flex items-center justify-center">
@@ -332,7 +350,9 @@ function EquityCalculator() {
           <div className="flex flex-col items-center gap-2 w-full max-w-[150px] h-full justify-end">
             <div className="text-center space-y-0.5">
               <span className="text-[9px] font-bold text-primary uppercase tracking-wider block">Elite</span>
-              <span className="text-xs sm:text-sm font-black text-primary">{formatCurrency(eliteProceeds)}</span>
+              <span className="text-xs sm:text-sm font-black text-primary">
+                {hasInteracted && !isGateUnlocked ? '$•,•••,•••' : formatCurrency(eliteProceeds)}
+              </span>
             </div>
             <div className="w-full h-full flex flex-col justify-end">
               <motion.div 
@@ -346,7 +366,7 @@ function EquityCalculator() {
                   className="w-full bg-[#5c2424] flex items-center justify-center p-1 text-[9px] font-bold text-red-200 border-b border-black/10 shrink-0"
                   layout
                 >
-                  -{formatCurrency(eliteCommission)}
+                  {hasInteracted && !isGateUnlocked ? '-$••,•••' : `-${formatCurrency(eliteCommission)}`}
                 </motion.div>
                 {/* Middle: Staging Gain block (Orange/Gold) */}
                 <motion.div 
@@ -354,7 +374,7 @@ function EquityCalculator() {
                   className="w-full bg-gradient-to-b from-primary to-orange-500 flex items-center justify-center p-1 text-[9px] font-bold text-secondary shrink-0"
                   layout
                 >
-                  +{formatCurrency(eliteNetGain)}
+                  {hasInteracted && !isGateUnlocked ? '+$••,•••' : `+${formatCurrency(eliteNetGain)}`}
                 </motion.div>
                 {/* Bottom: Base Net Proceeds block (Green) */}
                 <div className="w-full flex-1 bg-emerald-600/80 flex items-center justify-center">
@@ -365,79 +385,114 @@ function EquityCalculator() {
           </div>
         </div>
 
-        {/* Detailed Metrics Table */}
-        <div className="grid md:grid-cols-3 gap-6 pt-6">
-          {/* Card 1: Essential */}
-          <div className="p-4 rounded-xl border border-border/80 bg-white shadow-xs space-y-3">
-            <div className="border-b border-border/60 pb-2">
-              <span className="font-bold text-sm text-secondary block">Essential (2% Fee)</span>
-              <span className="text-[10px] text-muted-foreground">Standard listing, no staging</span>
-            </div>
-            <div className="space-y-1.5 text-xs">
-              <div className="flex justify-between">
-                <span className="text-muted-foreground">Sale Price:</span>
-                <span className="font-semibold text-secondary">{formatCurrency(essentialPrice)}</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-muted-foreground">Commission Fee:</span>
-                <span className="font-semibold text-red-500">-{formatCurrency(essentialCommission)}</span>
-              </div>
-              <div className="flex justify-between border-t border-border/40 pt-1.5 font-bold">
-                <span className="text-secondary">Net Proceeds:</span>
-                <span className="text-secondary">{formatCurrency(essentialProceeds)}</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Card 2: Signature */}
-          <div className="p-4 rounded-xl border border-primary/20 bg-primary/[0.01] shadow-xs space-y-3 relative">
-            <span className="absolute -top-2.5 left-4 bg-primary text-primary-foreground text-[8px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full border border-primary/20">
-              Popular
+        {/* Detailed Metrics Summary Gate */}
+        {hasInteracted && !isGateUnlocked ? (
+          <div className="bg-white border border-primary/25 rounded-2xl p-6 sm:p-8 text-center max-w-lg mx-auto shadow-md space-y-4 relative overflow-hidden mt-6">
+            <div className="absolute inset-0 opacity-[0.02] bg-[radial-gradient(#000000_1px,transparent_1px)] [background-size:16px_16px]" />
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 text-secondary text-[10px] font-bold border border-primary/20">
+              Personalized Equity Report
             </span>
-            <div className="border-b border-border/60 pb-2">
-              <span className="font-bold text-sm text-secondary block">Signature (3% Fee)</span>
-              <span className="text-[10px] text-muted-foreground">Virtual staging & marketing</span>
-            </div>
-            <div className="space-y-1.5 text-xs">
-              <div className="flex justify-between">
-                <span className="text-muted-foreground">Sale Price (+3%):</span>
-                <span className="font-semibold text-secondary">{formatCurrency(signaturePrice)}</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-muted-foreground">Commission Fee:</span>
-                <span className="font-semibold text-red-500">-{formatCurrency(signatureCommission)}</span>
-              </div>
-              <div className="flex justify-between border-t border-border/40 pt-1.5 font-bold">
-                <span className="text-secondary">Net Proceeds:</span>
-                <span className="text-primary">{formatCurrency(signatureProceeds)}</span>
-              </div>
-            </div>
+            <h4 className="text-base sm:text-lg font-bold text-secondary max-w-sm mx-auto">
+              Get a free, personalized equity estimate report sent directly to your inbox.
+            </h4>
+            <form 
+              onSubmit={(e) => { 
+                e.preventDefault()
+                if (email) setIsGateUnlocked(true)
+              }} 
+              className="flex flex-col sm:flex-row gap-3 pt-2 relative z-10"
+            >
+              <Input
+                type="email"
+                placeholder="Enter Email Address"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="bg-white border-primary/30 focus-visible:ring-1 focus-visible:ring-primary/45 focus:border-primary text-xs h-10 px-3 flex-1"
+              />
+              <Button type="submit" className="bg-primary hover:bg-primary/95 text-primary-foreground font-bold px-6 py-2.5 h-10 text-xs shadow-sm">
+                Unlock Estimate
+              </Button>
+            </form>
+            <p className="text-[10px] text-muted-foreground font-semibold">
+              Instant access. We protect your data privacy.
+            </p>
           </div>
+        ) : (
+          <div className="grid md:grid-cols-3 gap-6 pt-6">
+            {/* Card 1: Essential */}
+            <div className="p-4 rounded-xl border border-border/80 bg-white shadow-xs space-y-3">
+              <div className="border-b border-border/60 pb-2">
+                <span className="font-bold text-sm text-secondary block">Essential (2% Fee)</span>
+                <span className="text-[10px] text-muted-foreground">Standard listing, no staging</span>
+              </div>
+              <div className="space-y-1.5 text-xs">
+                <div className="flex justify-between">
+                  <span className="text-muted-foreground">Sale Price:</span>
+                  <span className="font-semibold text-secondary">{formatCurrency(essentialPrice)}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-muted-foreground">Commission Fee:</span>
+                  <span className="font-semibold text-red-500">-{formatCurrency(essentialCommission)}</span>
+                </div>
+                <div className="flex justify-between border-t border-border/40 pt-1.5 font-bold">
+                  <span className="text-secondary">Net Proceeds:</span>
+                  <span className="text-secondary">{formatCurrency(essentialProceeds)}</span>
+                </div>
+              </div>
+            </div>
 
-          {/* Card 3: Elite */}
-          <div className="p-4 rounded-xl border border-primary/30 bg-primary/[0.03] shadow-xs space-y-3">
-            <div className="border-b border-border/60 pb-2">
-              <span className="font-bold text-sm text-primary block">Elite Concierge (4% Fee)</span>
-              <span className="text-[10px] text-muted-foreground">Full prep, white-glove staging</span>
+            {/* Card 2: Signature */}
+            <div className="p-4 rounded-xl border border-primary/20 bg-primary/[0.01] shadow-xs space-y-3 relative">
+              <span className="absolute -top-2.5 left-4 bg-primary text-primary-foreground text-[8px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full border border-primary/20">
+                Popular
+              </span>
+              <div className="border-b border-border/60 pb-2">
+                <span className="font-bold text-sm text-secondary block">Signature (3% Fee)</span>
+                <span className="text-[10px] text-muted-foreground">Virtual staging & marketing</span>
+              </div>
+              <div className="space-y-1.5 text-xs">
+                <div className="flex justify-between">
+                  <span className="text-muted-foreground">Sale Price (+3%):</span>
+                  <span className="font-semibold text-secondary">{formatCurrency(signaturePrice)}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-muted-foreground">Commission Fee:</span>
+                  <span className="font-semibold text-red-500">-{formatCurrency(signatureCommission)}</span>
+                </div>
+                <div className="flex justify-between border-t border-border/40 pt-1.5 font-bold">
+                  <span className="text-secondary">Net Proceeds:</span>
+                  <span className="text-primary">{formatCurrency(signatureProceeds)}</span>
+                </div>
+              </div>
             </div>
-            <div className="space-y-1.5 text-xs">
-              <div className="flex justify-between">
-                <span className="text-muted-foreground">Sale Price (+5%):</span>
-                <span className="font-semibold text-secondary">{formatCurrency(elitePrice)}</span>
+
+            {/* Card 3: Elite */}
+            <div className="p-4 rounded-xl border border-primary/30 bg-primary/[0.03] shadow-xs space-y-3">
+              <div className="border-b border-border/60 pb-2">
+                <span className="font-bold text-sm text-primary block">Elite Concierge (4% Fee)</span>
+                <span className="text-[10px] text-muted-foreground">Full prep, white-glove staging</span>
               </div>
-              <div className="flex justify-between">
-                <span className="text-muted-foreground">Commission Fee:</span>
-                <span className="font-semibold text-red-500">-{formatCurrency(eliteCommission)}</span>
-              </div>
-              <div className="flex justify-between border-t border-border/40 pt-1.5 font-bold">
-                <span className="text-primary">Net Proceeds:</span>
-                <span className="text-primary">{formatCurrency(eliteProceeds)}</span>
+              <div className="space-y-1.5 text-xs">
+                <div className="flex justify-between">
+                  <span className="text-muted-foreground">Sale Price (+5%):</span>
+                  <span className="font-semibold text-secondary">{formatCurrency(elitePrice)}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-muted-foreground">Commission Fee:</span>
+                  <span className="font-semibold text-red-500">-{formatCurrency(eliteCommission)}</span>
+                </div>
+                <div className="flex justify-between border-t border-border/40 pt-1.5 font-bold">
+                  <span className="text-primary">Net Proceeds:</span>
+                  <span className="text-primary">{formatCurrency(eliteProceeds)}</span>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        )}
 
       </div>
     </div>
   )
 }
+

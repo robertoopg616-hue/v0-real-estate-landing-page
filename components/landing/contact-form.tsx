@@ -25,7 +25,7 @@ export function ContactForm() {
   }
 
   return (
-    <section id="contact" className="py-24 md:py-32 bg-muted/40 relative">
+    <section id="contact" className="py-16 bg-muted/40 relative">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div

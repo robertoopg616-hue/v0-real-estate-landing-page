@@ -124,7 +124,7 @@ export function Testimonials({
   const currentMetric = metrics[activeStoryIndex] || metrics[0]
 
   return (
-    <section id="testimonials" className="py-24 md:py-32 relative overflow-hidden bg-background">
+    <section id="testimonials" className="py-16 relative overflow-hidden bg-background">
       {/* Background gradients */}
       <div className="absolute bottom-0 right-0 w-[300px] h-[300px] rounded-full bg-primary/5 blur-[100px] pointer-events-none" />
 
