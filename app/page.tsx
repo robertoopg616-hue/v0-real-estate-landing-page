@@ -5,6 +5,7 @@ import { Header } from '@/components/landing/header'
 import { Hero } from '@/components/landing/hero'
 import { StatsSection } from '@/components/landing/stats-section'
 import { Features } from '@/components/landing/features'
+import { Listings } from '@/components/landing/listings'
 import { Pricing } from '@/components/landing/pricing'
 import { Testimonials } from '@/components/landing/testimonials'
 import { CaseStudy } from '@/components/landing/case-study'
@@ -14,11 +15,15 @@ import { CTASection } from '@/components/landing/cta-section'
 import { Footer } from '@/components/landing/footer'
 import { ContactModal } from '@/components/modals/contact-modal'
 import { LearnMoreModal } from '@/components/modals/learn-more-modal'
+import { PropertyDetailsModal } from '@/components/modals/property-details-modal'
+import type { Property } from '@/components/modals/property-details-modal'
 
 export default function HomePage() {
   const [isContactOpen, setIsContactOpen] = useState(false)
   const [isLearnMoreOpen, setIsLearnMoreOpen] = useState(false)
   const [activeStoryIndex, setActiveStoryIndex] = useState(0)
+  const [selectedProperty, setSelectedProperty] = useState<Property | null>(null)
+  const [isPropertyModalOpen, setIsPropertyModalOpen] = useState(false)
 
   const handleContactClick = () => {
     setIsContactOpen(true)
@@ -26,6 +31,11 @@ export default function HomePage() {
 
   const handleLearnMoreClick = () => {
     setIsLearnMoreOpen(true)
+  }
+
+  const handlePropertyClick = (property: Property) => {
+    setSelectedProperty(property)
+    setIsPropertyModalOpen(true)
   }
 
   return (
@@ -38,6 +48,7 @@ export default function HomePage() {
         <Hero onContactClick={handleContactClick} />
         <StatsSection />
         <Features onLearnMoreClick={handleLearnMoreClick} />
+        <Listings onPropertyClick={handlePropertyClick} />
         <Pricing onContactClick={handleContactClick} />
         <Testimonials 
           onContactClick={handleContactClick} 
@@ -60,6 +71,12 @@ export default function HomePage() {
         isOpen={isLearnMoreOpen} 
         onClose={() => setIsLearnMoreOpen(false)} 
         onContactClick={handleContactClick} 
+      />
+      <PropertyDetailsModal
+        isOpen={isPropertyModalOpen}
+        onClose={() => setIsPropertyModalOpen(false)}
+        onLearnMoreClick={handleLearnMoreClick}
+        property={selectedProperty}
       />
     </main>
   )
