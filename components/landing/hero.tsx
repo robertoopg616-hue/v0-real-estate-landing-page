@@ -21,10 +21,12 @@ export function Hero({ onContactClick }: HeroProps) {
     return () => window.removeEventListener('resize', handleResize)
   }, [])
 
+  // 3D rotations completely bypassed on mobile to prevent paint lags
   const heroContainerVariants = {
     initial: {
       opacity: 0,
-      scale: 0.96,
+      scale: isMobile ? 1 : 0.96,
+      y: isMobile ? 12 : 0,
       z: isMobile ? 0 : -80,
       rotateX: isMobile ? 0 : 8,
       rotateY: isMobile ? 0 : -6,
@@ -32,15 +34,81 @@ export function Hero({ onContactClick }: HeroProps) {
     animate: {
       opacity: 1,
       scale: 1,
+      y: 0,
       z: 0,
       rotateX: 0,
       rotateY: 0,
       transition: {
-        duration: 1.4,
+        duration: isMobile ? 0.6 : 1.4,
         ease: [0.16, 1, 0.3, 1], // cubic-bezier easeOutExpo
       }
     }
-  }
+  };
+
+  // Image scaling disabled on mobile to avoid layout shifts and GPU redraw lags
+  const bgVariants = {
+    initial: {
+      scale: isMobile ? 1 : 1.15,
+      opacity: 0,
+    },
+    animate: {
+      scale: 1,
+      opacity: 1,
+      transition: {
+        duration: isMobile ? 0.6 : 2.2,
+        ease: [0.16, 1, 0.3, 1],
+      }
+    }
+  };
+
+  // Simple fade & minimal y-translation on mobile instead of heavy clip-path mask reveals
+  const headlineVariants = {
+    initial: {
+      y: isMobile ? 0 : '115%',
+      opacity: isMobile ? 0 : 0.3,
+    },
+    animate: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: isMobile ? 0.6 : 1.0,
+        ease: [0.16, 1, 0.3, 1],
+        delay: isMobile ? 0.1 : 0.15,
+      }
+    }
+  };
+
+  const subheadlineVariants = {
+    initial: {
+      y: isMobile ? 0 : '115%',
+      opacity: isMobile ? 0 : 0.3,
+    },
+    animate: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: isMobile ? 0.6 : 1.0,
+        ease: [0.16, 1, 0.3, 1],
+        delay: isMobile ? 0.2 : 0.3,
+      }
+    }
+  };
+
+  const buttonsVariants = {
+    initial: {
+      opacity: 0,
+      y: isMobile ? 8 : 25,
+    },
+    animate: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: isMobile ? 0.6 : 1.0,
+        ease: [0.16, 1, 0.3, 1],
+        delay: isMobile ? 0.3 : 0.45,
+      }
+    }
+  };
 
   return (
     <section 
@@ -52,9 +120,9 @@ export function Hero({ onContactClick }: HeroProps) {
         <motion.img 
           src="/webaliser-_TPTXZd9mOo-unsplash.jpg" 
           alt="Modern luxury real estate villa background" 
-          initial={{ scale: 1.15, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 2.2, ease: [0.16, 1, 0.3, 1] }}
+          variants={bgVariants}
+          initial="initial"
+          animate="animate"
           className="w-full h-full object-cover object-center"
           loading="eager"
         />
@@ -64,9 +132,13 @@ export function Hero({ onContactClick }: HeroProps) {
         <div className="hidden md:block absolute inset-0 bg-gradient-to-r from-black/90 via-black/60 to-black/30 lg:to-transparent z-1" />
         <div className="hidden md:block absolute inset-0 bg-black/40 lg:bg-transparent z-1" />
 
-        {/* Ambient floating blobs for depth */}
-        <div className="absolute top-1/4 left-1/4 w-[300px] h-[300px] rounded-full bg-primary/10 blur-[80px] pointer-events-none animate-float-1 z-2" />
-        <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full bg-[#d4af37]/5 blur-[100px] pointer-events-none animate-float-2 z-2" />
+        {/* Ambient floating blobs for depth (Only animate on desktop for performance) */}
+        {!isMobile && (
+          <>
+            <div className="absolute top-1/4 left-1/4 w-[300px] h-[300px] rounded-full bg-primary/10 blur-[80px] pointer-events-none animate-float-1 z-2" />
+            <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full bg-[#d4af37]/5 blur-[100px] pointer-events-none animate-float-2 z-2" />
+          </>
+        )}
       </div>
 
       <motion.div
@@ -81,9 +153,9 @@ export function Hero({ onContactClick }: HeroProps) {
           {/* Headline Mask Reveal */}
           <div className="overflow-hidden py-1">
             <motion.h1
-              initial={{ y: '115%', opacity: 0.3 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1], delay: 0.15 }}
+              variants={headlineVariants}
+              initial="initial"
+              animate="animate"
               className="font-extrabold tracking-tight text-[26px] sm:text-4xl md:text-5xl lg:text-6xl leading-[1.15] text-neutral-900 md:text-white font-serif max-w-3xl"
             >
               Sell your current home for top dollar and move into your next one seamlessly.
@@ -93,9 +165,9 @@ export function Hero({ onContactClick }: HeroProps) {
           {/* Subheadline Mask Reveal */}
           <div className="overflow-hidden py-1">
             <motion.p
-              initial={{ y: '115%', opacity: 0.3 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
+              variants={subheadlineVariants}
+              initial="initial"
+              animate="animate"
               className="font-light text-base sm:text-lg text-neutral-500 md:text-slate-200/90 max-w-2xl leading-relaxed font-sans"
             >
               We handle the logistics, fund your property's cosmetic staging upfront, and coordinate timelines so you never have to move twice.
@@ -104,9 +176,9 @@ export function Hero({ onContactClick }: HeroProps) {
 
           {/* CTA Buttons Fade-In */}
           <motion.div
-            initial={{ opacity: 0, y: 25 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1], delay: 0.45 }}
+            variants={buttonsVariants}
+            initial="initial"
+            animate="animate"
             className="flex flex-col md:flex-row items-stretch md:items-center gap-3 md:gap-4 pt-4 w-full md:w-auto"
           >
             <Button
