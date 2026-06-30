@@ -178,17 +178,42 @@ export function Hero({ onContactClick }: HeroProps) {
     return () => window.removeEventListener('resize', handleResize)
   }, [])
 
-  // Resolve variants dynamically based on mount state and screen size
-  const containerVariants = mounted && !isMobile ? desktopContainerVariants : mobileContainerVariants;
-  const bgVariants = mounted && !isMobile ? desktopBgVariants : mobileBgVariants;
-  const headlineVariants = mounted && !isMobile ? desktopHeadlineVariants : mobileHeadlineVariants;
-  const subheadlineVariants = mounted && !isMobile ? desktopSubheadlineVariants : mobileSubheadlineVariants;
-  const buttonsVariants = mounted && !isMobile ? desktopButtonsVariants : mobileButtonsVariants;
+  // Static skeleton during SSR & Initial client hydration to prevent layouts shift
+  if (!mounted) {
+    return (
+      <section className="relative min-h-screen flex items-center pt-16 overflow-hidden bg-secondary">
+        <div className="absolute inset-0 z-0 overflow-hidden">
+          <img 
+            src="/webaliser-_TPTXZd9mOo-unsplash.jpg" 
+            alt="Modern luxury real estate villa background" 
+            className="w-full h-full object-cover object-center"
+          />
+          <div className="absolute inset-0 bg-white/85 backdrop-blur-[1px] md:hidden z-1" />
+          <div className="hidden md:block absolute inset-0 bg-gradient-to-r from-black/90 via-black/60 to-black/30 lg:to-transparent z-1" />
+          <div className="hidden md:block absolute inset-0 bg-black/40 lg:bg-transparent z-1" />
+        </div>
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-8 md:px-16 py-20 md:py-24 z-10 w-full">
+          <div className="max-w-4xl text-left space-y-6 opacity-0">
+            <h1 className="font-extrabold tracking-tight text-[26px] sm:text-4xl md:text-5xl lg:text-6xl leading-[1.15] text-neutral-900 md:text-white font-serif max-w-3xl">
+              Sell your current home for top dollar and move into your next one seamlessly.
+            </h1>
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  // Once mounted on the client, variants are resolved statically matching the window width
+  const containerVariants = isMobile ? mobileContainerVariants : desktopContainerVariants;
+  const bgVariants = isMobile ? mobileBgVariants : desktopBgVariants;
+  const headlineVariants = isMobile ? mobileHeadlineVariants : desktopHeadlineVariants;
+  const subheadlineVariants = isMobile ? mobileSubheadlineVariants : desktopSubheadlineVariants;
+  const buttonsVariants = isMobile ? mobileButtonsVariants : desktopButtonsVariants;
 
   return (
     <section 
       className="relative min-h-screen flex items-center pt-16 overflow-hidden bg-secondary"
-      style={{ perspective: mounted && !isMobile ? '1000px' : 'none' }}
+      style={{ perspective: isMobile ? 'none' : '1000px' }}
     >
       {/* Absolute Full-Bleed Background Image & Dark/Fog Overlay Mask */}
       <div className="absolute inset-0 z-0 overflow-hidden">
@@ -208,7 +233,7 @@ export function Hero({ onContactClick }: HeroProps) {
         <div className="hidden md:block absolute inset-0 bg-black/40 lg:bg-transparent z-1" />
 
         {/* Ambient floating blobs for depth (Only render on desktop for performance) */}
-        {mounted && !isMobile && (
+        {!isMobile && (
           <>
             <div className="absolute top-1/4 left-1/4 w-[300px] h-[300px] rounded-full bg-primary/10 blur-[80px] pointer-events-none animate-float-1 z-2" />
             <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full bg-[#d4af37]/5 blur-[100px] pointer-events-none animate-float-2 z-2" />
@@ -220,7 +245,7 @@ export function Hero({ onContactClick }: HeroProps) {
         variants={containerVariants}
         initial="initial"
         animate="animate"
-        style={{ transformStyle: mounted && !isMobile ? 'preserve-3d' : 'flat' }}
+        style={{ transformStyle: isMobile ? 'flat' : 'preserve-3d' }}
         className="relative mx-auto max-w-7xl px-4 sm:px-8 md:px-16 py-20 md:py-24 z-10 w-full"
       >
         <div className="max-w-4xl text-left space-y-6">
