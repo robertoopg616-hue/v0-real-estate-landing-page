@@ -9,10 +9,167 @@ interface HeroProps {
   onContactClick: () => void
 }
 
+// DESKTOP: Premium 3D perspective transitions
+const desktopContainerVariants = {
+  initial: {
+    opacity: 0,
+    scale: 0.96,
+    z: -80,
+    rotateX: 8,
+    rotateY: -6,
+  },
+  animate: {
+    opacity: 1,
+    scale: 1,
+    z: 0,
+    rotateX: 0,
+    rotateY: 0,
+    transition: {
+      duration: 1.4,
+      ease: [0.16, 1, 0.3, 1], // cubic-bezier easeOutExpo
+    }
+  }
+};
+
+const desktopBgVariants = {
+  initial: {
+    scale: 1.15,
+    opacity: 0,
+  },
+  animate: {
+    scale: 1,
+    opacity: 1,
+    transition: {
+      duration: 2.2,
+      ease: [0.16, 1, 0.3, 1],
+    }
+  }
+};
+
+const desktopHeadlineVariants = {
+  initial: {
+    y: '115%',
+    opacity: 0.3,
+  },
+  animate: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      duration: 1.0,
+      ease: [0.16, 1, 0.3, 1],
+      delay: 0.15,
+    }
+  }
+};
+
+const desktopSubheadlineVariants = {
+  initial: {
+    y: '115%',
+    opacity: 0.3,
+  },
+  animate: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      duration: 1.0,
+      ease: [0.16, 1, 0.3, 1],
+      delay: 0.3,
+    }
+  }
+};
+
+const desktopButtonsVariants = {
+  initial: {
+    opacity: 0,
+    y: 25,
+  },
+  animate: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 1.0,
+      ease: [0.16, 1, 0.3, 1],
+      delay: 0.45,
+    }
+  }
+};
+
+// MOBILE: Flat, lightweight transitions (No 3D/parallax scale to prevent rendering lag)
+const mobileContainerVariants = {
+  initial: {
+    opacity: 0,
+    y: 12,
+  },
+  animate: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: 'easeOut',
+    }
+  }
+};
+
+const mobileBgVariants = {
+  initial: {
+    opacity: 0,
+  },
+  animate: {
+    opacity: 1,
+    transition: {
+      duration: 0.6,
+      ease: 'easeOut',
+    }
+  }
+};
+
+const mobileHeadlineVariants = {
+  initial: {
+    opacity: 0,
+  },
+  animate: {
+    opacity: 1,
+    transition: {
+      duration: 0.6,
+      delay: 0.1,
+    }
+  }
+};
+
+const mobileSubheadlineVariants = {
+  initial: {
+    opacity: 0,
+  },
+  animate: {
+    opacity: 1,
+    transition: {
+      duration: 0.6,
+      delay: 0.2,
+    }
+  }
+};
+
+const mobileButtonsVariants = {
+  initial: {
+    opacity: 0,
+    y: 8,
+  },
+  animate: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      delay: 0.3,
+    }
+  }
+};
+
 export function Hero({ onContactClick }: HeroProps) {
-  const [isMobile, setIsMobile] = useState(true)
+  const [mounted, setMounted] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
+    setMounted(true)
     const handleResize = () => {
       setIsMobile(window.innerWidth < 768)
     }
@@ -21,99 +178,17 @@ export function Hero({ onContactClick }: HeroProps) {
     return () => window.removeEventListener('resize', handleResize)
   }, [])
 
-  // 3D rotations completely bypassed on mobile to prevent paint lags
-  const heroContainerVariants = {
-    initial: {
-      opacity: 0,
-      scale: isMobile ? 1 : 0.96,
-      y: isMobile ? 12 : 0,
-      z: isMobile ? 0 : -80,
-      rotateX: isMobile ? 0 : 8,
-      rotateY: isMobile ? 0 : -6,
-    },
-    animate: {
-      opacity: 1,
-      scale: 1,
-      y: 0,
-      z: 0,
-      rotateX: 0,
-      rotateY: 0,
-      transition: {
-        duration: isMobile ? 0.6 : 1.4,
-        ease: [0.16, 1, 0.3, 1], // cubic-bezier easeOutExpo
-      }
-    }
-  };
-
-  // Image scaling disabled on mobile to avoid layout shifts and GPU redraw lags
-  const bgVariants = {
-    initial: {
-      scale: isMobile ? 1 : 1.15,
-      opacity: 0,
-    },
-    animate: {
-      scale: 1,
-      opacity: 1,
-      transition: {
-        duration: isMobile ? 0.6 : 2.2,
-        ease: [0.16, 1, 0.3, 1],
-      }
-    }
-  };
-
-  // Simple fade & minimal y-translation on mobile instead of heavy clip-path mask reveals
-  const headlineVariants = {
-    initial: {
-      y: isMobile ? 0 : '115%',
-      opacity: isMobile ? 0 : 0.3,
-    },
-    animate: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        duration: isMobile ? 0.6 : 1.0,
-        ease: [0.16, 1, 0.3, 1],
-        delay: isMobile ? 0.1 : 0.15,
-      }
-    }
-  };
-
-  const subheadlineVariants = {
-    initial: {
-      y: isMobile ? 0 : '115%',
-      opacity: isMobile ? 0 : 0.3,
-    },
-    animate: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        duration: isMobile ? 0.6 : 1.0,
-        ease: [0.16, 1, 0.3, 1],
-        delay: isMobile ? 0.2 : 0.3,
-      }
-    }
-  };
-
-  const buttonsVariants = {
-    initial: {
-      opacity: 0,
-      y: isMobile ? 8 : 25,
-    },
-    animate: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: isMobile ? 0.6 : 1.0,
-        ease: [0.16, 1, 0.3, 1],
-        delay: isMobile ? 0.3 : 0.45,
-      }
-    }
-  };
+  // Resolve variants dynamically based on mount state and screen size
+  const containerVariants = mounted && !isMobile ? desktopContainerVariants : mobileContainerVariants;
+  const bgVariants = mounted && !isMobile ? desktopBgVariants : mobileBgVariants;
+  const headlineVariants = mounted && !isMobile ? desktopHeadlineVariants : mobileHeadlineVariants;
+  const subheadlineVariants = mounted && !isMobile ? desktopSubheadlineVariants : mobileSubheadlineVariants;
+  const buttonsVariants = mounted && !isMobile ? desktopButtonsVariants : mobileButtonsVariants;
 
   return (
     <section 
       className="relative min-h-screen flex items-center pt-16 overflow-hidden bg-secondary"
-      style={{ perspective: isMobile ? 'none' : '1000px' }}
+      style={{ perspective: mounted && !isMobile ? '1000px' : 'none' }}
     >
       {/* Absolute Full-Bleed Background Image & Dark/Fog Overlay Mask */}
       <div className="absolute inset-0 z-0 overflow-hidden">
@@ -132,8 +207,8 @@ export function Hero({ onContactClick }: HeroProps) {
         <div className="hidden md:block absolute inset-0 bg-gradient-to-r from-black/90 via-black/60 to-black/30 lg:to-transparent z-1" />
         <div className="hidden md:block absolute inset-0 bg-black/40 lg:bg-transparent z-1" />
 
-        {/* Ambient floating blobs for depth (Only animate on desktop for performance) */}
-        {!isMobile && (
+        {/* Ambient floating blobs for depth (Only render on desktop for performance) */}
+        {mounted && !isMobile && (
           <>
             <div className="absolute top-1/4 left-1/4 w-[300px] h-[300px] rounded-full bg-primary/10 blur-[80px] pointer-events-none animate-float-1 z-2" />
             <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full bg-[#d4af37]/5 blur-[100px] pointer-events-none animate-float-2 z-2" />
@@ -142,10 +217,10 @@ export function Hero({ onContactClick }: HeroProps) {
       </div>
 
       <motion.div
-        variants={heroContainerVariants}
+        variants={containerVariants}
         initial="initial"
         animate="animate"
-        style={{ transformStyle: isMobile ? 'flat' : 'preserve-3d' }}
+        style={{ transformStyle: mounted && !isMobile ? 'preserve-3d' : 'flat' }}
         className="relative mx-auto max-w-7xl px-4 sm:px-8 md:px-16 py-20 md:py-24 z-10 w-full"
       >
         <div className="max-w-4xl text-left space-y-6">
