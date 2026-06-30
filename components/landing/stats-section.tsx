@@ -43,17 +43,17 @@ function AnimatedCounter({ value }: { value: string }) {
 
 export function StatsSection() {
   return (
-    <section className="py-12 md:py-16 relative overflow-hidden bg-background">
+    <section className="py-16 md:py-20 relative overflow-hidden bg-background border-b border-neutral-200/60">
       {/* Soft ambient background glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[250px] rounded-full bg-primary/5 blur-[100px] pointer-events-none" />
 
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="mx-auto max-w-7xl px-4 sm:px-8 md:px-16 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 35 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-100px' }}
           transition={{ duration: 0.7, ease: 'easeOut' }}
-          className="grid grid-cols-2 lg:grid-cols-4 gap-y-8 gap-x-4 lg:gap-0 lg:divide-x lg:divide-primary/20"
+          className="grid grid-cols-2 lg:grid-cols-4 gap-y-8 gap-x-4 lg:gap-0 lg:divide-x lg:divide-neutral-200/60"
         >
           {stats.map((stat, index) => (
             <div

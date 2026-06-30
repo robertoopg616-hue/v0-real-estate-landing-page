@@ -43,25 +43,24 @@ const faqs = [
 
 export function FAQ() {
   return (
-    <section id="faq" className="py-16 bg-background relative">
-      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+    <section id="faq" className="py-20 md:py-32 bg-background border-t border-neutral-200/60 relative">
+      <div className="mx-auto max-w-4xl px-4 sm:px-8 md:px-16">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-100px' }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-left mb-16"
         >
-          <span className="text-primary font-bold text-sm uppercase tracking-wider">
+          <span className="text-primary font-bold text-sm uppercase tracking-[0.2em] block mb-3">
             Common Questions
           </span>
-          <h2 className="mt-3 text-3xl md:text-4xl lg:text-5xl font-bold text-secondary text-balance font-serif">
-            Everything you need to know
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-secondary font-serif leading-[1.1] tracking-tight">
+            Everything you need to know.
           </h2>
-          <p className="mt-4 text-lg text-muted-foreground text-pretty">
-            Have questions? We have answers. If you don&apos;t see what you&apos;re
-            looking for, reach out directly.
+          <p className="mt-6 text-neutral-500 font-light text-base sm:text-lg max-w-2xl leading-relaxed">
+            Have questions? We have answers. If you don&apos;t see what you&apos;re looking for, reach out directly.
           </p>
         </motion.div>
  

@@ -49,10 +49,10 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             transition={{ duration: 0.3, ease: 'easeOut' }}
-            className="fixed inset-0 md:left-1/2 md:top-1/2 z-50 w-full md:max-w-4xl md:-translate-x-1/2 md:-translate-y-1/2 p-0 md:px-4 h-full md:h-auto max-h-screen md:max-h-[90vh] overflow-y-auto"
+            className="fixed inset-0 z-50 p-4 flex items-center justify-center"
           >
             {/* Marble Texture Background Modal */}
-            <div className="marble-texture min-h-full md:min-h-0 md:rounded-2xl p-6 md:p-8 border-0 md:border md:border-primary/25 shadow-2xl relative flex flex-col justify-center bg-white">
+            <div className="marble-texture w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-2xl p-6 md:p-8 border border-primary/25 shadow-2xl relative flex flex-col bg-white scrollbar-thin">
               {/* Close button */}
               <button
                 onClick={handleClose}

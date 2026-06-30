@@ -8,18 +8,21 @@ const features = [
   {
     step: '01',
     title: 'Equity Assessment',
+    description: 'Calculate your true home buying power. Our analytical tools assess the net asset value of your current property to unlock your equity before listing, giving you the power to buy first.',
     image: '/hero-house.jpg',
     actionLabel: 'View Buying Power',
   },
   {
     step: '02',
     title: 'Stay-Put Guarantee',
+    description: 'Eliminate the risk of double moves. Secure an integrated timeline leaseback agreement that lets your family remain in your current home for up to 45 days post-closing while you acquire your next residence.',
     image: '/webaliser-_TPTXZd9mOo-unsplash.jpg',
     actionLabel: 'Check Timeline Safety',
   },
   {
     step: '03',
     title: 'Concierge Staging',
+    description: 'Maximize market returns at zero upfront cost. We fund and coordinate custom staging designs, cosmetic repairs, and visual styling that consistently drive higher net sale proceeds.',
     image: '/staged-interior.png',
     actionLabel: 'See Staging Program',
   },
@@ -31,63 +34,65 @@ interface FeaturesProps {
 
 export function Features({ onLearnMoreClick }: FeaturesProps) {
   return (
-    <section id="features" className="py-16 relative bg-background border-t border-primary/10">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <section id="features" className="py-20 md:py-32 relative bg-background border-t border-neutral-200/60">
+      <div className="mx-auto max-w-7xl px-4 sm:px-8 md:px-16">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-100px' }}
           transition={{ duration: 0.6 }}
-          className="text-center max-w-3xl mx-auto mb-12"
+          className="text-left max-w-3xl mb-20"
         >
-          <span className="text-primary font-bold text-sm uppercase tracking-wider">
+          <span className="text-primary font-bold text-sm uppercase tracking-[0.2em] block mb-3">
             Our Program
           </span>
-          <h2 className="mt-3 text-3xl md:text-4xl lg:text-5xl font-bold text-secondary text-balance font-serif">
-            Everything you need to upsize
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-secondary font-serif leading-[1.1] tracking-tight">
+            Everything you need to transition seamlessly.
           </h2>
-          <p className="mt-4 text-base text-muted-foreground text-pretty">
-            Explore the steps of our transition program.
+          <p className="mt-6 text-neutral-500 font-light text-base sm:text-lg max-w-2xl leading-relaxed">
+            Explore the core structural steps of our transition program. Designed specifically for growing families upsizing into their next residence.
           </p>
         </motion.div>
 
-        {/* Horizontal Scrolling Snap Track */}
-        <div className="flex overflow-x-auto gap-6 pb-6 snap-x snap-mandatory scrollbar-thin scrollbar-thumb-primary/20 scrollbar-track-transparent -mx-4 px-4 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8 scroll-smooth">
-          {features.map((feature) => (
+        {/* De-boxed, Editorial Alternating Rows */}
+        <div className="space-y-0">
+          {features.map((feature, idx) => (
             <div
               key={feature.title}
-              className="w-[80vw] sm:w-[380px] md:w-[400px] shrink-0 snap-align-start relative aspect-[4/3] rounded-2xl overflow-hidden shadow-md group border border-primary/15"
+              className={`py-12 md:py-20 border-t border-neutral-200/60 flex flex-col md:flex-row items-center gap-10 md:gap-16 ${
+                idx % 2 === 1 ? 'md:flex-row-reverse' : ''
+              }`}
             >
-              {/* Background Image */}
-              <img
-                src={feature.image}
-                alt={feature.title}
-                className="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 z-0"
-              />
-              {/* Dark Gradient Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/35 to-transparent z-10" />
-
-              {/* Card Content */}
-              <div className="absolute inset-0 p-6 z-20 flex flex-col justify-between text-white">
-                <div className="flex justify-between items-start">
-                  <span className="text-4xl font-extrabold text-primary/85 leading-none select-none">
-                    {feature.step}
-                  </span>
-                </div>
-
-                <div className="space-y-4">
-                  <h3 className="text-xl font-bold text-white tracking-tight leading-snug">
-                    {feature.title}
-                  </h3>
+              {/* Text Info */}
+              <div className="w-full md:w-[50%] space-y-6">
+                <span className="text-sm font-extrabold text-primary tracking-[0.25em] uppercase block">
+                  Step {feature.step}
+                </span>
+                <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-secondary font-serif tracking-tight">
+                  {feature.title}
+                </h3>
+                <p className="text-neutral-500 font-light text-sm sm:text-base leading-relaxed">
+                  {feature.description}
+                </p>
+                <div className="pt-2">
                   <Button
                     onClick={onLearnMoreClick}
-                    className="bg-primary hover:bg-primary/95 text-primary-foreground font-bold text-xs rounded-lg px-4 py-2 border border-primary/30 shadow-sm flex items-center justify-between gap-2 w-full sm:w-auto"
+                    className="bg-primary hover:bg-primary/95 text-primary-foreground font-bold text-xs rounded-lg px-6 py-3 border border-primary/30 shadow-md inline-flex items-center gap-2 group transition-all"
                   >
                     <span>{feature.actionLabel}</span>
-                    <ArrowRight className="size-3.5" />
+                    <ArrowRight className="size-4 transform group-hover:translate-x-0.5 transition-transform" />
                   </Button>
                 </div>
+              </div>
+
+              {/* Photo Area (No Card Container, Open Layout) */}
+              <div className="w-full md:w-[50%] overflow-hidden rounded-xl aspect-[16/10] border border-neutral-200/40 relative shadow-sm">
+                <img
+                  src={feature.image}
+                  alt={feature.title}
+                  className="w-full h-full object-cover object-center hover:scale-[1.03] transition-transform duration-700"
+                />
               </div>
             </div>
           ))}

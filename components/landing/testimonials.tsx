@@ -124,11 +124,11 @@ export function Testimonials({
   const currentMetric = metrics[activeStoryIndex] || metrics[0]
 
   return (
-    <section id="testimonials" className="py-16 relative overflow-hidden bg-background">
+    <section id="testimonials" className="py-20 md:py-32 relative overflow-hidden bg-background border-t border-neutral-200/60">
       {/* Background gradients */}
       <div className="absolute bottom-0 right-0 w-[300px] h-[300px] rounded-full bg-primary/5 blur-[100px] pointer-events-none" />
 
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="mx-auto max-w-7xl px-4 sm:px-8 md:px-16 relative z-10">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}

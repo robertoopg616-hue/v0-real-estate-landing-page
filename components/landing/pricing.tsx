@@ -76,25 +76,24 @@ interface PricingProps {
 
 export function Pricing({ onContactClick }: PricingProps) {
   return (
-    <section id="pricing" className="py-16 bg-muted/40 relative">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <section id="pricing" className="py-20 md:py-32 bg-background border-t border-neutral-200/60 relative">
+      <div className="mx-auto max-w-7xl px-4 sm:px-8 md:px-16">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-100px' }}
           transition={{ duration: 0.6 }}
-          className="text-center max-w-3xl mx-auto mb-16"
+          className="text-left max-w-3xl mb-20"
         >
-          <span className="text-primary font-bold text-sm uppercase tracking-wider">
+          <span className="text-primary font-bold text-sm uppercase tracking-[0.2em] block mb-3">
             Transparent Pricing
           </span>
-          <h2 className="mt-3 text-3xl md:text-4xl lg:text-5xl font-bold text-secondary text-balance font-serif">
-            Choose the service level that fits your needs
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-secondary font-serif leading-[1.1] tracking-tight">
+            Choose the service level that fits your needs.
           </h2>
-          <p className="mt-4 text-lg text-muted-foreground text-pretty">
-            No hidden fees. No surprises. Just straightforward pricing for
-            exceptional service.
+          <p className="mt-6 text-neutral-500 font-light text-base sm:text-lg max-w-2xl leading-relaxed">
+            No hidden fees. No surprises. Just straightforward pricing for exceptional service.
           </p>
         </motion.div>
 
@@ -104,21 +103,20 @@ export function Pricing({ onContactClick }: PricingProps) {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-100px' }}
-          className="glass-card rounded-[24px] bg-white border border-primary/25 shadow-figma-card grid md:grid-cols-3 gap-8 md:gap-0 md:divide-x md:divide-primary/20 relative"
+          className="grid md:grid-cols-3 gap-12 md:gap-0 md:divide-x md:divide-neutral-200/60 relative"
         >
           {plans.map((plan, index) => (
             <div
               key={plan.name}
               className={`relative p-6 sm:p-8 flex flex-col justify-between transition-all duration-300
-                ${plan.highlighted ? 'bg-primary/[0.02] rounded-t-2xl md:rounded-none' : ''}
-                ${index === 0 ? 'rounded-t-2xl md:rounded-l-2xl md:rounded-tr-none' : ''}
-                ${index === 2 ? 'rounded-b-2xl md:rounded-r-2xl md:rounded-bl-none' : ''}
+                ${plan.highlighted ? 'bg-primary/[0.01]' : ''}
+                ${index > 0 ? 'md:pl-12' : ''}
               `}
             >
               <div>
                 {/* Popular Badge */}
                 {plan.highlighted && (
-                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-10">
+                  <div className="absolute -top-4 left-6 md:left-12 z-10">
                     <span className="inline-flex items-center rounded-full bg-primary px-4 py-1 text-xs font-bold text-primary-foreground border border-primary/30 shadow-sm">
                       Most Popular
                     </span>
@@ -126,23 +124,23 @@ export function Pricing({ onContactClick }: PricingProps) {
                 )}
 
                 {/* Plan Header */}
-                <div className="text-center mb-6 pt-2">
+                <div className="text-left mb-6 pt-2">
                   <h3 className="text-xl font-bold text-secondary mb-2 font-serif">
                     {plan.name}
                   </h3>
-                  <div className="flex items-baseline justify-center gap-1">
+                  <div className="flex items-baseline gap-1">
                     <span className="text-5xl font-extrabold text-secondary">
                       {plan.commission}
                     </span>
                     <span className="text-muted-foreground text-sm font-semibold">commission</span>
                   </div>
-                  <p className="mt-3 text-xs text-muted-foreground max-w-[240px] mx-auto leading-relaxed">
+                  <p className="mt-3 text-xs text-muted-foreground max-w-[240px] leading-relaxed">
                     {plan.description}
                   </p>
                 </div>
 
                 {/* Features List */}
-                <ul className="space-y-3 mb-8 px-2">
+                <ul className="space-y-3 mb-8">
                   {plan.features.map((feature) => (
                     <li key={feature} className="flex items-start gap-3">
                       <Check className="size-4 text-primary shrink-0 mt-0.5" />
@@ -155,7 +153,7 @@ export function Pricing({ onContactClick }: PricingProps) {
               </div>
 
               {/* CTA Button */}
-              <div className="px-2 pt-4">
+              <div className="pt-4">
                 <Button
                   onClick={onContactClick}
                   className={`w-full font-bold rounded-lg py-5 shadow-sm transition-all ${
@@ -419,70 +417,70 @@ function EquityCalculator() {
             </p>
           </div>
         ) : (
-          <div className="grid md:grid-cols-3 gap-6 pt-6">
-            {/* Card 1: Essential */}
-            <div className="p-4 rounded-xl border border-border/80 bg-white shadow-xs space-y-3">
-              <div className="border-b border-border/60 pb-2">
+          <div className="grid md:grid-cols-3 gap-12 pt-6 md:divide-x md:divide-neutral-200/60">
+            {/* Column 1: Essential */}
+            <div className="space-y-3 transition-all duration-300">
+              <div className="border-b border-neutral-200/60 pb-2">
                 <span className="font-bold text-sm text-secondary block">Essential (2% Fee)</span>
                 <span className="text-[10px] text-muted-foreground">Standard listing, no staging</span>
               </div>
               <div className="space-y-1.5 text-xs">
                 <div className="flex justify-between">
-                  <span className="text-muted-foreground">Sale Price:</span>
+                  <span className="text-muted-foreground font-light">Sale Price:</span>
                   <span className="font-semibold text-secondary">{formatCurrency(essentialPrice)}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-muted-foreground">Commission Fee:</span>
+                  <span className="text-muted-foreground font-light">Commission Fee:</span>
                   <span className="font-semibold text-red-500">-{formatCurrency(essentialCommission)}</span>
                 </div>
-                <div className="flex justify-between border-t border-border/40 pt-1.5 font-bold">
+                <div className="flex justify-between border-t border-neutral-200/60 pt-1.5 font-bold">
                   <span className="text-secondary">Net Proceeds:</span>
                   <span className="text-secondary">{formatCurrency(essentialProceeds)}</span>
                 </div>
               </div>
             </div>
 
-            {/* Card 2: Signature */}
-            <div className="p-4 rounded-xl border border-primary/20 bg-primary/[0.01] shadow-xs space-y-3 relative">
-              <span className="absolute -top-2.5 left-4 bg-primary text-primary-foreground text-[8px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full border border-primary/20">
+            {/* Column 2: Signature */}
+            <div className="space-y-3 relative transition-all duration-300 md:pl-12">
+              <span className="absolute -top-6 left-12 bg-primary text-primary-foreground text-[8px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full border border-primary/30 shadow-sm">
                 Popular
               </span>
-              <div className="border-b border-border/60 pb-2">
+              <div className="border-b border-neutral-200/60 pb-2">
                 <span className="font-bold text-sm text-secondary block">Signature (3% Fee)</span>
                 <span className="text-[10px] text-muted-foreground">Virtual staging & marketing</span>
               </div>
               <div className="space-y-1.5 text-xs">
                 <div className="flex justify-between">
-                  <span className="text-muted-foreground">Sale Price (+3%):</span>
+                  <span className="text-muted-foreground font-light">Sale Price (+3%):</span>
                   <span className="font-semibold text-secondary">{formatCurrency(signaturePrice)}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-muted-foreground">Commission Fee:</span>
+                  <span className="text-muted-foreground font-light">Commission Fee:</span>
                   <span className="font-semibold text-red-500">-{formatCurrency(signatureCommission)}</span>
                 </div>
-                <div className="flex justify-between border-t border-border/40 pt-1.5 font-bold">
+                <div className="flex justify-between border-t border-neutral-200/60 pt-1.5 font-bold">
                   <span className="text-secondary">Net Proceeds:</span>
                   <span className="text-primary">{formatCurrency(signatureProceeds)}</span>
                 </div>
               </div>
             </div>
 
-            {/* Card 3: Elite */}
-            <div className="p-4 rounded-xl border border-primary/30 bg-primary/[0.03] shadow-xs space-y-3">
-              <div className="border-b border-border/60 pb-2">
+            {/* Column 3: Elite */}
+            <div className="space-y-3 transition-all duration-300 md:pl-12">
+              <div className="border-b border-neutral-200/60 pb-2">
                 <span className="font-bold text-sm text-primary block">Elite Concierge (4% Fee)</span>
                 <span className="text-[10px] text-muted-foreground">Full prep, white-glove staging</span>
               </div>
               <div className="space-y-1.5 text-xs">
                 <div className="flex justify-between">
-                  <span className="text-muted-foreground">Sale Price (+5%):</span>
+                  <span className="text-muted-foreground font-light">Sale Price (+5%):</span>
                   <span className="font-semibold text-secondary">{formatCurrency(elitePrice)}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-muted-foreground">Commission Fee:</span>
+                  <span className="text-muted-foreground font-light">Commission Fee:</span>
                   <span className="font-semibold text-red-500">-{formatCurrency(eliteCommission)}</span>
                 </div>
-                <div className="flex justify-between border-t border-border/40 pt-1.5 font-bold">
+                <div className="flex justify-between border-t border-neutral-200/60 pt-1.5 font-bold">
                   <span className="text-primary">Net Proceeds:</span>
                   <span className="text-primary">{formatCurrency(eliteProceeds)}</span>
                 </div>

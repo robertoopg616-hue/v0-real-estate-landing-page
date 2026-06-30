@@ -1,13 +1,19 @@
 import { SpeedInsights } from "@vercel/speed-insights/next"
 
 import type { Metadata, Viewport } from 'next'
-import { Geist } from 'next/font/google'
+import { Syne, Plus_Jakarta_Sans } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
-const geist = Geist({
+const syne = Syne({
   subsets: ['latin'],
-  variable: '--font-geist-sans',
+  variable: '--font-syne',
+  display: 'swap',
+})
+
+const plusJakartaSans = Plus_Jakarta_Sans({
+  subsets: ['latin'],
+  variable: '--font-plus-jakarta',
   display: 'swap',
 })
 
@@ -59,7 +65,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${geist.variable} bg-background`}>
+    <html lang="en" className={`${syne.variable} ${plusJakartaSans.variable} bg-background`}>
       <body className="font-sans antialiased min-h-screen">
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}

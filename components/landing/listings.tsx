@@ -128,17 +128,17 @@ export function Listings({ onPropertyClick }: ListingsProps) {
   const types = ['all', 'Estate', 'Modern Villa', 'Penthouse']
 
   return (
-    <section id="listings" className="py-16 relative bg-background border-t border-primary/10">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <section id="listings" className="py-20 md:py-32 bg-background border-t border-neutral-200/60 relative">
+      <div className="mx-auto max-w-7xl px-4 sm:px-8 md:px-16">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-12">
-          <span className="text-primary font-bold text-sm uppercase tracking-wider">
+        <div className="text-left max-w-3xl mb-16">
+          <span className="text-primary font-bold text-sm uppercase tracking-[0.2em] block mb-3">
             Featured Portfolio
           </span>
-          <h2 className="mt-3 text-3xl md:text-4xl lg:text-5xl font-bold text-secondary text-balance font-serif">
-            Exclusive Listings
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-secondary font-serif leading-[1.1] tracking-tight">
+            Exclusive Listings.
           </h2>
-          <p className="mt-4 text-base text-muted-foreground text-pretty">
+          <p className="mt-6 text-neutral-500 font-light text-base sm:text-lg max-w-2xl leading-relaxed">
             Browse our mock collection of premium properties transformed and optimized for ultimate market value.
           </p>
         </div>
