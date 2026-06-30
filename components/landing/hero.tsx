@@ -1,60 +1,112 @@
 'use client'
 
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-
-const fadeInUp = {
-  initial: { opacity: 0, y: 30 },
-  animate: { opacity: 1, y: 0 },
-}
 
 interface HeroProps {
   onContactClick: () => void
 }
 
 export function Hero({ onContactClick }: HeroProps) {
+  const [isMobile, setIsMobile] = useState(true)
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+    handleResize()
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
+
+  const heroContainerVariants = {
+    initial: {
+      opacity: 0,
+      scale: 0.96,
+      z: isMobile ? 0 : -80,
+      rotateX: isMobile ? 0 : 8,
+      rotateY: isMobile ? 0 : -6,
+    },
+    animate: {
+      opacity: 1,
+      scale: 1,
+      z: 0,
+      rotateX: 0,
+      rotateY: 0,
+      transition: {
+        duration: 1.4,
+        ease: [0.16, 1, 0.3, 1], // cubic-bezier easeOutExpo
+      }
+    }
+  }
+
   return (
-    <section className="relative min-h-screen flex items-center pt-16 overflow-hidden bg-secondary">
+    <section 
+      className="relative min-h-screen flex items-center pt-16 overflow-hidden bg-secondary"
+      style={{ perspective: isMobile ? 'none' : '1000px' }}
+    >
       {/* Absolute Full-Bleed Background Image & Dark/Fog Overlay Mask */}
-      <div className="absolute inset-0 z-0">
-        <img 
+      <div className="absolute inset-0 z-0 overflow-hidden">
+        <motion.img 
           src="/webaliser-_TPTXZd9mOo-unsplash.jpg" 
           alt="Modern luxury real estate villa background" 
+          initial={{ scale: 1.15, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 2.2, ease: [0.16, 1, 0.3, 1] }}
           className="w-full h-full object-cover object-center"
           loading="eager"
         />
         {/* Mobile: light fog overlay mask */}
-        <div className="absolute inset-0 bg-white/85 backdrop-blur-[1px] md:hidden" />
+        <div className="absolute inset-0 bg-white/85 backdrop-blur-[1px] md:hidden z-1" />
         {/* Desktop: subtle linear-gradient overlay mask (darkening for contrast) */}
-        <div className="hidden md:block absolute inset-0 bg-gradient-to-r from-black/90 via-black/60 to-black/30 lg:to-transparent" />
-        <div className="hidden md:block absolute inset-0 bg-black/40 lg:bg-transparent" />
+        <div className="hidden md:block absolute inset-0 bg-gradient-to-r from-black/90 via-black/60 to-black/30 lg:to-transparent z-1" />
+        <div className="hidden md:block absolute inset-0 bg-black/40 lg:bg-transparent z-1" />
+
+        {/* Ambient floating blobs for depth */}
+        <div className="absolute top-1/4 left-1/4 w-[300px] h-[300px] rounded-full bg-primary/10 blur-[80px] pointer-events-none animate-float-1 z-2" />
+        <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full bg-[#d4af37]/5 blur-[100px] pointer-events-none animate-float-2 z-2" />
       </div>
 
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-8 md:px-16 py-20 md:py-24 z-10 w-full">
+      <motion.div
+        variants={heroContainerVariants}
+        initial="initial"
+        animate="animate"
+        style={{ transformStyle: isMobile ? 'flat' : 'preserve-3d' }}
+        className="relative mx-auto max-w-7xl px-4 sm:px-8 md:px-16 py-20 md:py-24 z-10 w-full"
+      >
         <div className="max-w-2xl text-left space-y-6">
-          {/* Headline */}
-          <motion.h1
-            {...fadeInUp}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="font-extrabold tracking-tight text-[32px] leading-[1.15] sm:text-5xl md:text-7xl text-neutral-900 md:text-white font-serif"
-          >
-            Sell your current home for top dollar and move into your next one seamlessly.
-          </motion.h1>
+          
+          {/* Headline Mask Reveal */}
+          <div className="overflow-hidden py-1">
+            <motion.h1
+              initial={{ y: '115%', opacity: 0.3 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1], delay: 0.15 }}
+              className="font-extrabold tracking-tight text-[32px] leading-[1.15] sm:text-5xl md:text-7xl text-neutral-900 md:text-white font-serif"
+            >
+              Sell your current home for top dollar and move into your next one seamlessly.
+            </motion.h1>
+          </div>
 
-          {/* Subheadline */}
-          <motion.p
-            {...fadeInUp}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="font-light text-base sm:text-lg text-neutral-500 md:text-slate-200/90 max-w-2xl leading-relaxed font-sans"
-          >
-            We handle the logistics, fund your property's cosmetic staging upfront, and coordinate timelines so you never have to move twice.
-          </motion.p>
+          {/* Subheadline Mask Reveal */}
+          <div className="overflow-hidden py-1">
+            <motion.p
+              initial={{ y: '115%', opacity: 0.3 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
+              className="font-light text-base sm:text-lg text-neutral-500 md:text-slate-200/90 max-w-2xl leading-relaxed font-sans"
+            >
+              We handle the logistics, fund your property's cosmetic staging upfront, and coordinate timelines so you never have to move twice.
+            </motion.p>
+          </div>
 
-          {/* CTA Buttons */}
+          {/* CTA Buttons Fade-In */}
           <motion.div
-            {...fadeInUp}
-            transition={{ duration: 0.6, delay: 0.3 }}
+            initial={{ opacity: 0, y: 25 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1], delay: 0.45 }}
             className="flex flex-col md:flex-row items-stretch md:items-center gap-3 md:gap-4 pt-4 w-full md:w-auto"
           >
             <Button
@@ -78,7 +130,7 @@ export function Hero({ onContactClick }: HeroProps) {
             </Button>
           </motion.div>
         </div>
-      </div>
+      </motion.div>
     </section>
   )
 }

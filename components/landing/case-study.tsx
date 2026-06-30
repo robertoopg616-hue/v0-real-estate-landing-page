@@ -66,6 +66,26 @@ const caseStudies = [
   }
 ]
 
+const timelineContainerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.18,
+      delayChildren: 0.1,
+    }
+  }
+}
+
+const timelineColumnVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] }
+  }
+}
+
 export function CaseStudy({ onContactClick, activeStoryIndex }: CaseStudyProps) {
   const activeData = caseStudies[activeStoryIndex] || caseStudies[0]
 
@@ -95,10 +115,19 @@ export function CaseStudy({ onContactClick, activeStoryIndex }: CaseStudyProps) 
         </motion.div>
 
         {/* 3-Column De-boxed Timeline Grid */}
-        <div className="grid lg:grid-cols-3 gap-12 items-stretch">
+        <motion.div 
+          variants={timelineContainerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-100px' }}
+          className="grid lg:grid-cols-3 gap-12 items-stretch"
+        >
           
           {/* COLUMN 1: THE Challenge (Left) */}
-          <div className="pt-8 border-t-2 border-primary/30 flex flex-col justify-between transition-all duration-300">
+          <motion.div 
+            variants={timelineColumnVariants}
+            className="pt-8 border-t-2 border-primary/30 flex flex-col justify-between transition-all duration-300"
+          >
             <div>
               <span className="text-xs font-bold text-primary tracking-widest uppercase block mb-3">
                 01 / The Challenge
@@ -141,10 +170,13 @@ export function CaseStudy({ onContactClick, activeStoryIndex }: CaseStudyProps) 
               <span>Status: Active Challenge</span>
               <span>Timeline Start</span>
             </div>
-          </div>
+          </motion.div>
 
           {/* COLUMN 2: THE CONCIERGE STRATEGY BRIDGE (Center) */}
-          <div className="pt-8 border-t-2 border-[#d4af37] flex flex-col justify-between relative transition-all duration-300">
+          <motion.div 
+            variants={timelineColumnVariants}
+            className="pt-8 border-t-2 border-[#d4af37] flex flex-col justify-between relative transition-all duration-300"
+          >
             {/* Transition highlight tag */}
             <div className="absolute -top-3 left-0">
               <span className="bg-[#d4af37] text-secondary font-extrabold text-[9px] uppercase tracking-wider px-3 py-1 rounded-full shadow-xs border border-white/20">
@@ -200,10 +232,13 @@ export function CaseStudy({ onContactClick, activeStoryIndex }: CaseStudyProps) 
               <span>Status: Staging & Leaseback</span>
               <span>Concierge Phase</span>
             </div>
-          </div>
+          </motion.div>
 
           {/* COLUMN 3: THE UNLOCKED RESULTS (Right) */}
-          <div className="pt-8 border-t-2 border-emerald-600 flex flex-col justify-between transition-all duration-300">
+          <motion.div 
+            variants={timelineColumnVariants}
+            className="pt-8 border-t-2 border-emerald-600 flex flex-col justify-between transition-all duration-300"
+          >
             <div>
               <span className="text-xs font-bold text-emerald-600 tracking-widest uppercase block mb-3">
                 03 / The Outcome
@@ -252,9 +287,9 @@ export function CaseStudy({ onContactClick, activeStoryIndex }: CaseStudyProps) 
               <span>Status: Outcome Achieved</span>
               <span>100% Client Success</span>
             </div>
-          </div>
+          </motion.div>
 
-        </div>
+        </motion.div>
 
         {/* Dynamic CTA */}
         <motion.div 

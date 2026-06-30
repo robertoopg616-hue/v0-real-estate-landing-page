@@ -32,6 +32,35 @@ interface FeaturesProps {
   onLearnMoreClick: () => void
 }
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.25,
+      delayChildren: 0.1,
+    }
+  }
+}
+
+const rowVariantsLeft = {
+  hidden: { opacity: 0, x: -40 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1] }
+  }
+}
+
+const rowVariantsRight = {
+  hidden: { opacity: 0, x: 40 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1] }
+  }
+}
+
 export function Features({ onLearnMoreClick }: FeaturesProps) {
   return (
     <section id="features" className="py-20 md:py-32 relative bg-background border-t border-neutral-200/60">
@@ -55,48 +84,58 @@ export function Features({ onLearnMoreClick }: FeaturesProps) {
           </p>
         </motion.div>
 
-        {/* De-boxed, Editorial Alternating Rows */}
-        <div className="space-y-0">
-          {features.map((feature, idx) => (
-            <div
-              key={feature.title}
-              className={`py-12 md:py-20 border-t border-neutral-200/60 flex flex-col md:flex-row items-center gap-10 md:gap-16 ${
-                idx % 2 === 1 ? 'md:flex-row-reverse' : ''
-              }`}
-            >
-              {/* Text Info */}
-              <div className="w-full md:w-[50%] space-y-6">
-                <span className="text-sm font-extrabold text-primary tracking-[0.25em] uppercase block">
-                  Step {feature.step}
-                </span>
-                <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-secondary font-serif tracking-tight">
-                  {feature.title}
-                </h3>
-                <p className="text-neutral-500 font-light text-sm sm:text-base leading-relaxed">
-                  {feature.description}
-                </p>
-                <div className="pt-2">
-                  <Button
-                    onClick={onLearnMoreClick}
-                    className="bg-primary hover:bg-primary/95 text-primary-foreground font-bold text-xs rounded-lg px-6 py-3 border border-primary/30 shadow-md inline-flex items-center gap-2 group transition-all"
-                  >
-                    <span>{feature.actionLabel}</span>
-                    <ArrowRight className="size-4 transform group-hover:translate-x-0.5 transition-transform" />
-                  </Button>
+        {/* De-boxed, Editorial Alternating Rows with Staggered Scroll Animations */}
+        <motion.div 
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-100px' }}
+          className="space-y-0"
+        >
+          {features.map((feature, idx) => {
+            const isEven = idx % 2 === 0
+            return (
+              <motion.div
+                key={feature.title}
+                variants={isEven ? rowVariantsLeft : rowVariantsRight}
+                className={`py-12 md:py-20 border-t border-neutral-200/60 flex flex-col md:flex-row items-center gap-10 md:gap-16 ${
+                  idx % 2 === 1 ? 'md:flex-row-reverse' : ''
+                }`}
+              >
+                {/* Text Info */}
+                <div className="w-full md:w-[50%] space-y-6">
+                  <span className="text-sm font-extrabold text-primary tracking-[0.25em] uppercase block">
+                    Step {feature.step}
+                  </span>
+                  <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-secondary font-serif tracking-tight">
+                    {feature.title}
+                  </h3>
+                  <p className="text-neutral-500 font-light text-sm sm:text-base leading-relaxed">
+                    {feature.description}
+                  </p>
+                  <div className="pt-2">
+                    <Button
+                      onClick={onLearnMoreClick}
+                      className="bg-primary hover:bg-primary/95 text-primary-foreground font-bold text-xs rounded-lg px-6 py-3 border border-primary/30 shadow-md inline-flex items-center gap-2 group transition-all"
+                    >
+                      <span>{feature.actionLabel}</span>
+                      <ArrowRight className="size-4 transform group-hover:translate-x-0.5 transition-transform" />
+                    </Button>
+                  </div>
                 </div>
-              </div>
 
-              {/* Photo Area (No Card Container, Open Layout) */}
-              <div className="w-full md:w-[50%] overflow-hidden rounded-xl aspect-[16/10] border border-neutral-200/40 relative shadow-sm">
-                <img
-                  src={feature.image}
-                  alt={feature.title}
-                  className="w-full h-full object-cover object-center hover:scale-[1.03] transition-transform duration-700"
-                />
-              </div>
-            </div>
-          ))}
-        </div>
+                {/* Photo Area (No Card Container, Open Layout) */}
+                <div className="w-full md:w-[50%] overflow-hidden rounded-xl aspect-[16/10] border border-neutral-200/40 relative shadow-sm">
+                  <img
+                    src={feature.image}
+                    alt={feature.title}
+                    className="w-full h-full object-cover object-center hover:scale-[1.03] transition-transform duration-700"
+                  />
+                </div>
+              </motion.div>
+            )
+          })}
+        </motion.div>
       </div>
     </section>
   )

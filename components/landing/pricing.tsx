@@ -70,6 +70,26 @@ const itemVariants = {
   },
 }
 
+const visualizerTableContainerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+      delayChildren: 0.05,
+    }
+  }
+}
+
+const visualizerTableColumnVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] }
+  }
+}
+
 interface PricingProps {
   onContactClick: () => void
 }
@@ -106,8 +126,9 @@ export function Pricing({ onContactClick }: PricingProps) {
           className="grid md:grid-cols-3 gap-12 md:gap-0 md:divide-x md:divide-neutral-200/60 relative"
         >
           {plans.map((plan, index) => (
-            <div
+            <motion.div
               key={plan.name}
+              variants={itemVariants}
               className={`relative p-6 sm:p-8 flex flex-col justify-between transition-all duration-300
                 ${plan.highlighted ? 'bg-primary/[0.01]' : ''}
                 ${index > 0 ? 'md:pl-12' : ''}
@@ -165,7 +186,7 @@ export function Pricing({ onContactClick }: PricingProps) {
                   {plan.highlighted ? 'Join the Program' : 'Get Started'}
                 </Button>
               </div>
-            </div>
+            </motion.div>
           ))}
         </motion.div>
 
@@ -417,9 +438,14 @@ function EquityCalculator() {
             </p>
           </div>
         ) : (
-          <div className="grid md:grid-cols-3 gap-12 pt-6 md:divide-x md:divide-neutral-200/60">
+          <motion.div 
+            variants={visualizerTableContainerVariants}
+            initial="hidden"
+            animate="visible"
+            className="grid md:grid-cols-3 gap-12 pt-6 md:divide-x md:divide-neutral-200/60"
+          >
             {/* Column 1: Essential */}
-            <div className="space-y-3 transition-all duration-300">
+            <motion.div variants={visualizerTableColumnVariants} className="space-y-3 transition-all duration-300">
               <div className="border-b border-neutral-200/60 pb-2">
                 <span className="font-bold text-sm text-secondary block">Essential (2% Fee)</span>
                 <span className="text-[10px] text-muted-foreground">Standard listing, no staging</span>
@@ -438,10 +464,10 @@ function EquityCalculator() {
                   <span className="text-secondary">{formatCurrency(essentialProceeds)}</span>
                 </div>
               </div>
-            </div>
+            </motion.div>
 
             {/* Column 2: Signature */}
-            <div className="space-y-3 relative transition-all duration-300 md:pl-12">
+            <motion.div variants={visualizerTableColumnVariants} className="space-y-3 relative transition-all duration-300 md:pl-12">
               <span className="absolute -top-6 left-12 bg-primary text-primary-foreground text-[8px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full border border-primary/30 shadow-sm">
                 Popular
               </span>
@@ -463,10 +489,10 @@ function EquityCalculator() {
                   <span className="text-primary">{formatCurrency(signatureProceeds)}</span>
                 </div>
               </div>
-            </div>
+            </motion.div>
 
             {/* Column 3: Elite */}
-            <div className="space-y-3 transition-all duration-300 md:pl-12">
+            <motion.div variants={visualizerTableColumnVariants} className="space-y-3 transition-all duration-300 md:pl-12">
               <div className="border-b border-neutral-200/60 pb-2">
                 <span className="font-bold text-sm text-primary block">Elite Concierge (4% Fee)</span>
                 <span className="text-[10px] text-muted-foreground">Full prep, white-glove staging</span>
@@ -485,8 +511,8 @@ function EquityCalculator() {
                   <span className="text-primary">{formatCurrency(eliteProceeds)}</span>
                 </div>
               </div>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         )}
 
       </div>
