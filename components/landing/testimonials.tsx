@@ -171,7 +171,7 @@ export function Testimonials({
                       ))}
                     </div>
 
-                    <blockquote className="text-lg sm:text-2xl font-semibold text-secondary leading-relaxed text-pretty font-serif italic">
+                    <blockquote className="text-lg sm:text-2xl font-semibold text-secondary leading-relaxed text-pretty font-serif italic px-6 sm:px-12 break-words whitespace-normal normal-case">
                       &ldquo;{item.quote}&rdquo;
                     </blockquote>
 
@@ -233,11 +233,11 @@ export function Testimonials({
                     className="space-y-4 pt-4"
                   >
                     {/* Before Row */}
-                    <div className="space-y-1.5">
-                      <span className="inline-flex items-center rounded-full bg-red-500/10 border border-red-500/20 px-2.5 py-0.5 text-[10px] font-bold text-red-500">
+                    <div className="space-y-1.5 w-full max-w-full overflow-hidden">
+                      <span className="inline-flex items-center rounded-full bg-red-500/10 border border-red-500/20 px-2.5 py-0.5 text-[10px] font-bold text-red-500 whitespace-normal break-words text-left">
                         {currentMetric.before.label}
                       </span>
-                      <div className="flex justify-between items-center text-xs font-semibold text-muted-foreground pt-1">
+                      <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-1 text-xs font-semibold text-muted-foreground pt-1">
                         <span>Valued at: {currentMetric.before.val}</span>
                         <span>{currentMetric.before.days}</span>
                       </div>
@@ -252,11 +252,11 @@ export function Testimonials({
                     </div>
 
                     {/* After Row */}
-                    <div className="space-y-1.5 pt-2">
-                      <span className="inline-flex items-center rounded-full bg-emerald-500/10 border border-emerald-500/20 px-2.5 py-0.5 text-[10px] font-bold text-emerald-600">
+                    <div className="space-y-1.5 pt-2 w-full max-w-full overflow-hidden">
+                      <span className="inline-flex items-center rounded-full bg-emerald-500/10 border border-emerald-500/20 px-2.5 py-0.5 text-[10px] font-bold text-emerald-600 whitespace-normal break-words text-left">
                         {currentMetric.after.label}
                       </span>
-                      <div className="flex justify-between items-center text-xs font-bold text-secondary pt-1">
+                      <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-1 text-xs font-bold text-secondary pt-1">
                         <span>Sold: {currentMetric.after.val}</span>
                         <span className="text-emerald-600">{currentMetric.after.days}</span>
                       </div>

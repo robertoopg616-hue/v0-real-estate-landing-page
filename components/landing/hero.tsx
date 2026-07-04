@@ -194,7 +194,7 @@ export function Hero({ onContactClick }: HeroProps) {
         </div>
         <div className="relative mx-auto max-w-7xl px-4 sm:px-8 md:px-16 py-20 md:py-24 z-10 w-full">
           <div className="max-w-4xl text-left space-y-6 opacity-0">
-            <h1 className="font-extrabold tracking-tight text-[32px] sm:text-5xl md:text-7xl lg:text-8xl leading-[1.15] text-neutral-900 md:text-white font-serif max-w-3xl">
+            <h1 className="font-normal tracking-wide text-[36px] sm:text-5xl md:text-7xl lg:text-8xl leading-[1.1] text-neutral-900 md:text-white font-headline max-w-3xl normal-case">
               Your Next Home. Perfectly Timed.
             </h1>
           </div>
@@ -256,7 +256,7 @@ export function Hero({ onContactClick }: HeroProps) {
               variants={headlineVariants}
               initial="initial"
               animate="animate"
-              className="font-extrabold tracking-tight text-[32px] sm:text-5xl md:text-7xl lg:text-8xl leading-[1.1] text-neutral-900 md:text-white font-serif max-w-3xl"
+              className="font-normal tracking-wide text-[36px] sm:text-5xl md:text-7xl lg:text-8xl leading-[1.1] text-neutral-900 md:text-white font-headline max-w-3xl normal-case"
             >
               Your Next Home. Perfectly Timed.
             </motion.h1>

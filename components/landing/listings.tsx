@@ -144,44 +144,48 @@ export function Listings({ onPropertyClick }: ListingsProps) {
         </div>
 
         {/* Filter Navigation Box */}
-        <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between border-b border-border pb-8 mb-10">
+        <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between border-b border-border pb-8 mb-10 w-full max-w-full overflow-hidden">
           {/* Main Status Tabs */}
-          <div className="flex overflow-x-auto gap-2 bg-neutral-100 p-1.5 rounded-lg w-full md:w-auto shrink-0 scrollbar-none border border-neutral-200/60">
-            {(['all', 'buy', 'rent', 'sold'] as const).map((status) => (
-              <button
-                key={status}
-                onClick={() => setSelectedStatus(status)}
-                className={`px-5 py-2.5 rounded-md text-xs font-bold uppercase tracking-wider transition-all whitespace-nowrap ${
-                  selectedStatus === status
-                    ? 'bg-secondary text-secondary-foreground shadow-sm'
-                    : 'text-neutral-500 hover:text-secondary hover:bg-neutral-200/50'
-                }`}
-              >
-                {status === 'all' && 'All Properties'}
-                {status === 'buy' && 'For Sale'}
-                {status === 'rent' && 'For Rent'}
-                {status === 'sold' && 'Recently Sold'}
-              </button>
-            ))}
+          <div className="w-full md:w-auto overflow-hidden shrink-0">
+            <div className="flex overflow-x-auto gap-2 bg-neutral-100 p-1.5 rounded-lg w-full md:w-auto no-scrollbar border border-neutral-200/60">
+              {(['all', 'buy', 'rent', 'sold'] as const).map((status) => (
+                <button
+                  key={status}
+                  onClick={() => setSelectedStatus(status)}
+                  className={`px-5 py-2.5 rounded-md text-xs font-bold uppercase tracking-wider transition-all whitespace-nowrap ${
+                    selectedStatus === status
+                      ? 'bg-secondary text-secondary-foreground shadow-sm'
+                      : 'text-neutral-500 hover:text-secondary hover:bg-neutral-200/50'
+                  }`}
+                >
+                  {status === 'all' && 'All Properties'}
+                  {status === 'buy' && 'For Sale'}
+                  {status === 'rent' && 'For Rent'}
+                  {status === 'sold' && 'Recently Sold'}
+                </button>
+              ))}
+            </div>
           </div>
 
           {/* Micro Types Filters */}
-          <div className="flex items-center gap-4 overflow-x-auto pb-1 md:pb-0 scrollbar-none">
-            <SlidersHorizontal className="size-4 text-primary shrink-0" />
-            <div className="flex gap-2">
-              {types.map((type) => (
-                <button
-                  key={type}
-                  onClick={() => setSelectedType(type)}
-                  className={`px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest border transition-all whitespace-nowrap ${
-                    selectedType === type
-                      ? 'border-primary bg-primary/10 text-secondary'
-                      : 'border-border/60 hover:border-primary/40 text-muted-foreground hover:text-secondary'
-                  }`}
-                >
-                  {type === 'all' ? 'All Types' : type}
-                </button>
-              ))}
+          <div className="w-full md:w-auto overflow-hidden shrink-0">
+            <div className="flex items-center gap-4 overflow-x-auto pb-1 md:pb-0 no-scrollbar">
+              <SlidersHorizontal className="size-4 text-primary shrink-0" />
+              <div className="flex gap-2">
+                {types.map((type) => (
+                  <button
+                    key={type}
+                    onClick={() => setSelectedType(type)}
+                    className={`px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest border transition-all whitespace-nowrap ${
+                      selectedType === type
+                        ? 'border-primary bg-primary/10 text-secondary'
+                        : 'border-border/60 hover:border-primary/40 text-muted-foreground hover:text-secondary'
+                    }`}
+                  >
+                    {type === 'all' ? 'All Types' : type}
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
         </div>
