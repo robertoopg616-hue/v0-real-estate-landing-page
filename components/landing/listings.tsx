@@ -11,7 +11,7 @@ const properties: Property[] = [
     id: 'prop-1',
     title: 'The Malachite Villa',
     price: '$1,850,000',
-    image: '/hero-house.jpg',
+    image: '/estate-1.jpg',
     location: 'Oak Hills Estates',
     specs: '4 Beds  /  3.5 Baths  /  3,200 SQFT',
     status: 'For Sale',
@@ -28,7 +28,7 @@ const properties: Property[] = [
     id: 'prop-2',
     title: 'Minimalist Alabaster Penthouse',
     price: '$6,200 / mo',
-    image: '/staged-interior.png',
+    image: '/estate-2.jpg',
     location: 'Riverside District',
     specs: '3 Beds  /  2.5 Baths  /  2,100 SQFT',
     status: 'Exclusive Lease',
@@ -45,7 +45,7 @@ const properties: Property[] = [
     id: 'prop-3',
     title: 'The Emerald Estate',
     price: '$2,450,000',
-    image: '/condo-after.png',
+    image: '/estate-3.jpg',
     location: 'Westlake Heights',
     specs: '5 Beds  /  5 Baths  /  4,800 SQFT',
     status: 'For Sale',
@@ -62,7 +62,7 @@ const properties: Property[] = [
     id: 'prop-4',
     title: 'Midtown Modern Loft',
     price: '$890,000',
-    image: '/staged-interior.png',
+    image: '/estate-4.jpg',
     location: 'Midtown Crossing',
     specs: '2 Beds  /  2 Baths  /  1,450 SQFT',
     status: 'Staging Success',
@@ -79,7 +79,7 @@ const properties: Property[] = [
     id: 'prop-5',
     title: 'Oak Ridge Bungalow',
     price: '$1,150,000',
-    image: '/hero-house.jpg',
+    image: '/hero-house.png',
     location: 'Oak Ridge',
     specs: '3 Beds  /  2 Baths  /  1,900 SQFT',
     status: 'For Sale',
@@ -96,7 +96,7 @@ const properties: Property[] = [
     id: 'prop-6',
     title: 'The Amber Residence',
     price: '$5,800 / mo',
-    image: '/condo-after.png',
+    image: '/after-staging.png',
     location: 'Marina Boulevard',
     specs: '3 Beds  /  3 Baths  /  2,400 SQFT',
     status: 'Exclusive Lease',
@@ -146,21 +146,21 @@ export function Listings({ onPropertyClick }: ListingsProps) {
         {/* Filter Navigation Box */}
         <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between border-b border-border pb-8 mb-10">
           {/* Main Status Tabs */}
-          <div className="flex overflow-x-auto gap-2 bg-muted/60 p-1 rounded-xl w-fit shrink-0 scrollbar-none">
+          <div className="flex overflow-x-auto gap-2 bg-neutral-100 p-1.5 rounded-lg w-full md:w-auto shrink-0 scrollbar-none border border-neutral-200/60">
             {(['all', 'buy', 'rent', 'sold'] as const).map((status) => (
               <button
                 key={status}
                 onClick={() => setSelectedStatus(status)}
-                className={`px-5 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider transition-all whitespace-nowrap ${
+                className={`px-5 py-2.5 rounded-md text-xs font-bold uppercase tracking-wider transition-all whitespace-nowrap ${
                   selectedStatus === status
-                    ? 'bg-white text-secondary shadow-xs border border-primary/15'
-                    : 'text-muted-foreground hover:text-secondary'
+                    ? 'bg-secondary text-secondary-foreground shadow-sm'
+                    : 'text-neutral-500 hover:text-secondary hover:bg-neutral-200/50'
                 }`}
               >
                 {status === 'all' && 'All Properties'}
                 {status === 'buy' && 'For Sale'}
                 {status === 'rent' && 'For Rent'}
-                {status === 'sold' && 'Recently Transformed'}
+                {status === 'sold' && 'Recently Sold'}
               </button>
             ))}
           </div>

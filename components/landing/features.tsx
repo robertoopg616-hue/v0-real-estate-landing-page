@@ -16,7 +16,7 @@ const features = [
     step: '02',
     title: 'Stay-Put Guarantee',
     description: 'Eliminate the risk of double moves. Secure an integrated timeline leaseback agreement that lets your family remain in your current home for up to 45 days post-closing while you acquire your next residence.',
-    image: '/webaliser-_TPTXZd9mOo-unsplash.jpg',
+    image: '/condo-before.png',
     actionLabel: 'Check Timeline Safety',
   },
   {

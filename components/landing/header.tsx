@@ -69,9 +69,14 @@ export function Header({ onContactClick }: HeaderProps) {
           {/* Logo brand typographic signature */}
           <a
             href="#"
-            className="flex items-center gap-2 hover:text-primary transition-colors text-current"
+            className="flex items-center gap-2.5 hover:text-primary transition-colors text-current"
           >
-            <span className="text-lg font-serif font-semibold tracking-[0.2em] uppercase text-current">
+            <img 
+              src="/logo.png" 
+              alt="Premium Realty Logo" 
+              className="w-7 h-7 object-contain" 
+            />
+            <span className="text-base font-serif font-bold tracking-[0.2em] uppercase text-current">
               Premium Realty
             </span>
           </a>

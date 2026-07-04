@@ -1,19 +1,19 @@
 import { SpeedInsights } from "@vercel/speed-insights/next"
 
 import type { Metadata, Viewport } from 'next'
-import { Syne, Plus_Jakarta_Sans } from 'next/font/google'
+import { Cinzel, Inter } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
-const syne = Syne({
+const cinzel = Cinzel({
   subsets: ['latin'],
-  variable: '--font-syne',
+  variable: '--font-cinzel',
   display: 'swap',
 })
 
-const plusJakartaSans = Plus_Jakarta_Sans({
+const inter = Inter({
   subsets: ['latin'],
-  variable: '--font-plus-jakarta',
+  variable: '--font-inter',
   display: 'swap',
 })
 
@@ -65,7 +65,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${syne.variable} ${plusJakartaSans.variable} bg-background`}>
+    <html lang="en" className={`${cinzel.variable} ${inter.variable} bg-background`}>
       <body className="font-sans antialiased min-h-screen">
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}

@@ -194,8 +194,8 @@ export function Hero({ onContactClick }: HeroProps) {
         </div>
         <div className="relative mx-auto max-w-7xl px-4 sm:px-8 md:px-16 py-20 md:py-24 z-10 w-full">
           <div className="max-w-4xl text-left space-y-6 opacity-0">
-            <h1 className="font-extrabold tracking-tight text-[26px] sm:text-4xl md:text-5xl lg:text-6xl leading-[1.15] text-neutral-900 md:text-white font-serif max-w-3xl">
-              Sell your current home for top dollar and move into your next one seamlessly.
+            <h1 className="font-extrabold tracking-tight text-[32px] sm:text-5xl md:text-7xl lg:text-8xl leading-[1.15] text-neutral-900 md:text-white font-serif max-w-3xl">
+              Your Next Home. Perfectly Timed.
             </h1>
           </div>
         </div>
@@ -256,9 +256,9 @@ export function Hero({ onContactClick }: HeroProps) {
               variants={headlineVariants}
               initial="initial"
               animate="animate"
-              className="font-extrabold tracking-tight text-[26px] sm:text-4xl md:text-5xl lg:text-6xl leading-[1.15] text-neutral-900 md:text-white font-serif max-w-3xl"
+              className="font-extrabold tracking-tight text-[32px] sm:text-5xl md:text-7xl lg:text-8xl leading-[1.1] text-neutral-900 md:text-white font-serif max-w-3xl"
             >
-              Sell your current home for top dollar and move into your next one seamlessly.
+              Your Next Home. Perfectly Timed.
             </motion.h1>
           </div>
 
