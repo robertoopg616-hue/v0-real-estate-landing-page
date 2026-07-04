@@ -157,23 +157,25 @@ export function Testimonials({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-100px' }}
             transition={{ duration: 0.8 }}
-            className="lg:col-span-7 space-y-6 p-4 sm:p-6 lg:p-0"
+            className="lg:col-span-7 space-y-6 w-full max-w-full overflow-hidden p-4 sm:p-6 lg:p-0"
           >
             <Quote className="size-16 text-primary/30" />
             
-            <Carousel setApi={setApi} className="w-full">
+            <Carousel setApi={setApi} className="w-full max-w-full overflow-hidden">
               <CarouselContent>
                 {testimonials.map((item, index) => (
-                  <CarouselItem key={index} className="space-y-6">
+                  <CarouselItem key={index} className="space-y-6 w-full max-w-full overflow-hidden px-1">
                     <div className="flex gap-1">
                       {Array.from({ length: item.rating }).map((_, i) => (
                         <Star key={i} className="size-5 fill-primary text-primary" />
                       ))}
                     </div>
 
-                    <blockquote className="text-lg sm:text-2xl font-semibold text-secondary leading-relaxed text-pretty font-serif italic px-6 sm:px-12 break-words whitespace-normal normal-case">
-                      &ldquo;{item.quote}&rdquo;
-                    </blockquote>
+                    <div className="w-full max-w-full overflow-hidden px-6 sm:px-12">
+                      <blockquote className="text-lg sm:text-2xl font-semibold text-secondary leading-relaxed text-pretty font-serif italic w-full max-w-full block whitespace-normal break-words normal-case">
+                        &ldquo;{item.quote}&rdquo;
+                      </blockquote>
+                    </div>
 
                     <div className="flex items-center justify-between pt-6 border-t border-border">
                       <div className="flex items-center gap-3">

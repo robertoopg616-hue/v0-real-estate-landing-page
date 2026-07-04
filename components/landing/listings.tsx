@@ -169,8 +169,7 @@ export function Listings({ onPropertyClick }: ListingsProps) {
 
           {/* Micro Types Filters */}
           <div className="w-full md:w-auto overflow-hidden shrink-0">
-            <div className="flex items-center gap-4 overflow-x-auto pb-1 md:pb-0 no-scrollbar">
-              <SlidersHorizontal className="size-4 text-primary shrink-0" />
+            <div className="flex items-center overflow-x-auto pb-1 md:pb-0 no-scrollbar">
               <div className="flex gap-2">
                 {types.map((type) => (
                   <button
