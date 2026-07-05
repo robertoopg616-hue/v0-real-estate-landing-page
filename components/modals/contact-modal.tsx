@@ -55,18 +55,23 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
             {/* Marble Texture Background Modal */}
             <div 
               onClick={(e) => e.stopPropagation()}
-              className="marble-texture w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-2xl p-6 md:p-8 border border-primary/25 shadow-2xl relative flex flex-col bg-white scrollbar-thin cursor-default"
+              className="marble-texture w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-2xl border border-primary/25 shadow-2xl relative flex flex-col bg-white scrollbar-thin cursor-default pt-[72px]"
             >
+              {/* Dedicated white/off-white top utility bar area */}
+              <div className="absolute top-0 left-0 right-0 h-[72px] border-b border-neutral-100 bg-neutral-50/50 flex items-center px-6 md:px-8 z-40">
+                <span className="text-xs font-bold text-secondary uppercase tracking-widest font-sans">Contact Staging Concierge</span>
+              </div>
+
               {/* Close button */}
               <button
                 onClick={handleClose}
-                className="absolute right-4 top-4 p-2.5 rounded-full bg-background/90 hover:bg-muted text-muted-foreground hover:text-foreground transition-colors border border-border z-10"
+                className="w-10 h-10 flex items-center justify-center text-gray-700 bg-gray-100/80 active:bg-gray-200 rounded-full cursor-pointer absolute top-4 right-4 z-50"
               >
-                <X className="size-4" />
+                <X className="size-5" />
                 <span className="sr-only">Close</span>
               </button>
 
-              <div className="grid md:grid-cols-12 gap-8 items-stretch">
+              <div className="p-6 md:p-8 grid md:grid-cols-12 gap-8 items-stretch">
                 {/* Left Column: Value summary benefits card (desktop only) */}
                 <div className="hidden md:flex md:col-span-5 bg-secondary text-white rounded-xl p-6 flex-col justify-between relative overflow-hidden border border-primary/20">
                   <div className="absolute inset-0 opacity-[0.03] bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:16px_16px]" />
