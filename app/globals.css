@@ -45,7 +45,7 @@
 @theme inline {
   --font-sans: var(--font-crimson-pro), system-ui, sans-serif;
   --font-serif: var(--font-crimson-pro), system-ui, sans-serif;
-  --font-headline: var(--font-dancing-script), cursive;
+  --font-headline: var(--font-cinzel), serif;
   --font-mono: var(--font-crimson-pro), monospace;
   --color-background: var(--background);
   --color-foreground: var(--foreground);

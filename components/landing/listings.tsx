@@ -12,7 +12,7 @@ const properties: Property[] = [
     title: 'The Malachite Villa',
     price: '$1,850,000',
     image: '/estate-1.jpg',
-    images: ['/estate-1.jpg', '/estate-2.jpg', '/estate-3.jpg', '/estate-4.jpg'],
+    images: ['/estate-1.jpg', '/interior1.jpeg'],
     location: 'Oak Hills Estates',
     specs: '4 Beds  /  3.5 Baths  /  3,200 SQFT',
     status: 'For Sale',
@@ -30,7 +30,7 @@ const properties: Property[] = [
     title: 'Minimalist Alabaster Penthouse',
     price: '$6,200 / mo',
     image: '/estate-2.jpg',
-    images: ['/estate-2.jpg', '/estate-1.jpg', '/estate-3.jpg', '/estate-4.jpg'],
+    images: ['/estate-2.jpg', '/interior2.jpeg'],
     location: 'Riverside District',
     specs: '3 Beds  /  2.5 Baths  /  2,100 SQFT',
     status: 'Exclusive Lease',
@@ -48,7 +48,7 @@ const properties: Property[] = [
     title: 'The Emerald Estate',
     price: '$2,450,000',
     image: '/estate-3.jpg',
-    images: ['/estate-3.jpg', '/estate-1.jpg', '/estate-2.jpg', '/estate-4.jpg'],
+    images: ['/estate-3.jpg', '/interior3.jpeg'],
     location: 'Westlake Heights',
     specs: '5 Beds  /  5 Baths  /  4,800 SQFT',
     status: 'For Sale',
@@ -66,7 +66,7 @@ const properties: Property[] = [
     title: 'Midtown Modern Loft',
     price: '$890,000',
     image: '/estate-4.jpg',
-    images: ['/estate-4.jpg', '/estate-1.jpg', '/estate-2.jpg', '/estate-3.jpg'],
+    images: ['/estate-4.jpg', '/interior4.jpg'],
     location: 'Midtown Crossing',
     specs: '2 Beds  /  2 Baths  /  1,450 SQFT',
     status: 'Staging Success',
@@ -84,7 +84,7 @@ const properties: Property[] = [
     title: 'Oak Ridge Bungalow',
     price: '$1,150,000',
     image: '/hero-house.png',
-    images: ['/hero-house.png', '/estate-1.jpg', '/estate-2.jpg', '/estate-3.jpg'],
+    images: ['/hero-house.png', '/villa-interior-design-20.jpg'],
     location: 'Oak Ridge',
     specs: '3 Beds  /  2 Baths  /  1,900 SQFT',
     status: 'For Sale',
@@ -102,7 +102,7 @@ const properties: Property[] = [
     title: 'The Amber Residence',
     price: '$5,800 / mo',
     image: '/after-staging.png',
-    images: ['/after-staging.png', '/estate-1.jpg', '/estate-2.jpg', '/estate-3.jpg'],
+    images: ['/after-staging.png'],
     location: 'Marina Boulevard',
     specs: '3 Beds  /  3 Baths  /  2,400 SQFT',
     status: 'Exclusive Lease',
@@ -208,78 +208,11 @@ export function Listings({ onPropertyClick }: ListingsProps) {
             >
               {filteredProperties.length > 0 ? (
                 filteredProperties.map((property) => (
-                  <div
+                  <PropertyCard
                     key={property.id}
-                    onClick={() => onPropertyClick(property)}
-                    className="snap-align-start shrink-0 w-[82vw] sm:w-[350px] md:w-auto rounded-2xl overflow-hidden group bg-transparent border-0 flex flex-col justify-between cursor-pointer"
-                  >
-                    {/* Image Box */}
-                    <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-primary/10 shadow-xs">
-                      <img
-                        src={property.image}
-                        alt={property.title}
-                        className="w-full h-full object-cover object-center group-hover:scale-[1.03] transition-transform duration-500"
-                      />
-                      
-                      {/* FUTURE INTERIOR GALLERIES (Dormant UI Dots Pagination Placeholder) */}
-                      {/*
-                      {property.images && property.images.length > 1 && (
-                        <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1 z-20 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity">
-                          {property.images.map((_, i) => (
-                            <span 
-                              key={i} 
-                              className={`w-1.5 h-1.5 rounded-full transition-all ${i === 0 ? 'bg-white scale-110' : 'bg-white/40'}`} 
-                            />
-                          ))}
-                        </div>
-                      )}
-                      */}
-
-                      {/* Top Overlay Status Capsule */}
-                      <div className="absolute top-4 left-4 z-10">
-                        <span className="bg-white/90 backdrop-blur-xs text-secondary text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider shadow-xs border border-primary/20">
-                          {property.status}
-                        </span>
-                      </div>
-
-                      {/* Detail Hover Overlay */}
-                      <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center z-10">
-                        <Button
-                          variant="secondary"
-                          className="bg-white hover:bg-white text-secondary font-bold text-xs rounded-lg px-5 py-2.5 shadow-md flex items-center gap-1.5 border border-primary/25"
-                        >
-                          <span>View Details</span>
-                          <ArrowRight className="size-3.5 text-primary" />
-                        </Button>
-                      </div>
-                    </div>
-
-                    {/* Content Box */}
-                    <div className="pt-4 pb-2 px-1 space-y-1.5">
-                      <div className="flex justify-between items-baseline">
-                        <span className="text-xs font-bold text-muted-foreground uppercase tracking-widest">
-                          {property.type}
-                        </span>
-                        <span className="text-primary text-sm font-extrabold">
-                          {property.price}
-                        </span>
-                      </div>
-                      
-                      <h3 className="text-base font-bold text-secondary tracking-tight group-hover:text-primary transition-colors">
-                        {property.title}
-                      </h3>
-
-                      <div className="flex items-center gap-1 text-xs text-muted-foreground">
-                        <MapPin className="size-3 text-primary shrink-0" />
-                        <span className="truncate">{property.location}</span>
-                      </div>
-
-                      {/* Specs Divider Ribbon */}
-                      <div className="text-xs font-semibold text-muted-foreground/80 border-t border-border/60 pt-2.5 mt-2.5 uppercase tracking-wider">
-                        {property.specs}
-                      </div>
-                    </div>
-                  </div>
+                    property={property}
+                    onPropertyClick={onPropertyClick}
+                  />
                 ))
               ) : (
                 <div className="w-full text-center py-20 md:col-span-3 text-muted-foreground text-xs font-semibold">
@@ -291,5 +224,113 @@ export function Listings({ onPropertyClick }: ListingsProps) {
         </div>
       </div>
     </section>
+  )
+}
+
+interface PropertyCardProps {
+  property: Property
+  onPropertyClick: (property: Property) => void
+}
+
+function PropertyCard({ property, onPropertyClick }: PropertyCardProps) {
+  const [currentImageIndex, setCurrentImageIndex] = useState(0)
+
+  return (
+    <div
+      onClick={() => onPropertyClick(property)}
+      onMouseEnter={() => {
+        if (property.images && property.images.length > 1) {
+          setCurrentImageIndex(1)
+        }
+      }}
+      onMouseLeave={() => {
+        setCurrentImageIndex(0)
+      }}
+      className="snap-align-start shrink-0 w-[82vw] sm:w-[350px] md:w-auto rounded-2xl overflow-hidden group bg-transparent border-0 flex flex-col justify-between cursor-pointer relative"
+    >
+      {/* Image Box */}
+      <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-primary/10 shadow-xs bg-muted">
+        {property.images && property.images.length > 0 ? (
+          property.images.map((imgUrl, idx) => (
+            <img
+              key={idx}
+              src={imgUrl}
+              alt={property.title}
+              className={`absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-500 ${
+                idx === currentImageIndex ? 'opacity-100' : 'opacity-0'
+              }`}
+            />
+          ))
+        ) : (
+          <img
+            src={property.image}
+            alt={property.title}
+            className="w-full h-full object-cover object-center group-hover:scale-[1.03] transition-transform duration-500"
+          />
+        )}
+        
+        {/* Subtle thumbnail toggle navigation dots */}
+        {property.images && property.images.length > 1 && (
+          <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5 z-20">
+            {property.images.map((_, i) => (
+              <button
+                key={i}
+                onClick={(e) => {
+                  e.stopPropagation()
+                  setCurrentImageIndex(i)
+                }}
+                className={`w-2 h-2 rounded-full transition-all border border-black/10 ${
+                  i === currentImageIndex ? 'bg-white scale-125' : 'bg-white/40'
+                }`}
+              />
+            ))}
+          </div>
+        )}
+
+        {/* Top Overlay Status Capsule */}
+        <div className="absolute top-4 left-4 z-10">
+          <span className="bg-white/90 backdrop-blur-xs text-secondary text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider shadow-xs border border-primary/20">
+            {property.status}
+          </span>
+        </div>
+
+        {/* Detail Hover Overlay */}
+        <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center z-10">
+          <Button
+            variant="secondary"
+            className="bg-white hover:bg-white text-secondary font-bold text-xs rounded-lg px-5 py-2.5 shadow-md flex items-center gap-1.5 border border-primary/25"
+          >
+            <span>View Details</span>
+            <ArrowRight className="size-3.5 text-primary" />
+          </Button>
+        </div>
+      </div>
+
+      {/* Content Box */}
+      <div className="pt-4 pb-2 px-1 space-y-1.5">
+        <div className="flex justify-between items-baseline">
+          <span className="text-xs font-bold text-muted-foreground uppercase tracking-widest">
+            {property.type}
+          </span>
+          <span className="text-primary text-sm font-extrabold">
+            {property.price}
+          </span>
+        </div>
+        
+        <h3 className="text-base font-bold text-secondary tracking-tight group-hover:text-primary transition-colors">
+          {property.title}
+        </h3>
+
+        <div className="flex items-center gap-1 text-xs text-muted-foreground">
+          <MapPin className="size-3 text-primary shrink-0" />
+          <span className="truncate">{property.location}</span>
+        </div>
+
+        {/* Specs Divider Ribbon */}
+        <div className="text-xs font-semibold text-muted-foreground/80 border-t border-border/60 pt-2.5 mt-2.5 uppercase tracking-wider">
+          {property.specs}
+        </div>
+      </div>
+    </div>
   )
 }
