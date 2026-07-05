@@ -164,49 +164,57 @@ export function Testimonials({
             <Carousel setApi={setApi} className="w-full max-w-full overflow-hidden">
               <CarouselContent>
                 {testimonials.map((item, index) => (
-                  <CarouselItem key={index} className="space-y-6 w-full max-w-full overflow-hidden px-1">
-                      <div className="w-full max-w-full overflow-hidden px-6 sm:px-12 space-y-6">
+                  <CarouselItem key={index} className="w-full max-w-full overflow-hidden p-1">
+                    <div className="bg-neutral-50/70 backdrop-blur-xs rounded-2xl p-6 sm:p-8 border border-primary/10 shadow-xs space-y-6 flex flex-col justify-between h-full min-h-[320px] md:min-h-0 mx-2">
+                      <div className="space-y-4">
+                        {/* Star Rating Alignment Shield */}
                         <div className="flex gap-1 pl-0">
                           {Array.from({ length: item.rating }).map((_, i) => (
                             <Star key={i} className="size-5 fill-primary text-primary" />
                           ))}
                         </div>
 
-                      <blockquote className="text-lg sm:text-2xl font-semibold text-secondary leading-relaxed text-pretty font-serif italic w-full max-w-full block whitespace-normal break-words normal-case">
-                        &ldquo;{item.quote}&rdquo;
-                      </blockquote>
-                    </div>
-
-                    <div className="flex items-center justify-between pt-6 border-t border-border">
-                      <div className="flex items-center gap-3">
-                        <div className="flex items-center justify-center w-12 h-12 rounded-full bg-primary/15 text-secondary font-bold text-base border border-primary/30 shrink-0">
-                          {item.initials}
-                        </div>
-                        <div>
-                          <p className="font-extrabold text-secondary text-sm">{item.name}</p>
-                          <p className="text-xs text-muted-foreground font-semibold">{item.location}</p>
-                        </div>
+                        <blockquote className="text-base sm:text-xl md:text-2xl font-semibold text-secondary leading-relaxed text-pretty font-serif italic w-full max-w-full block whitespace-normal break-words normal-case">
+                          &ldquo;{item.quote}&rdquo;
+                        </blockquote>
                       </div>
 
-                      {/* Property Thumbnail */}
-                      <div className="flex items-center gap-2.5 bg-muted/40 rounded-lg p-1.5 border border-border/60 max-w-[160px] sm:max-w-[220px]">
-                        <img 
-                          src={item.image} 
-                          alt={`Staged property for ${item.name}`} 
-                          className="w-10 h-10 rounded object-cover shadow-xs border border-border shrink-0" 
-                        />
-                        <div className="hidden sm:block text-[10px] leading-tight text-muted-foreground">
-                          <span className="font-bold text-secondary block">Verified Sale</span>
-                          Staged Home
+                      <div className="flex items-center justify-between pt-6 border-t border-border/60">
+                        <div className="flex items-center gap-3">
+                          <div className="flex items-center justify-center w-12 h-12 rounded-full bg-primary/15 text-secondary font-bold text-base border border-primary/30 shrink-0">
+                            {item.initials}
+                          </div>
+                          <div>
+                            <p className="font-extrabold text-secondary text-sm">{item.name}</p>
+                            <p className="text-xs text-muted-foreground font-semibold">{item.location}</p>
+                          </div>
+                        </div>
+
+                        {/* Property Thumbnail */}
+                        <div className="flex items-center gap-2.5 bg-muted/40 rounded-lg p-1.5 border border-border/60 max-w-[160px] sm:max-w-[220px]">
+                          <img 
+                            src={item.image} 
+                            alt={`Staged property for ${item.name}`} 
+                            className="w-10 h-10 rounded object-cover shadow-xs border border-border shrink-0" 
+                          />
+                          <div className="hidden sm:block text-[10px] leading-tight text-muted-foreground">
+                            <span className="font-bold text-secondary block">Verified Sale</span>
+                            Staged Home
+                          </div>
                         </div>
                       </div>
                     </div>
                   </CarouselItem>
                 ))}
               </CarouselContent>
-              <div className="flex justify-end gap-2 mt-4 pt-4 border-t border-border/10">
-                <CarouselPrevious className="static translate-y-0 text-secondary border-primary/20 hover:bg-primary/10" />
-                <CarouselNext className="static translate-y-0 text-secondary border-primary/20 hover:bg-primary/10" />
+              <div className="flex items-center justify-between gap-4 mt-6 px-2">
+                <div className="flex gap-2">
+                  <CarouselPrevious className="static translate-y-0 text-secondary border-primary/20 hover:bg-primary/10" />
+                  <CarouselNext className="static translate-y-0 text-secondary border-primary/20 hover:bg-primary/10" />
+                </div>
+                <span className="text-xs text-muted-foreground font-semibold">
+                  Swipe to browse success stories
+                </span>
               </div>
             </Carousel>
           </motion.div>
