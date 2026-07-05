@@ -101,11 +101,11 @@ export function PropertyDetailsModal({
 
               <div className="p-6 md:p-8 grid md:grid-cols-12 gap-8 items-stretch">
                 {/* Left Column: Image and Specs (50% width on desktop) */}
-                <div className="md:col-span-6 flex flex-col justify-between relative rounded-xl overflow-hidden border border-primary/20 aspect-[4/3] md:aspect-auto min-h-[250px] md:min-h-[400px]">
+                <div className="md:col-span-6 flex flex-col justify-between relative rounded-2xl overflow-hidden border border-primary/20 aspect-[4/3] md:aspect-auto min-h-[250px] md:min-h-[400px] w-full max-w-full touch-none select-none">
                   <img
                     src={property.image}
                     alt={property.title}
-                    className="absolute inset-0 w-full h-full object-cover object-center"
+                    className="w-full max-w-full block object-cover pointer-events-none select-none rounded-2xl mx-auto absolute inset-0 h-full object-center"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/20 to-black/30 z-0" />
                   
