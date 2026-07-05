@@ -45,7 +45,7 @@
 @theme inline {
   --font-sans: var(--font-crimson-pro), system-ui, sans-serif;
   --font-serif: var(--font-crimson-pro), system-ui, sans-serif;
-  --font-headline: var(--font-cinzel), serif;
+  --font-headline: var(--font-dancing-script), cursive;
   --font-mono: var(--font-crimson-pro), monospace;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -86,9 +86,8 @@
   }
 }
 
-/* Smooth scrolling and root scaling */
+/* Smooth scrolling */
 html {
-  font-size: 18px;
   scroll-behavior: smooth;
   @apply overflow-x-hidden w-full max-w-full;
 }

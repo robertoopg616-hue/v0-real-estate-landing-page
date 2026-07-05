@@ -181,7 +181,7 @@ export function Listings({ onPropertyClick }: ListingsProps) {
                   <button
                     key={type}
                     onClick={() => setSelectedType(type)}
-                    className={`px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest border transition-all whitespace-nowrap ${
+                    className={`px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest border transition-all whitespace-nowrap ${
                       selectedType === type
                         ? 'border-primary bg-primary/10 text-secondary'
                         : 'border-border/60 hover:border-primary/40 text-muted-foreground hover:text-secondary'
@@ -301,23 +301,7 @@ function PropertyCard({ property, onPropertyClick }: PropertyCardProps) {
           </>
         )}
 
-        {/* Floating high-contrast dots capsule */}
-        {property.images && property.images.length > 1 && (
-          <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5 z-20 bg-black/40 backdrop-blur-md px-3 py-1.5 rounded-full">
-            {property.images.map((_, i) => (
-              <button
-                key={i}
-                onClick={(e) => {
-                  e.stopPropagation()
-                  setCurrentImageIndex(i)
-                }}
-                className={`w-2 h-2 rounded-full transition-all ${
-                  i === currentImageIndex ? 'bg-white scale-110' : 'bg-white/50'
-                }`}
-              />
-            ))}
-          </div>
-        )}
+
 
         {/* Top Overlay Status Capsule */}
         <div className="absolute top-4 left-4 z-10">
