@@ -87,7 +87,7 @@ export function Header({ onContactClick }: HeaderProps) {
               <button
                 key={link.href}
                 onClick={() => scrollToSection(link.href)}
-                className={`text-sm font-bold transition-colors ${
+                className={`text-base font-bold transition-colors ${
                   isScrolled 
                     ? 'text-muted-foreground hover:text-secondary' 
                     : 'text-slate-200 hover:text-white'

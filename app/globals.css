@@ -86,8 +86,9 @@
   }
 }
 
-/* Smooth scrolling */
+/* Smooth scrolling and root scaling */
 html {
+  font-size: 17.5px;
   scroll-behavior: smooth;
   @apply overflow-x-hidden w-full max-w-full;
 }

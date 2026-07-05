@@ -11,6 +11,7 @@ export interface Property {
   title: string
   price: string
   image: string
+  images?: string[] // Optional array for interior gallery expansion
   location: string
   specs: string // e.g., "4 Beds / 3.5 Baths / 3,200 SQFT"
   status: string // e.g., "For Sale"
@@ -77,9 +78,13 @@ export function PropertyDetailsModal({
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             transition={{ duration: 0.3, ease: 'easeOut' }}
-            className="fixed inset-0 z-50 p-4 flex items-center justify-center"
+            onClick={handleClose}
+            className="fixed inset-0 z-50 p-4 flex items-center justify-center cursor-pointer"
           >
-            <div className="glass-card w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-2xl p-6 md:p-8 border border-primary/25 shadow-2xl relative flex flex-col bg-white scrollbar-thin">
+            <div 
+              onClick={(e) => e.stopPropagation()}
+              className="glass-card w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-2xl p-6 md:p-8 border border-primary/25 shadow-2xl relative flex flex-col bg-white scrollbar-thin cursor-default"
+            >
               {/* Close Button */}
               <button
                 onClick={handleClose}

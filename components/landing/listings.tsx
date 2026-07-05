@@ -12,6 +12,7 @@ const properties: Property[] = [
     title: 'The Malachite Villa',
     price: '$1,850,000',
     image: '/estate-1.jpg',
+    images: ['/estate-1.jpg', '/estate-2.jpg', '/estate-3.jpg', '/estate-4.jpg'],
     location: 'Oak Hills Estates',
     specs: '4 Beds  /  3.5 Baths  /  3,200 SQFT',
     status: 'For Sale',
@@ -29,6 +30,7 @@ const properties: Property[] = [
     title: 'Minimalist Alabaster Penthouse',
     price: '$6,200 / mo',
     image: '/estate-2.jpg',
+    images: ['/estate-2.jpg', '/estate-1.jpg', '/estate-3.jpg', '/estate-4.jpg'],
     location: 'Riverside District',
     specs: '3 Beds  /  2.5 Baths  /  2,100 SQFT',
     status: 'Exclusive Lease',
@@ -46,6 +48,7 @@ const properties: Property[] = [
     title: 'The Emerald Estate',
     price: '$2,450,000',
     image: '/estate-3.jpg',
+    images: ['/estate-3.jpg', '/estate-1.jpg', '/estate-2.jpg', '/estate-4.jpg'],
     location: 'Westlake Heights',
     specs: '5 Beds  /  5 Baths  /  4,800 SQFT',
     status: 'For Sale',
@@ -63,6 +66,7 @@ const properties: Property[] = [
     title: 'Midtown Modern Loft',
     price: '$890,000',
     image: '/estate-4.jpg',
+    images: ['/estate-4.jpg', '/estate-1.jpg', '/estate-2.jpg', '/estate-3.jpg'],
     location: 'Midtown Crossing',
     specs: '2 Beds  /  2 Baths  /  1,450 SQFT',
     status: 'Staging Success',
@@ -80,6 +84,7 @@ const properties: Property[] = [
     title: 'Oak Ridge Bungalow',
     price: '$1,150,000',
     image: '/hero-house.png',
+    images: ['/hero-house.png', '/estate-1.jpg', '/estate-2.jpg', '/estate-3.jpg'],
     location: 'Oak Ridge',
     specs: '3 Beds  /  2 Baths  /  1,900 SQFT',
     status: 'For Sale',
@@ -97,6 +102,7 @@ const properties: Property[] = [
     title: 'The Amber Residence',
     price: '$5,800 / mo',
     image: '/after-staging.png',
+    images: ['/after-staging.png', '/estate-1.jpg', '/estate-2.jpg', '/estate-3.jpg'],
     location: 'Marina Boulevard',
     specs: '3 Beds  /  3 Baths  /  2,400 SQFT',
     status: 'Exclusive Lease',
@@ -215,9 +221,23 @@ export function Listings({ onPropertyClick }: ListingsProps) {
                         className="w-full h-full object-cover object-center group-hover:scale-[1.03] transition-transform duration-500"
                       />
                       
+                      {/* FUTURE INTERIOR GALLERIES (Dormant UI Dots Pagination Placeholder) */}
+                      {/*
+                      {property.images && property.images.length > 1 && (
+                        <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1 z-20 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity">
+                          {property.images.map((_, i) => (
+                            <span 
+                              key={i} 
+                              className={`w-1.5 h-1.5 rounded-full transition-all ${i === 0 ? 'bg-white scale-110' : 'bg-white/40'}`} 
+                            />
+                          ))}
+                        </div>
+                      )}
+                      */}
+
                       {/* Top Overlay Status Capsule */}
                       <div className="absolute top-4 left-4 z-10">
-                        <span className="bg-white/90 backdrop-blur-xs text-secondary text-[9px] font-extrabold px-3 py-1 rounded-full uppercase tracking-wider shadow-xs border border-primary/20">
+                        <span className="bg-white/90 backdrop-blur-xs text-secondary text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider shadow-xs border border-primary/20">
                           {property.status}
                         </span>
                       </div>
@@ -237,7 +257,7 @@ export function Listings({ onPropertyClick }: ListingsProps) {
                     {/* Content Box */}
                     <div className="pt-4 pb-2 px-1 space-y-1.5">
                       <div className="flex justify-between items-baseline">
-                        <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">
+                        <span className="text-xs font-bold text-muted-foreground uppercase tracking-widest">
                           {property.type}
                         </span>
                         <span className="text-primary text-sm font-extrabold">
@@ -249,13 +269,13 @@ export function Listings({ onPropertyClick }: ListingsProps) {
                         {property.title}
                       </h3>
 
-                      <div className="flex items-center gap-1 text-[10px] text-muted-foreground">
+                      <div className="flex items-center gap-1 text-xs text-muted-foreground">
                         <MapPin className="size-3 text-primary shrink-0" />
                         <span className="truncate">{property.location}</span>
                       </div>
 
                       {/* Specs Divider Ribbon */}
-                      <div className="text-[10px] font-semibold text-muted-foreground/80 border-t border-border/60 pt-2.5 mt-2.5 uppercase tracking-wider">
+                      <div className="text-xs font-semibold text-muted-foreground/80 border-t border-border/60 pt-2.5 mt-2.5 uppercase tracking-wider">
                         {property.specs}
                       </div>
                     </div>
