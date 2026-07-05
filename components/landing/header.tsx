@@ -76,7 +76,7 @@ export function Header({ onContactClick }: HeaderProps) {
               alt="Premium Realty Logo" 
               className="w-7 h-7 object-contain" 
             />
-            <span className="text-base font-serif font-bold tracking-[0.2em] uppercase text-current">
+            <span className="text-base font-sans font-bold tracking-[0.2em] uppercase text-current">
               Premium Realty
             </span>
           </a>
@@ -118,7 +118,7 @@ export function Header({ onContactClick }: HeaderProps) {
             </SheetTrigger>
             <SheetContent side="right" className="w-[300px] bg-background border-l border-primary/20">
               <SheetHeader>
-                <SheetTitle className="text-secondary font-serif font-semibold tracking-[0.2em] uppercase text-sm">
+                <SheetTitle className="text-secondary font-sans font-semibold tracking-[0.2em] uppercase text-sm">
                   Premium Realty
                 </SheetTitle>
               </SheetHeader>
