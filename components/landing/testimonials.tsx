@@ -159,14 +159,15 @@ export function Testimonials({
             transition={{ duration: 0.8 }}
             className="lg:col-span-7 space-y-6 w-full max-w-full overflow-hidden p-4 sm:p-6 lg:p-0"
           >
-            <Quote className="size-16 text-primary/30" />
-            
             <Carousel setApi={setApi} className="w-full max-w-full overflow-hidden">
               <CarouselContent>
                 {testimonials.map((item, index) => (
-                  <CarouselItem key={index} className="w-full max-w-full overflow-hidden p-1">
-                    <div className="bg-neutral-50/70 backdrop-blur-xs rounded-2xl p-6 sm:p-8 border border-primary/10 shadow-xs space-y-6 flex flex-col justify-between h-full min-h-[320px] md:min-h-0 mx-2">
+                  <CarouselItem key={index} className="w-full max-w-full overflow-hidden px-6 sm:px-12">
+                    <div className="space-y-6 flex flex-col justify-between h-full w-full">
                       <div className="space-y-4">
+                        {/* Quotation Marks */}
+                        <Quote className="size-16 text-primary/30" />
+
                         {/* Star Rating Alignment Shield */}
                         <div className="flex gap-1 pl-0">
                           {Array.from({ length: item.rating }).map((_, i) => (
@@ -174,12 +175,15 @@ export function Testimonials({
                           ))}
                         </div>
 
+                        {/* Quote Block */}
                         <blockquote className="text-base sm:text-xl md:text-2xl font-semibold text-secondary leading-relaxed text-pretty font-serif italic w-full max-w-full block whitespace-normal break-words normal-case">
                           &ldquo;{item.quote}&rdquo;
                         </blockquote>
                       </div>
 
-                      <div className="flex items-center justify-between pt-6 border-t border-border/60">
+                      {/* Divider and Author profile + Thumbnail inline row */}
+                      <div className="pt-6 border-t border-border/60 flex items-center justify-between gap-4">
+                        {/* Left Alignment: Avatar and Details */}
                         <div className="flex items-center gap-3">
                           <div className="flex items-center justify-center w-12 h-12 rounded-full bg-primary/15 text-secondary font-bold text-base border border-primary/30 shrink-0">
                             {item.initials}
@@ -190,31 +194,24 @@ export function Testimonials({
                           </div>
                         </div>
 
-                        {/* Property Thumbnail */}
-                        <div className="flex items-center gap-2.5 bg-muted/40 rounded-lg p-1.5 border border-border/60 max-w-[160px] sm:max-w-[220px]">
+                        {/* Right Alignment: Property Thumbnail */}
+                        <div className="rounded-xl overflow-hidden border border-border/60 shrink-0 w-12 h-12">
                           <img 
                             src={item.image} 
                             alt={`Staged property for ${item.name}`} 
-                            className="w-10 h-10 rounded object-cover shadow-xs border border-border shrink-0" 
+                            className="w-full h-full object-cover" 
                           />
-                          <div className="hidden sm:block text-[10px] leading-tight text-muted-foreground">
-                            <span className="font-bold text-secondary block">Verified Sale</span>
-                            Staged Home
-                          </div>
                         </div>
                       </div>
                     </div>
                   </CarouselItem>
                 ))}
               </CarouselContent>
-              <div className="flex items-center justify-between gap-4 mt-6 px-2">
-                <div className="flex gap-2">
-                  <CarouselPrevious className="static translate-y-0 text-secondary border-primary/20 hover:bg-primary/10" />
-                  <CarouselNext className="static translate-y-0 text-secondary border-primary/20 hover:bg-primary/10" />
-                </div>
-                <span className="text-xs text-muted-foreground font-semibold">
-                  Swipe to browse success stories
-                </span>
+              
+              {/* Clean Navigation Arrows aligned in the bottom-right corner */}
+              <div className="flex justify-end gap-2 mt-6 px-6 sm:px-12">
+                <CarouselPrevious className="static translate-y-0 text-secondary border-primary/20 hover:bg-primary/10 w-10 h-10 flex items-center justify-center rounded-full" />
+                <CarouselNext className="static translate-y-0 text-secondary border-primary/20 hover:bg-primary/10 w-10 h-10 flex items-center justify-center rounded-full" />
               </div>
             </Carousel>
           </motion.div>
