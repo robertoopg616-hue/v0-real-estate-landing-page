@@ -163,39 +163,39 @@ export function Testimonials({
               <CarouselContent>
                 {testimonials.map((item, index) => (
                   <CarouselItem key={index} className="w-full max-w-full overflow-hidden px-6 sm:px-12">
-                    <div className="space-y-6 flex flex-col justify-between h-full w-full">
-                      <div className="space-y-4">
+                    <div className="space-y-4 md:space-y-6 flex flex-col justify-between h-full w-full">
+                      <div className="space-y-3 md:space-y-4">
                         {/* Quotation Marks */}
-                        <Quote className="size-16 text-primary/30" />
+                        <Quote className="size-10 md:size-16 text-primary/30" />
 
                         {/* Star Rating Alignment Shield */}
                         <div className="flex gap-1 pl-0">
                           {Array.from({ length: item.rating }).map((_, i) => (
-                            <Star key={i} className="size-5 fill-primary text-primary" />
+                            <Star key={i} className="size-4 md:size-5 fill-primary text-primary" />
                           ))}
                         </div>
 
                         {/* Quote Block */}
-                        <blockquote className="text-base sm:text-xl md:text-2xl font-semibold text-secondary leading-relaxed text-pretty font-serif italic w-full max-w-full block whitespace-normal break-words normal-case">
+                        <blockquote className="text-sm sm:text-base md:text-xl lg:text-2xl font-medium md:font-semibold text-secondary leading-relaxed text-pretty font-serif italic w-full max-w-full block whitespace-normal break-words normal-case">
                           &ldquo;{item.quote}&rdquo;
                         </blockquote>
                       </div>
 
                       {/* Divider and Author profile + Thumbnail inline row */}
-                      <div className="pt-6 border-t border-border/60 flex items-center justify-between gap-4">
+                      <div className="pt-4 md:pt-6 border-t border-border/60 flex items-center justify-between gap-4">
                         {/* Left Alignment: Avatar and Details */}
-                        <div className="flex items-center gap-3">
-                          <div className="flex items-center justify-center w-12 h-12 rounded-full bg-primary/15 text-secondary font-bold text-base border border-primary/30 shrink-0">
+                        <div className="flex items-center gap-2.5 md:gap-3">
+                          <div className="flex items-center justify-center w-9 h-9 md:w-12 md:h-12 rounded-full bg-primary/15 text-secondary font-bold text-xs md:text-base border border-primary/30 shrink-0">
                             {item.initials}
                           </div>
                           <div>
-                            <p className="font-extrabold text-secondary text-sm">{item.name}</p>
-                            <p className="text-xs text-muted-foreground font-semibold">{item.location}</p>
+                            <p className="font-extrabold text-secondary text-xs md:text-sm">{item.name}</p>
+                            <p className="text-[10px] md:text-xs text-muted-foreground font-semibold">{item.location}</p>
                           </div>
                         </div>
 
                         {/* Right Alignment: Property Thumbnail */}
-                        <div className="rounded-xl overflow-hidden border border-border/60 shrink-0 w-12 h-12">
+                        <div className="rounded-xl overflow-hidden border border-border/60 shrink-0 w-10 h-10 md:w-12 md:h-12">
                           <img 
                             src={item.image} 
                             alt={`Staged property for ${item.name}`} 
