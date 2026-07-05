@@ -165,12 +165,12 @@ export function Testimonials({
               <CarouselContent>
                 {testimonials.map((item, index) => (
                   <CarouselItem key={index} className="space-y-6 w-full max-w-full overflow-hidden px-1">
-                    <div className="w-full max-w-full overflow-hidden px-6 sm:px-12 space-y-6">
-                      <div className="flex gap-1">
-                        {Array.from({ length: item.rating }).map((_, i) => (
-                          <Star key={i} className="size-5 fill-primary text-primary" />
-                        ))}
-                      </div>
+                      <div className="w-full max-w-full overflow-hidden px-6 sm:px-12 space-y-6">
+                        <div className="flex gap-1 pl-0">
+                          {Array.from({ length: item.rating }).map((_, i) => (
+                            <Star key={i} className="size-5 fill-primary text-primary" />
+                          ))}
+                        </div>
 
                       <blockquote className="text-lg sm:text-2xl font-semibold text-secondary leading-relaxed text-pretty font-serif italic w-full max-w-full block whitespace-normal break-words normal-case">
                         &ldquo;{item.quote}&rdquo;

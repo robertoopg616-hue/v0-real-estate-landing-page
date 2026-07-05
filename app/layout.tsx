@@ -1,7 +1,7 @@
 import { SpeedInsights } from "@vercel/speed-insights/next"
 
 import type { Metadata, Viewport } from 'next'
-import { Crimson_Pro, Dancing_Script } from 'next/font/google'
+import { Crimson_Pro, Cinzel } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
@@ -11,9 +11,9 @@ const crimsonPro = Crimson_Pro({
   display: 'swap',
 })
 
-const dancingScript = Dancing_Script({
+const cinzel = Cinzel({
   subsets: ['latin'],
-  variable: '--font-dancing-script',
+  variable: '--font-cinzel',
   display: 'swap',
 })
 
@@ -65,7 +65,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${crimsonPro.variable} ${dancingScript.variable} bg-background`}>
+    <html lang="en" className={`${crimsonPro.variable} ${cinzel.variable} bg-background`}>
       <body className="font-sans antialiased min-h-screen">
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}

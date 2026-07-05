@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ArrowRight, MapPin, SlidersHorizontal } from 'lucide-react'
+import { ArrowRight, MapPin, ChevronLeft, ChevronRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Property } from '@/components/modals/property-details-modal'
 
@@ -181,7 +181,7 @@ export function Listings({ onPropertyClick }: ListingsProps) {
                   <button
                     key={type}
                     onClick={() => setSelectedType(type)}
-                    className={`px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest border transition-all whitespace-nowrap ${
+                    className={`px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest border transition-all whitespace-nowrap ${
                       selectedType === type
                         ? 'border-primary bg-primary/10 text-secondary'
                         : 'border-border/60 hover:border-primary/40 text-muted-foreground hover:text-secondary'
@@ -235,6 +235,20 @@ interface PropertyCardProps {
 function PropertyCard({ property, onPropertyClick }: PropertyCardProps) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
 
+  const handlePrev = (e: React.MouseEvent) => {
+    e.stopPropagation()
+    if (property.images && property.images.length > 1) {
+      setCurrentImageIndex((prev) => (prev === 0 ? property.images!.length - 1 : prev - 1))
+    }
+  }
+
+  const handleNext = (e: React.MouseEvent) => {
+    e.stopPropagation()
+    if (property.images && property.images.length > 1) {
+      setCurrentImageIndex((prev) => (prev === property.images!.length - 1 ? 0 : prev + 1))
+    }
+  }
+
   return (
     <div
       onClick={() => onPropertyClick(property)}
@@ -269,9 +283,27 @@ function PropertyCard({ property, onPropertyClick }: PropertyCardProps) {
           />
         )}
         
-        {/* Subtle thumbnail toggle navigation dots */}
+        {/* Navigation Arrows */}
         {property.images && property.images.length > 1 && (
-          <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5 z-20">
+          <>
+            <button
+              onClick={handlePrev}
+              className="absolute left-2.5 top-1/2 -translate-y-1/2 z-25 w-8 h-8 rounded-full bg-white/80 hover:bg-white flex items-center justify-center text-black shadow-md transition-all opacity-80 md:opacity-0 md:group-hover:opacity-100"
+            >
+              <ChevronLeft className="size-4" />
+            </button>
+            <button
+              onClick={handleNext}
+              className="absolute right-2.5 top-1/2 -translate-y-1/2 z-25 w-8 h-8 rounded-full bg-white/80 hover:bg-white flex items-center justify-center text-black shadow-md transition-all opacity-80 md:opacity-0 md:group-hover:opacity-100"
+            >
+              <ChevronRight className="size-4" />
+            </button>
+          </>
+        )}
+
+        {/* Floating high-contrast dots capsule */}
+        {property.images && property.images.length > 1 && (
+          <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5 z-20 bg-black/40 backdrop-blur-md px-3 py-1.5 rounded-full">
             {property.images.map((_, i) => (
               <button
                 key={i}
@@ -279,8 +311,8 @@ function PropertyCard({ property, onPropertyClick }: PropertyCardProps) {
                   e.stopPropagation()
                   setCurrentImageIndex(i)
                 }}
-                className={`w-2 h-2 rounded-full transition-all border border-black/10 ${
-                  i === currentImageIndex ? 'bg-white scale-125' : 'bg-white/40'
+                className={`w-2 h-2 rounded-full transition-all ${
+                  i === currentImageIndex ? 'bg-white scale-110' : 'bg-white/50'
                 }`}
               />
             ))}
