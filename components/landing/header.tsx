@@ -76,7 +76,7 @@ export function Header({ onContactClick }: HeaderProps) {
               alt="Premium Realty Logo" 
               className="w-7 h-7 object-contain" 
             />
-            <span className="text-base font-sans font-bold tracking-[0.2em] uppercase text-current">
+            <span className="text-xl font-headline tracking-wide normal-case text-current">
               Premium Realty
             </span>
           </a>
