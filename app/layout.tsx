@@ -18,7 +18,7 @@ const dancingScript = Dancing_Script({
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://v0-real-estate-landing-page-0-robertoopg616-4887-52eebc56.vercel.app'),
+  metadataBase: new URL('https://v0-real-estate-landing-page-ruddy-eight.vercel.app'),
   title: 'Premium Real Estate | Expert Guidance for Upsizing Families',
   description:
     'Outgrow your home, not your peace of mind. Expert guidance to sell your property for top dollar and transition into your dream home seamlessly. We handle the timing so you never move twice.',
@@ -44,11 +44,11 @@ export const metadata: Metadata = {
       'Outgrow your home, not your peace of mind. Expert guidance to sell your property for top dollar and transition into your dream home seamlessly.',
     type: 'website',
     locale: 'en_US',
-    url: 'https://v0-real-estate-landing-page-0-robertoopg616-4887-52eebc56.vercel.app',
+    url: 'https://v0-real-estate-landing-page-ruddy-eight.vercel.app',
     siteName: 'Premium Realty',
     images: [
       {
-        url: '/og-image.png',
+        url: 'https://v0-real-estate-landing-page-ruddy-eight.vercel.app/og-image.png',
         width: 1200,
         height: 630,
         alt: 'Premium Realty - Your Next Home. Perfectly Timed.',
@@ -61,7 +61,7 @@ export const metadata: Metadata = {
     description:
       'Outgrow your home, not your peace of mind. Expert guidance to sell your property for top dollar and transition into your dream home seamlessly.',
     creator: '@PremiumRealty',
-    images: ['/og-image.png'],
+    images: ['https://v0-real-estate-landing-page-ruddy-eight.vercel.app/og-image.png'],
   },
   robots: {
     index: true,
