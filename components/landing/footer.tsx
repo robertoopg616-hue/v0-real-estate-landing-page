@@ -1,6 +1,6 @@
 'use client'
 
-import { Home, ArrowUp, Shield } from 'lucide-react'
+import { Home, ArrowUp, Shield, Facebook, Twitter, Instagram, Linkedin } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
 const footerLinks = {
@@ -46,6 +46,45 @@ export function Footer({ onContactClick }: FooterProps) {
             <p className="text-xs text-secondary-foreground/75 leading-relaxed max-w-sm">
               Helping upsizing families transition into spacious luxury homes seamlessly. We coordinate the timeline, prep your home for $0 upfront, and protect your move with the Stay-Put Guarantee.
             </p>
+            {/* Social Media Links */}
+            <div className="flex items-center gap-3 pt-2">
+              <a
+                href="https://facebook.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-white/5 hover:bg-white/15 text-white/85 hover:text-white border border-white/10 w-9 h-9 rounded-full flex items-center justify-center transition-all"
+                aria-label="Facebook"
+              >
+                <Facebook className="size-4" />
+              </a>
+              <a
+                href="https://x.com/PremiumRealty"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-white/5 hover:bg-white/15 text-white/85 hover:text-white border border-white/10 w-9 h-9 rounded-full flex items-center justify-center transition-all"
+                aria-label="Twitter"
+              >
+                <Twitter className="size-4" />
+              </a>
+              <a
+                href="https://instagram.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-white/5 hover:bg-white/15 text-white/85 hover:text-white border border-white/10 w-9 h-9 rounded-full flex items-center justify-center transition-all"
+                aria-label="Instagram"
+              >
+                <Instagram className="size-4" />
+              </a>
+              <a
+                href="https://linkedin.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-white/5 hover:bg-white/15 text-white/85 hover:text-white border border-white/10 w-9 h-9 rounded-full flex items-center justify-center transition-all"
+                aria-label="LinkedIn"
+              >
+                <Linkedin className="size-4" />
+              </a>
+            </div>
           </div>
 
           {/* Program Links Column */}
