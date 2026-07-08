@@ -18,11 +18,13 @@ const dancingScript = Dancing_Script({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://v0-real-estate-landing-page-0-robertoopg616-4887-52eebc56.vercel.app'),
   title: 'Premium Real Estate | Expert Guidance for Upsizing Families',
   description:
     'Outgrow your home, not your peace of mind. Expert guidance to sell your property for top dollar and transition into your dream home seamlessly. We handle the timing so you never move twice.',
   icons: {
     icon: '/favicon.png',
+    apple: '/apple-icon.png',
   },
   keywords: [
     'real estate',
@@ -32,20 +34,34 @@ export const metadata: Metadata = {
     'home selling',
     'equity unlock',
     'real estate agent',
+    'premium staging',
+    'timeline guarantee',
   ],
   authors: [{ name: 'Premium Real Estate' }],
   openGraph: {
     title: 'Premium Real Estate | Expert Guidance for Upsizing Families',
     description:
-      'Expert guidance to sell your property for top dollar and transition into your dream home seamlessly.',
+      'Outgrow your home, not your peace of mind. Expert guidance to sell your property for top dollar and transition into your dream home seamlessly.',
     type: 'website',
     locale: 'en_US',
+    url: 'https://v0-real-estate-landing-page-0-robertoopg616-4887-52eebc56.vercel.app',
+    siteName: 'Premium Realty',
+    images: [
+      {
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Premium Realty - Your Next Home. Perfectly Timed.',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Premium Real Estate | Expert Guidance for Upsizing Families',
     description:
-      'Expert guidance to sell your property for top dollar and transition into your dream home seamlessly.',
+      'Outgrow your home, not your peace of mind. Expert guidance to sell your property for top dollar and transition into your dream home seamlessly.',
+    creator: '@PremiumRealty',
+    images: ['/og-image.png'],
   },
   robots: {
     index: true,
